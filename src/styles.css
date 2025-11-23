@@ -263,6 +263,10 @@ body {
   line-height: 1.5;
 }
 
+.hero-highlight {
+  color: var(--primary);
+}
+
 .hero-body {
   margin: 0;
   font-size: 0.9rem;
@@ -278,7 +282,7 @@ body {
 }
 
 .hero-aside {
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(15, 23, 42, 0.9);
   color: #ecfeff;
   border-radius: 16px;
   padding: 0.9rem 0.9rem;
@@ -294,7 +298,7 @@ body {
 
 .hero-aside ul {
   margin: 0;
-  padding-left: 1.1rem;
+  padding-right: 1.1rem;
 }
 
 .hero-aside li {

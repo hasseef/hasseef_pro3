@@ -4,6 +4,19 @@ import { accounts } from "../config/accounts.js";
 import { coreModules } from "../config/coreModules.js";
 
 const modulesMatrix = {
+  platform_admin: [
+    "solutions",
+    "projects",
+    "events",
+    "funding",
+    "sponsorship",
+    "investment",
+    "investmentOpportunities",
+    "wallet",
+    "vision2030",
+    "govAlignment",
+    "reports"
+  ],
   emirate: ["events", "trainers", "projects", "vision2030", "govAlignment", "reports"],
   development_authority: [
     "solutions",
@@ -12,12 +25,9 @@ const modulesMatrix = {
     "facilities",
     "incubation",
     "consulting",
-    "volunteering",
-    "employment",
-    "sponsorship",
     "partnerships",
-    "reports",
-    "vision2030"
+    "vision2030",
+    "reports"
   ],
   government: [
     "solutions",
@@ -29,8 +39,6 @@ const modulesMatrix = {
     "employment",
     "funding",
     "sponsorship",
-    "partnerships",
-    "wallet",
     "vision2030",
     "govAlignment",
     "reports"
@@ -110,11 +118,16 @@ export function AccountDetailsPage() {
   const moduleIds = modulesMatrix[account.id] || [];
   const modules = coreModules.filter((m) => moduleIds.includes(m.id));
 
+  const isAdmin = account.id === "platform_admin";
+
   return (
     <div className="page">
       <div className="page-header">
         <div>
-          <div className="page-title">{account.name}</div>
+          <div className="page-title">
+            {isAdmin ? "🔐 " : ""}
+            {account.name}
+          </div>
           <div className="page-subtitle">{account.description}</div>
         </div>
         <div className="chips-row">
@@ -124,13 +137,16 @@ export function AccountDetailsPage() {
       </div>
 
       <section className="section">
-        <h3 className="section-title">المكوّنات المتاحة لهذا الحساب</h3>
+        <h3 className="section-title">
+          {isAdmin ? "مجالات إدارة المنصة" : "المكوّنات المتاحة لهذا الحساب"}
+        </h3>
         <div className="grid-3">
           {modules.map((m) => (
             <div key={m.id} className="card">
               <div className="card-header">{m.label}</div>
               <div className="card-sub">{m.description}</div>
               <div className="chips-row">
+                <span className="chip primary">مكوّن أساسي</span>
                 <span className="chip">{m.id}</span>
               </div>
             </div>
@@ -139,36 +155,60 @@ export function AccountDetailsPage() {
       </section>
 
       <section className="section">
-        <h3 className="section-title">واجهات التشغيل (نموذج أولي)</h3>
+        <h3 className="section-title">
+          {isAdmin ? "نماذج لوحات إدارة وطنية (مقترحة)" : "واجهات التشغيل (نموذج أولي)"}
+        </h3>
         <p className="page-subtitle">
-          هذه الواجهة توضح نموذجًا تشغيليًا مبسطًا يمكن لفريق التطوير تحويله إلى جداول فعلية تعتمد على
+          هذا القسم يوضّح نموذجًا تشغيليًا مبسطًا يمكن لفريق التطوير تحويله إلى جداول فعلية تعتمد على
           نموذج البيانات وواجهات الـ API المعتمدة في الملف التشغيلي.
         </p>
         <div className="card">
           <table className="table">
             <thead>
               <tr>
-                <th>المكوّن</th>
+                <th>{isAdmin ? "لوحة / شاشة" : "المكوّن"}</th>
                 <th>أهم الجداول والحقول المتوقعة</th>
                 <th>أمثلة على الإجراءات</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>الحلول</td>
-                <td>عنوان الحل، الجهة المستهدفة، وصف مختصر، حالة الحل، مستوى الربط بالرؤية.</td>
-                <td>إنشاء حل، تقييم الحل، طلب تعزيز علمي، تحويل لمشروع.</td>
-              </tr>
-              <tr>
-                <td>المشاريع</td>
-                <td>اسم المشروع، المالك، الشركاء، الميزانية، حالة التنفيذ، مستوى الأثر.</td>
-                <td>إنشاء مشروع، ربط بالرؤية، ربط بتمويل، رفع تقارير الأثر.</td>
-              </tr>
-              <tr>
-                <td>الفعاليات</td>
-                <td>اسم الفعالية، المنظم، المرفق، المتحدثون، حالة الاعتماد، عدد الحضور.</td>
-                <td>إنشاء فعالية، طلب اعتماد الإمارة، إدارة التسجيل، رفع التقرير الختامي.</td>
-              </tr>
+              {isAdmin ? (
+                <>
+                  <tr>
+                    <td>إدارة الحسابات</td>
+                    <td>نوع الحساب، اسم الجهة، المنطقة، حالة التفعيل، تاريخ الإنشاء.</td>
+                    <td>إنشاء حساب جديد، تعليق حساب، ضبط صلاحيات المكوّنات.</td>
+                  </tr>
+                  <tr>
+                    <td>القوائم الوطنية</td>
+                    <td>برامج الرؤية، الأهداف، الجهات الحكومية، إمارات المناطق، الجامعات.</td>
+                    <td>إضافة برنامج، تحديث هدف، ربط جهة ببرنامج، تفعيل/تعطيل عنصر.</td>
+                  </tr>
+                  <tr>
+                    <td>لوحة المؤشرات الوطنية</td>
+                    <td>عدد المشاريع، حجم التمويل، توزيع الأثر حسب المنطقة والقطاع والبرنامج.</td>
+                    <td>تصفية وفق برنامج/منطقة/قطاع، تصدير تقارير، عرض خرائط تفاعلية.</td>
+                  </tr>
+                </>
+              ) : (
+                <>
+                  <tr>
+                    <td>الحلول</td>
+                    <td>عنوان الحل، الجهة المستهدفة، وصف مختصر، حالة الحل، مستوى الربط بالرؤية.</td>
+                    <td>إنشاء حل، تقييم الحل، طلب تعزيز علمي، تحويل لمشروع.</td>
+                  </tr>
+                  <tr>
+                    <td>المشاريع</td>
+                    <td>اسم المشروع، المالك، الشركاء، الميزانية، حالة التنفيذ، مستوى الأثر.</td>
+                    <td>إنشاء مشروع، ربط بالرؤية، ربط بتمويل، رفع تقارير الأثر.</td>
+                  </tr>
+                  <tr>
+                    <td>الفعاليات</td>
+                    <td>اسم الفعالية، المنظم، المرفق، المتحدثون، حالة الاعتماد، عدد الحضور.</td>
+                    <td>إنشاء فعالية، طلب اعتماد الإمارة، إدارة التسجيل، رفع التقرير الختامي.</td>
+                  </tr>
+                </>
+              )}
             </tbody>
           </table>
         </div>

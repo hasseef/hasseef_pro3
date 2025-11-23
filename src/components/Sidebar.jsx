@@ -15,7 +15,9 @@ export function Sidebar() {
       <div className="sidebar-header">
         <div className="logo-mark">
           <span className="logo-main">حصيف</span>
-          <span className="logo-sub">برنامج شباب المملكة حصيف الوطني</span>
+          <span className="logo-sub">
+            المنصة الوطنية للتكامل التنموي المرتبطة ببرامج رؤية المملكة 2030
+          </span>
         </div>
         <div className="logo-partners">
           <span>رؤية 2030</span>
