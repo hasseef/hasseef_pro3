@@ -3,10 +3,6 @@ import React from "react";
 export function SimpleTable({ columns, data }) {
   return (
     <div className="card">
-      <div className="card-header">جدول تشغيلي تجريبي</div>
-      <div className="card-sub">
-        نموذج مبسط لعرض بيانات (مشاريع / فعاليات / فرص...) داخل حساب حصيف.
-      </div>
       <div className="toolbar">
         <input placeholder="بحث..." />
         <select>
