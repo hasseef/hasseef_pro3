@@ -1,12 +1,323 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <title>منصة حصيف الوطنية للتكامل التنموي</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <div id="app-root" class="app-root">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo-row">
+            <img src="assets/hasseef.png" alt="حصيف" class="logo-main-img" onerror="this.style.display='none'" />
+            <div class="logo-text-block">
+              <div class="logo-main">حصيف</div>
+              <div class="logo-sub">
+                المنصة الوطنية للتكامل التنموي المرتبطة ببرامج رؤية المملكة 2030
+              </div>
+            </div>
+          </div>
+          <div class="logo-partners">
+            <span>
+              <img src="assets/Vision2030.png" alt="رؤية 2030" class="logo-badge-img" onerror="this.style.display='none'" />
+            </span>
+            <span>
+              <img src="assets/talbiya.png" alt="مبادرة تلبية" class="logo-badge-img" onerror="this.style.display='none'" />
+            </span>
+          </div>
+        </div>
+        <nav class="sidebar-nav">
+          <button class="nav-item nav-item-active" data-section="home">
+            <span class="nav-icon">🏛</span>
+            <span>الرئيسية</span>
+          </button>
+          <button class="nav-item" data-section="accounts">
+            <span class="nav-icon">🧩</span>
+            <span>الحسابات الوطنية</span>
+          </button>
+          <button class="nav-item" data-section="services">
+            <span class="nav-icon">📋</span>
+            <span>الخدمات التشغيلية</span>
+          </button>
+          <button class="nav-item" data-section="vision">
+            <span class="nav-icon">🎯</span>
+            <span>الرؤية 2030</span>
+          </button>
+          <button class="nav-item" data-section="about">
+            <span class="nav-icon">ℹ️</span>
+            <span>عن حصيف</span>
+          </button>
+        </nav>
+      </aside>
+
+      <div class="app-main">
+        <header class="topbar">
+          <div>
+            <div class="topbar-title" id="topbar-title">
+              المنصة الوطنية للتكامل التنموي وتمكين المشاركة المجتمعية
+            </div>
+            <div class="topbar-subtitle">
+              طبقة تشغيل وطنية توحّد الحلول والمشاريع والفعاليات والتمويل بين إمارات المناطق والجهات الحكومية والقطاعين الخاص وغير الربحي والجامعات والمانحين والأفراد.
+            </div>
+          </div>
+          <div class="topbar-actions">
+            <button type="button" class="btn ghost">تسجيل الدخول</button>
+            <button type="button" class="btn primary small">إنشاء حساب</button>
+          </div>
+        </header>
+
+        <main class="app-content">
+          <!-- الرئيسية -->
+          <section id="section-home" class="page section-active">
+            <section class="hero">
+              <div class="hero-main">
+                <div class="hero-badge">
+                  المنصة الوطنية للتكامل التنموي – نموذج تشغيلي مرتبط بالرؤية 2030
+                </div>
+                <h1 class="hero-title">
+                  حصيف… طبقة تشغيل وطنية تربط
+                  <span class="hero-highlight">المجتمع والحكومة والاقتصاد</span>
+                  في مسار واحد.
+                </h1>
+                <p class="hero-body">
+                  بدلاً من تعدد المنصات والنماذج، تقدّم حصيف نظامًا موحّدًا لاستقبال الحلول والمبادرات،
+                  وتحويلها إلى مشاريع وبرامج، وربطها بالتمويل والرعايات والاستثمار، مع لوحات تقارير
+                  تعكس مساهمة كل منطقة وجهة في تحقيق مستهدفات رؤية المملكة 2030.
+                </p>
+                <div class="hero-actions">
+                  <button type="button" class="btn primary" data-section-target="accounts">
+                    استعراض الحسابات الوطنية
+                  </button>
+                  <button type="button" class="btn outline" data-section-target="services">
+                    الدخول إلى الخدمات التشغيلية
+                  </button>
+                </div>
+              </div>
+              <aside class="hero-aside">
+                <h3>ماذا يضيف حساب إدارة المنصة؟</h3>
+                <ul>
+                  <li>إدارة الحسابات وصلاحيات المكوّنات على مستوى المملكة.</li>
+                  <li>إدارة القوائم الوطنية (برامج الرؤية، الجهات، إمارات المناطق، الجامعات).</li>
+                  <li>لوحات مؤشرات وطنية للأثر التنموي والمجتمعي والاقتصادي.</li>
+                  <li>ضبط الهوية البصرية والمحتوى التعريفي الموحد للمنصة.</li>
+                </ul>
+              </aside>
+            </section>
+
+            <section class="stats-grid">
+              <article class="stat-card">
+                <div class="stat-label">الحسابات الوطنية + الحساب الإداري</div>
+                <div class="stat-value">9</div>
+                <div class="stat-sub">حساب إدارة المنصة + 8 حسابات تمثل جميع القطاعات.</div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-label">المكوّنات الأساسية</div>
+                <div class="stat-value">19</div>
+                <div class="stat-sub">نظام تشغيل موحّد للحلول والمشاريع والفعاليات والتمويل والشراكات.</div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-label">الربط بالرؤية 2030</div>
+                <div class="stat-value">مفعّل</div>
+                <div class="stat-sub">كل مشروع أو حل أو فعالية يمكن ربطه ببرامج وأهداف الرؤية ومؤشرات الجهات.</div>
+              </article>
+            </section>
+          </section>
+
+          <!-- الحسابات -->
+          <section id="section-accounts" class="page">
+            <div class="page-header">
+              <div>
+                <div class="page-title">الحسابات الوطنية + حساب إدارة المنصة</div>
+                <div class="page-subtitle">
+                  تسعة حسابات متكاملة تمثل إدارة المنصة، إمارة المنطقة، هيئة التطوير، الجهة الحكومية،
+                  القطاع الخاص، القطاع غير الربحي، الجامعات، المانحين، والأفراد.
+                </div>
+              </div>
+            </div>
+            <div class="grid-3">
+              <div class="card">
+                <div class="card-header">🔐 حساب إدارة المنصة</div>
+                <div class="card-sub">
+                  إدارة الحسابات، المكوّنات الأساسية، القوائم الوطنية، ولوحات المؤشرات على مستوى المملكة.
+                </div>
+                <div class="chips-row">
+                  <span class="chip primary">المنظور الوطني الشامل</span>
+                  <span class="chip">Platform Admin</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">حساب الإمارة</div>
+                <div class="card-sub">
+                  الإشراف التنموي على مستوى المنطقة واعتماد الفعاليات والمتحدثين ومتابعة المشاريع.
+                </div>
+                <div class="chips-row">
+                  <span class="chip primary">Emirate</span>
+                  <span class="chip">Events · Projects · Reports</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">حساب هيئة التطوير</div>
+                <div class="card-sub">
+                  إدارة الحلول والمشاريع والفعاليات والمرافق والاحتضان والشراكات على مستوى المدينة أو المنطقة.
+                </div>
+                <div class="chips-row">
+                  <span class="chip primary">Development Authority</span>
+                  <span class="chip">Solutions · Facilities · Partnerships</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">حساب الجهة الحكومية</div>
+                <div class="card-sub">
+                  بوابة لاستقبال الحلول وإدارة المشاريع والبرامج والفعاليات الحكومية المرتبطة بالرؤية 2030.
+                </div>
+                <div class="chips-row">
+                  <span class="chip primary">Government</span>
+                  <span class="chip">Solutions · Projects · Vision2030</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">حساب القطاع الخاص</div>
+                <div class="card-sub">
+                  تفعيل دور الشركات في الحلول والمشاريع والرعايات والاستثمار والمسؤولية الاجتماعية.
+                </div>
+                <div class="chips-row">
+                  <span class="chip primary">Private Sector</span>
+                  <span class="chip">Sponsorship · Investment</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">حساب القطاع غير الربحي</div>
+                <div class="card-sub">
+                  بوابة الجمعيات لطرح مشاريع مجتمعية وطلب التمويل والرعايات وإدارة التطوع.
+                </div>
+                <div class="chips-row">
+                  <span class="chip primary">Nonprofit</span>
+                  <span class="chip">Volunteering · Funding</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">حساب الجامعات</div>
+                <div class="card-sub">
+                  تمكين الجامعات من التعزيز العلمي والاستشارات والاحتضان والمرافق والتدريب التعاوني.
+                </div>
+                <div class="chips-row">
+                  <span class="chip primary">Universities</span>
+                  <span class="chip">Consulting · Incubation</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">حساب المانحين</div>
+                <div class="card-sub">
+                  واجهة المانحين والصناديق والبنوك لاستعراض وتمويل المشاريع ورعاية الفعاليات.
+                </div>
+                <div class="chips-row">
+                  <span class="chip primary">Donors</span>
+                  <span class="chip">Funding · Reports</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">حساب الأفراد</div>
+                <div class="card-sub">
+                  تمكين المواطنين والمقيمين من طرح الحلول والمبادرات والمشاركة في التطوع والتدريب.
+                </div>
+                <div class="chips-row">
+                  <span class="chip primary">Individuals</span>
+                  <span class="chip">Solutions · Volunteering</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- الخدمات -->
+          <section id="section-services" class="page">
+            <div class="page-header">
+              <div>
+                <div class="page-title">الخدمات التشغيلية التجريبية في حصيف</div>
+                <div class="page-subtitle">
+                  هذه الواجهات نموذج أولي لخدمات تشغيلية يمكن ربطها لاحقًا بقواعد بيانات وواجهات برمجة تطبيقات.
+                </div>
+              </div>
+            </div>
+            <div class="grid-3">
+              <div class="card">
+                <div class="card-header">إدارة الحلول والمبادرات</div>
+                <div class="card-sub">
+                  استقبال الحلول من الأفراد والجهات، وفرزها، وتحديد الجهة المناسبة، وربطها ببرامج الرؤية.
+                </div>
+                <button class="btn outline full" data-modal="solutions">فتح نموذج الحلول</button>
+              </div>
+              <div class="card">
+                <div class="card-header">إدارة المشاريع والبرامج</div>
+                <div class="card-sub">
+                  متابعة دورة حياة المشروع من الفكرة وحتى الإغلاق مع ربطه بالتمويل والرؤية والتقارير.
+                </div>
+                <button class="btn outline full" data-modal="projects">عرض سجل المشاريع</button>
+              </div>
+              <div class="card">
+                <div class="card-header">إدارة الفعاليات والاعتمادات</div>
+                <div class="card-sub">
+                  تسجيل الفعاليات، طلب اعتماد الإمارة، إدارة المتحدثين، وتوثيق التقرير الختامي.
+                </div>
+                <button class="btn outline full" data-modal="events">عرض سجل الفعاليات</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- الرؤية 2030 -->
+          <section id="section-vision" class="page">
+            <div class="page-header">
+              <div>
+                <div class="page-title">التكامل مع رؤية المملكة 2030</div>
+                <div class="page-subtitle">
+                  كل مشروع أو حل أو فعالية داخل حصيف يمكن ربطه ببرامج وأهداف رؤية المملكة 2030، وبالجهات الحكومية والجهات المساندة وإمارة المنطقة.
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <ul class="bullets">
+                <li>اختيار برنامج الرؤية المرتبط بالمشروع أو الفعالية.</li>
+                <li>تحديد الهدف الاستراتيجي والفرعي والتفصيلي.</li>
+                <li>ربط الجهة الحكومية الرئيسية والجهات الشريكة والمنطقة وهيئة التطوير.</li>
+                <li>توليد تقارير توضح مساهمة كل منطقة وجهة في تحقيق مؤشرات الرؤية.</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- عن حصيف -->
+          <section id="section-about" class="page">
+            <div class="page-header">
+              <div>
+                <div class="page-title">عن منصة حصيف</div>
+                <div class="page-subtitle">
+                  منصة حصيف هي منظومة وطنية مبتكرة للتكامل التنموي، تم إعدادها وتشغيلها تحت إشراف مبادرة
+                  تلبية وبرنامج شباب المملكة حصيف الوطني، استجابةً واعية لدعوة القيادة لتحقيق مستهدفات رؤية 2030.
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <p>
+                هذا النموذج يمثل واجهة تشغيلية أولية يمكن البناء عليها وربطها بأنظمة الخلفية وقواعد البيانات.
+                تم تصميمه ليكون قريبًا من نمط المنصات الحكومية السعودية، مع قابلية التوسع لحسابات وخدمات ومؤشرات إضافية.
+              </p>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- نوافذ بسيطة للخدمات -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 id="modal-title">عنوان الخدمة</h3>
+          <button class="btn ghost small" id="modal-close">إغلاق ✕</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
   </body>
 </html>
