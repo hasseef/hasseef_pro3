@@ -64,7 +64,24 @@ body {
   border-bottom: 1px solid rgba(148, 187, 233, 0.35);
 }
 
-.logo-mark {
+.logo-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.logo-main-img {
+  height: 40px;
+  width: auto;
+}
+
+.logo-badge-img {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+
+.logo-text-block {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
@@ -451,6 +468,45 @@ body {
 .table th {
   background: #f8fafc;
   font-weight: 600;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.7rem;
+  align-items: flex-end;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+}
+
+.form-field label {
+  color: var(--text-sub);
+}
+
+.form-field input,
+.form-field select {
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  outline: none;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  border-color: var(--primary);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 0.3rem;
 }
 
 @media (max-width: 1024px) {

@@ -2,7 +2,6 @@ import { coreModules } from "./coreModules";
 
 const pickModules = (ids) => coreModules.filter((m) => ids.includes(m.id));
 
-// حساب إدارة المنصة + الحسابات الوطنية الثمانية
 export const accounts = [
   {
     id: "platform_admin",

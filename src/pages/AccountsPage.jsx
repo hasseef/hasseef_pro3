@@ -1,10 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { accounts } from "../config/accounts.js";
 
 export function AccountsPage() {
-  const navigate = useNavigate();
-
   return (
     <div className="page">
       <div className="page-header">
@@ -12,8 +9,7 @@ export function AccountsPage() {
           <div className="page-title">الحسابات الوطنية + حساب إدارة المنصة</div>
           <div className="page-subtitle">
             تسعة حسابات متكاملة تمثل إدارة المنصة، إمارة المنطقة، هيئة التطوير، الجهة الحكومية،
-            القطاع الخاص، القطاع غير الربحي، الجامعات، المانحين، والأفراد، مع صلاحيات مختلفة على
-            نفس المكوّنات التشغيلية الأساسية.
+            القطاع الخاص، القطاع غير الربحي، الجامعات، المانحين، والأفراد.
           </div>
         </div>
       </div>
@@ -32,13 +28,6 @@ export function AccountsPage() {
                 </span>
               ))}
             </div>
-            <button
-              type="button"
-              className="btn outline full"
-              onClick={() => navigate(`/accounts/${a.id}`)}
-            >
-              فتح لوحة التحكم
-            </button>
           </div>
         ))}
       </div>

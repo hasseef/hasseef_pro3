@@ -96,9 +96,9 @@ export function Home() {
             <button
               type="button"
               className="btn outline"
-              onClick={() => navigate("/core-modules")}
+              onClick={() => navigate("/services")}
             >
-              استعراض المكوّنات الأساسية
+              الدخول إلى الخدمات التشغيلية
             </button>
           </div>
         </div>
@@ -148,7 +148,7 @@ export function Home() {
             <div className="page-title">الحسابات الوطنية والحساب الإداري</div>
             <div className="page-subtitle">
               كل حساب يمثل منظورًا تشغيليًا مختلفًا ويستخدم نفس المكوّنات الأساسية بصلاحيات ومدخلات
-              ومخرجات تتوافق مع دوره في الملف التشغيلي لمنصة حصيف، مع وجود حساب وطني لإدارة المنصة.
+              ومخرجات تتوافق مع دوره، مع وجود حساب وطني لإدارة المنصة.
             </div>
           </div>
         </div>
@@ -171,13 +171,6 @@ export function Home() {
                   </span>
                 ))}
               </div>
-              <button
-                type="button"
-                className="btn outline full"
-                onClick={() => navigate(`/accounts/${a.id}`)}
-              >
-                دخول الواجهة التشغيلية
-              </button>
             </div>
           ))}
         </div>
