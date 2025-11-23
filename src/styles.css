@@ -1,0 +1,363 @@
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #111827;
+  background-color: #f3f4f6;
+}
+
+body {
+  margin: 0;
+  background-color: #f3f4f6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.topbar-logos {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.topbar-logos img {
+  height: 32px;
+  object-fit: contain;
+}
+
+.topbar-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar-title-main {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.topbar-title-sub {
+  font-size: 0.78rem;
+  color: #6b7280;
+}
+
+.topbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.topbar-link {
+  font-size: 0.9rem;
+  color: #374151;
+  text-decoration: none;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+}
+
+.topbar-link.active {
+  background-color: #e5f0ff;
+  color: #1d4ed8;
+}
+
+.topbar-link:hover {
+  background-color: #edf2ff;
+}
+
+.layout-main {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.sidebar {
+  width: 260px;
+  background: white;
+  border-inline-end: 1px solid #e5e7eb;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sidebar-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.sidebar-section {
+  margin-bottom: 0.75rem;
+}
+
+.account-button {
+  width: 100%;
+  text-align: right;
+  padding: 0.45rem 0.6rem;
+  margin-bottom: 0.15rem;
+  border-radius: 0.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.86rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #111827;
+}
+
+.account-button span {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.account-button.active {
+  background-color: #eef2ff;
+  color: #1d4ed8;
+}
+
+.account-button:hover {
+  background-color: #f3f4ff;
+}
+
+.content {
+  flex: 1;
+  padding: 1.25rem 1.5rem;
+  overflow: auto;
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.page-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.page-subtitle {
+  font-size: 0.9rem;
+  color: #6b7280;
+  max-width: 640px;
+}
+
+.chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+
+.chip {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  font-size: 0.75rem;
+  background-color: #f9fafb;
+  color: #374151;
+}
+
+.chip.primary {
+  border-color: #bfdbfe;
+  background-color: #eff6ff;
+  color: #1d4ed8;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.9rem;
+}
+
+.card {
+  background: white;
+  border-radius: 0.9rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid #e5e7eb;
+}
+
+.card-header {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.card-sub {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+th, td {
+  padding: 0.35rem 0.4rem;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: right;
+}
+
+th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+tr:hover td {
+  background-color: #f9fafb;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  background-color: #ecfdf5;
+  color: #047857;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-bottom: 0.6rem;
+}
+
+.toolbar input, .toolbar select {
+  padding: 0.25rem 0.4rem;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  font-size: 0.78rem;
+  min-width: 120px;
+}
+
+.btn {
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.btn.primary {
+  background-color: #1d4ed8;
+  color: white;
+}
+
+.btn.outline {
+  background-color: white;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.hero-badge {
+  font-size: 0.75rem;
+  display: inline-flex;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background-color: white;
+  margin-bottom: 0.5rem;
+}
+
+.hero-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.hero-body {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin-bottom: 0.9rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.hero-aside {
+  background: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+}
+
+.hero-aside h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+}
+
+.hero-aside ul {
+  padding-right: 1rem;
+  margin: 0;
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+.hero-aside li {
+  margin-bottom: 0.2rem;
+}
+
+@media (max-width: 900px) {
+  .layout-main {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    border-inline-end: none;
+    border-bottom: 1px solid #e5e7eb;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .sidebar-section {
+    min-width: 220px;
+  }
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

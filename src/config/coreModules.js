@@ -1,0 +1,21 @@
+export const coreModules = [
+  { id: "solutions", label: "الحلول", description: "استقبال واقتراح الحلول التنموية من جميع القطاعات." },
+  { id: "projects", label: "المشاريع", description: "تحويل الحلول إلى مشاريع تنفيذية ومتابعة أثرها." },
+  { id: "events", label: "الفعاليات", description: "إدارة الفعاليات والملتقيات والورش في مختلف المناطق." },
+  { id: "facilities", label: "المرافق", description: "إدارة المرافق والقاعات والمسارح وربطها بالفعاليات." },
+  { id: "incubation", label: "الاحتضان والمسرعات", description: "برامج احتضان ومسرعات للمشاريع الريادية والتنموية." },
+  { id: "consulting", label: "الاستشارات", description: "طلب وتقديم الاستشارات العلمية والمهنية." },
+  { id: "coop", label: "التدريب التعاوني", description: "ربط طلاب الجامعات بفرص التدريب التعاوني." },
+  { id: "volunteering", label: "التطوع", description: "تنظيم فرص التطوع وتوثيق الساعات والأثر." },
+  { id: "employment", label: "التوظيف", description: "نشر الوظائف وإدارة طلبات التقديم." },
+  { id: "trainers", label: "المدربون والمتحدثون", description: "تمكين الخبراء والمدربين والمتحدثين." },
+  { id: "sponsorship", label: "الرعايات", description: "إدارة الرعايات المالية والإعلامية والتنموية." },
+  { id: "funding", label: "التمويل", description: "طلبات التمويل ومنح المشاريع التنموية." },
+  { id: "partnerships", label: "الشراكات", description: "بناء الشراكات بين الجهات في جميع القطاعات." },
+  { id: "wallet", label: "المحفظة المالية", description: "محفظة رقمية لإدارة المدفوعات والتحويلات داخل المنصة." },
+  { id: "investment", label: "الاستثمار", description: "إدارة استثمارات الأفراد والجهات في الفرص المتاحة." },
+  { id: "opportunities", label: "الفرص الاستثمارية", description: "طرح واستعراض الفرص الاستثمارية." },
+  { id: "vision2030", label: "ربط الرؤية 2030", description: "ربط كل مشاركة ببرامج وأهداف رؤية المملكة 2030." },
+  { id: "govAlignment", label: "الربط الحكومي", description: "ربط الحلول والمشاريع بالجهات الحكومية ذات الصلة." },
+  { id: "reports", label: "التقارير والأثر", description: "لوحات متابعة الأثر التنموي والتقارير الوطنية." }
+];
