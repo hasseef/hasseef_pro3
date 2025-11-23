@@ -1,28 +1,24 @@
-import React, { useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { Layout } from "./components/Layout";
-import { Home } from "./pages/Home";
-import { AccountsOverview } from "./pages/AccountsOverview";
-import { AccountPage } from "./pages/AccountPage";
-import { Login, Signup } from "./pages/Login";
-import { AboutGovernment } from "./pages/AboutGovernment";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { Layout } from "./components/Layout.jsx";
+import { Home } from "./pages/Home.jsx";
+import { AccountsPage } from "./pages/AccountsPage.jsx";
+import { AccountDetailsPage } from "./pages/AccountDetailsPage.jsx";
+import { CoreModulesPage } from "./pages/CoreModulesPage.jsx";
+import { Vision2030Page } from "./pages/Vision2030Page.jsx";
+import { AboutPage } from "./pages/AboutPage.jsx";
 
-function App() {
-  const [currentAccountId, setCurrentAccountId] = useState(null);
-
+export default function App() {
   return (
-    <Layout currentAccountId={currentAccountId} onSelectAccount={setCurrentAccountId}>
+    <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/accounts" element={<AccountsOverview />} />
-        <Route path="/accounts/:accountId" element={<AccountPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/about-government" element={<AboutGovernment />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/accounts" element={<AccountsPage />} />
+        <Route path="/accounts/:accountId" element={<AccountDetailsPage />} />
+        <Route path="/core-modules" element={<CoreModulesPage />} />
+        <Route path="/vision2030" element={<Vision2030Page />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
     </Layout>
   );
 }
-
-export default App;

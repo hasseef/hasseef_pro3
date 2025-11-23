@@ -1,78 +1,62 @@
 import { coreModules } from "./coreModules";
 
-const byIds = (...ids) => coreModules.filter(m => ids.includes(m.id));
+const pickModules = (ids) => coreModules.filter((m) => ids.includes(m.id));
 
 export const accounts = [
   {
     id: "emirate",
     name: "حساب الإمارة",
-    short: "الإمارة",
     role: "المنظور الإقليمي الشامل",
-    description:
-      "يمكن الإمارة من الإشراف على الفعاليات والمتحدثين ومشاريع المنطقة، وربطها ببرامج الرؤية 2030 وهيئات التطوير.",
-    focusModules: byIds("events", "trainers", "projects", "vision2030", "govAlignment", "reports")
+    description: "واجهة الإشراف التنموي على مستوى المنطقة لاعتماد الفعاليات والمتحدثين ومتابعة المشاريع والتقارير.",
+    focusModules: pickModules(["events", "trainers", "projects", "vision2030", "govAlignment", "reports"])
   },
   {
     id: "development_authority",
     name: "حساب هيئة التطوير",
-    short: "هيئة التطوير",
-    role: "المحرّك الإقليمي للتنمية",
-    description:
-      "يدير الحلول والمشاريع والفعاليات والمرافق والاحتضان على مستوى المنطقة أو المدينة، مع تقارير تنموية متقدمة.",
-    focusModules: byIds("solutions", "projects", "events", "facilities", "incubation", "volunteering", "partnerships", "vision2030", "reports")
+    role: "المحرّك الإقليمي للتطوير",
+    description: "إدارة الحلول والمشاريع والفعاليات والمرافق والاحتضان والشراكات على مستوى المنطقة أو المدينة.",
+    focusModules: pickModules(["solutions", "projects", "events", "facilities", "incubation", "partnerships", "reports", "vision2030"])
   },
   {
     id: "government",
     name: "حساب الجهة الحكومية",
-    short: "الجهة الحكومية",
     role: "المحرّك القطاعي",
-    description:
-      "يستقبل الحلول من جميع القطاعات، ويحّولها إلى مشاريع وبرامج مرتبطة بمؤشرات أداء الجهة وبرامج الرؤية.",
-    focusModules: byIds("solutions", "projects", "events", "consulting", "coop", "volunteering", "employment", "funding", "partnerships", "vision2030", "govAlignment", "reports")
+    description: "بوابة لاستقبال الحلول وإدارة المشاريع الحكومية والفعاليات والبرامج المرتبطة بالرؤية 2030.",
+    focusModules: pickModules(["solutions", "projects", "events", "consulting", "funding", "partnerships", "vision2030", "govAlignment", "reports"])
   },
   {
-    id: "private",
+    id: "private_sector",
     name: "حساب القطاع الخاص",
-    short: "القطاع الخاص",
-    role: "المحرك الاقتصادي",
-    description:
-      "يوحد مسارات المسؤولية الاجتماعية والاستثمار وفرص التوظيف والتدريب والمرافق والفعاليات للشركات والمؤسسات.",
-    focusModules: byIds("solutions", "projects", "events", "facilities", "consulting", "coop", "volunteering", "employment", "sponsorship", "wallet", "investment", "opportunities", "partnerships", "reports")
+    role: "المحرّك الاقتصادي",
+    description: "تفعيل دور الشركات في الحلول والمشاريع والرعايات والاستثمار والمسؤولية الاجتماعية.",
+    focusModules: pickModules(["solutions", "projects", "events", "facilities", "sponsorship", "investment", "investmentOpportunities", "wallet", "employment", "coop", "volunteering", "reports"])
   },
   {
     id: "nonprofit",
     name: "حساب القطاع غير الربحي",
-    short: "القطاع غير الربحي",
     role: "القلب المجتمعي",
-    description:
-      "بوابة للجمعيات والمؤسسات غير الربحية لطرح المشاريع وطلب التمويل والرعايات وتنظيم التطوع والفعاليات.",
-    focusModules: byIds("projects", "events", "volunteering", "coop", "employment", "sponsorship", "funding", "wallet", "partnerships", "vision2030", "reports")
+    description: "بوابة الجمعيات والمؤسسات غير الربحية لطرح مشاريع مجتمعية وطلب التمويل والرعايات وإدارة التطوع.",
+    focusModules: pickModules(["projects", "events", "volunteering", "funding", "sponsorship", "partnerships", "wallet", "vision2030", "reports"])
   },
   {
     id: "university",
     name: "حساب الجامعات",
-    short: "الجامعات",
     role: "المحرّك العلمي",
-    description:
-      "يعزز الحلول علميًا، ويدير المشاريع البحثية والفعاليات العلمية والمرافق الجامعية والاحتضان والتدريب التعاوني.",
-    focusModules: byIds("solutions", "projects", "events", "facilities", "incubation", "consulting", "coop", "volunteering", "employment", "investment", "opportunities", "vision2030", "reports")
+    description: "تمكين الجامعات من التعزيز العلمي، والاستشارات، والاحتضان، والمرافق، والتدريب التعاوني.",
+    focusModules: pickModules(["solutions", "projects", "events", "facilities", "incubation", "consulting", "coop", "trainers", "vision2030", "reports"])
   },
   {
     id: "donor",
     name: "حساب المانحين",
-    short: "المانحون",
     role: "البوابة المالية للتنمية",
-    description:
-      "يُسهّل للجهات المانحة والبنوك والصناديق الاطلاع على المشاريع المؤهلة للتمويل والرعاية وتتبع أثر دعمهم.",
-    focusModules: byIds("projects", "events", "sponsorship", "funding", "wallet", "reports")
+    description: "واجهة المانحين والصناديق والبنوك لاستعراض وتمويل المشاريع ورعاية الفعاليات ومتابعة أثر الدعم.",
+    focusModules: pickModules(["projects", "events", "sponsorship", "funding", "wallet", "reports", "vision2030"])
   },
   {
     id: "individual",
     name: "حساب الأفراد",
-    short: "الأفراد",
     role: "الواجهة المجتمعية",
-    description:
-      "يمكّن الفرد من تقديم حلول ومبادرات، والمشاركة في التطوع والتدريب والتوظيف والاستثمار والطبقة التخصصية.",
-    focusModules: byIds("solutions", "projects", "events", "volunteering", "coop", "employment", "trainers", "investment", "opportunities", "wallet", "reports")
+    description: "تمكين المواطنين والمقيمين من طرح الحلول والمبادرات والمشاركة في التطوع والتدريب والاستثمار.",
+    focusModules: pickModules(["solutions", "projects", "events", "volunteering", "coop", "employment", "investment", "investmentOpportunities", "trainers", "wallet", "reports"])
   }
 ];
