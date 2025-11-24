@@ -119,10 +119,6 @@
             <button data-route="stories" class="navlink w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-50">
               <span class="flex items-center gap-2"><i data-lucide="sparkles" class="w-4 h-4"></i> <span data-i18n="impactStories">قصص الأثر</span></span>
             </button>
-            <button data-route="ops" class="navlink w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-50">
-              <span class="flex items-center gap-2"><i data-lucide="activity" class="w-4 h-4"></i> <span>غرفة العمليات</span></span>
-              <span class="text-xs text-slate-400">Alt+5</span>
-            </button>
           </nav>
         </div>
 
@@ -219,64 +215,6 @@
           <div id="storiesWrap" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
         </div>
       </section>
-      <section id="ops" class="view hidden">
-        <div class="bg-white rounded-2xl p-6 shadow-soft">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <h2 class="text-lg font-semibold">غرفة العمليات الوطنية</h2>
-              <p class="text-sm text-slate-600 mt-1">
-                لوحة تشغيلية مختصرة تجمع نظرة على المشاريع والفعاليات والفرص عبر جميع الحسابات
-                (تجريبية، ويمكن لاحقًا ربطها مباشرة ببيانات قاعدة البيانات).
-              </p>
-            </div>
-            <div class="hidden md:flex gap-2">
-              <button class="px-3 py-2 rounded-lg bg-slate-100 text-sm">تصدير تقرير</button>
-              <button class="px-3 py-2 rounded-lg bg-primary text-white text-sm">إعداد تقرير فوري</button>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-            <div class="bg-slate-50 rounded-xl p-4">
-              <div class="text-xs text-slate-500">إجمالي المشاريع النشطة</div>
-              <div class="text-2xl font-bold" id="ops-total-projects">0</div>
-              <div class="text-[11px] text-slate-500 mt-1">حكومي، غير ربحي، جامعات، قطاع خاص</div>
-            </div>
-            <div class="bg-slate-50 rounded-xl p-4">
-              <div class="text-xs text-slate-500">إجمالي التمويل (ر.س)</div>
-              <div class="text-2xl font-bold" id="ops-total-funding">0</div>
-              <div class="text-[11px] text-slate-500 mt-1">تشمل منح، مسؤولية اجتماعية، استثمار تنموي</div>
-            </div>
-            <div class="bg-slate-50 rounded-xl p-4">
-              <div class="text-xs text-slate-500">الفعاليات القادمة</div>
-              <div class="text-2xl font-bold" id="ops-total-events">0</div>
-              <div class="text-[11px] text-slate-500 mt-1">بانتظار اعتماد الإمارة أو التنفيذ</div>
-            </div>
-            <div class="bg-slate-50 rounded-xl p-4">
-              <div class="text-xs text-slate-500">فرص عمل/تطوع/تدريب</div>
-              <div class="text-2xl font-bold" id="ops-total-opps">0</div>
-              <div class="text-[11px] text-slate-500 mt-1">مرتبطة بمشاريع مسجلة داخل حصيف</div>
-            </div>
-          </div>
-
-          <div class="overflow-auto scroll-slim rounded-2xl border border-slate-100">
-            <table class="min-w-full text-sm text-right">
-              <thead class="bg-slate-50 text-slate-500">
-                <tr>
-                  <th class="px-3 py-2">المشروع / البرنامج</th>
-                  <th class="px-3 py-2">الحساب</th>
-                  <th class="px-3 py-2">القطاع</th>
-                  <th class="px-3 py-2">المنطقة</th>
-                  <th class="px-3 py-2">الحالة</th>
-                  <th class="px-3 py-2">التمويل (ر.س)</th>
-                </tr>
-              </thead>
-              <tbody id="ops-projects-body">
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
 
       <!-- Per-account sections -->
       <section id="account-emirate" class="view hidden"></section>
@@ -609,13 +547,6 @@
       { id:2, title:'لقاء الجامعات والجهات', date:'2025-12-02', venue:'جامعة حائل', desc:'ربط البحث بالتنفيذ' },
     ];
 
-    let opportunities = [
-      { id:1, title:'متطوع فعاليات حصيف', type:'تطوع', sector:'غير ربحي', region:'حائل', account:'حساب القطاع غير الربحي' },
-      { id:2, title:'باحث مشاريع تنموية', type:'وظيفة', sector:'حكومي', region:'الرياض', account:'حساب الجهة الحكومية' },
-      { id:3, title:'متدرب في مختبر الابتكار', type:'تدريب تعاوني', sector:'جامعات', region:'حائل', account:'حساب الجامعات' },
-      { id:4, title:'منسق مسؤولية اجتماعية', type:'وظيفة', sector:'خاص', region:'الشرقية', account:'حساب القطاع الخاص' },
-    ];
-
     function renderAccounts(){
       const w=$('#accountsGrid'); w.innerHTML='';
       accounts.forEach(a=>{
@@ -642,51 +573,7 @@
       });
     }
 
-    
-    function renderOpsOverview(){
-      const opsTotalProjects = document.getElementById('ops-total-projects');
-      const opsTotalFunding  = document.getElementById('ops-total-funding');
-      const opsTotalEvents   = document.getElementById('ops-total-events');
-      const opsTotalOpps     = document.getElementById('ops-total-opps');
-      const body             = document.getElementById('ops-projects-body');
-      if(!opsTotalProjects || !body) return;
-
-      const totalProjects = projects.length;
-      const totalFunding  = projects.reduce((sum,p)=> sum + (p.fund||0), 0);
-      const totalEvents   = (typeof events!=='undefined' && events)? events.length : 0;
-      const totalOpps     = (typeof opportunities!=='undefined' && opportunities)? opportunities.length : 0;
-
-      opsTotalProjects.textContent = totalProjects.toString();
-      opsTotalFunding.textContent  = totalFunding.toLocaleString('ar-EG');
-      opsTotalEvents.textContent   = totalEvents.toString();
-      opsTotalOpps.textContent     = totalOpps.toString();
-
-      body.innerHTML = '';
-      const sectorAccountMap = {
-        'غير ربحي':'حساب القطاع غير الربحي',
-        'جامعات':'حساب الجامعات',
-        'حكومي':'حساب الجهة الحكومية',
-        'خاص':'حساب القطاع الخاص'
-      };
-
-      projects.forEach(p=>{
-        const tr = document.createElement('tr');
-        tr.className = 'border-t border-slate-100';
-        const accountName = sectorAccountMap[p.sector] || '—';
-        tr.innerHTML = `
-          <td class="px-3 py-2">${p.name}</td>
-          <td class="px-3 py-2">${accountName}</td>
-          <td class="px-3 py-2">${p.sector||''}</td>
-          <td class="px-3 py-2">${p.region||''}</td>
-          <td class="px-3 py-2">
-            <span class="px-2 py-1 rounded-full bg-slate-50 text-slate-700 text-xs">${p.status||''}</span>
-          </td>
-          <td class="px-3 py-2">${(p.fund||0).toLocaleString('ar-EG')}</td>
-        `;
-        body.appendChild(tr);
-      });
-    }
-function renderKPIs(){
+    function renderKPIs(){
       $('#kpiProjects').textContent=projects.length;
       const funding=projects.reduce((s,p)=>s+(+p.fund||0),0);
       $('#kpiFunding').textContent=funding.toLocaleString(currentLang==='ar'?'ar-EG':'en-US');
@@ -1109,6 +996,7 @@ function configurePeopleAccount(sec, id){
 
       
       if(key==='people'){ configurePeopleAccount(sec, id); }
+      if(key==='nonprofit'){ configureNonprofitAccount(sec, id); }
 
 // Tabs behavior
       sec.querySelectorAll('.tab-btn').forEach(btn => {
@@ -1123,7 +1011,157 @@ function configurePeopleAccount(sec, id){
       lucide.createIcons();
     }
 
-    function openDrawer(id){ $('#'+id).classList.remove('hidden'); }
+    
+    function configureNonprofitAccount(sec, id){
+      try{
+        if(!sec) return;
+
+        // تخصيص تبويب المشاريع لهذا الحساب بناءً على نموذج التشغيل
+        const projectsTab = sec.querySelector('#tab-'+id+'-projects tbody');
+        if(projectsTab){
+          projectsTab.innerHTML = '';
+          const rows = [
+            {
+              name:'مشروع تمكين الجمعيات الصغيرة',
+              focus:'بناء قدرات إدارية ومالية',
+              region:'منطقة حائل',
+              status:'قيد التنفيذ',
+              fund:320000
+            },
+            {
+              name:'برنامج التوعية بالمسؤولية الاجتماعية',
+              focus:'حملات إعلامية بالتعاون مع القطاع الخاص',
+              region:'منطقة الرياض',
+              status:'تحت الإعداد',
+              fund:150000
+            },
+            {
+              name:'مبادرة الدعم التقني للجمعيات',
+              focus:'تحويل رقمي للجمعيات غير الربحية',
+              region:'منطقة مكة المكرمة',
+              status:'مقترح',
+              fund:0
+            }
+          ];
+          rows.forEach(r=>{
+            const tr = document.createElement('tr');
+            tr.className = 'border-t border-slate-100';
+            tr.innerHTML = `
+              <td class="px-3 py-3 font-medium">${r.name}</td>
+              <td class="px-3 py-3 text-slate-500">${r.focus}</td>
+              <td class="px-3 py-3 text-slate-500">${r.region}</td>
+              <td class="px-3 py-3">
+                <span class="px-2 py-1 rounded-full bg-slate-50 text-slate-700 text-xs">${r.status}</span>
+              </td>
+              <td class="px-3 py-3 text-slate-700">${r.fund ? r.fund.toLocaleString('ar-EG') : '—'}</td>
+            `;
+            projectsTab.appendChild(tr);
+          });
+        }
+
+        // تخصيص تبويب الفعاليات
+        const eventsTab = sec.querySelector('#tab-'+id+'-events');
+        if(eventsTab){
+          eventsTab.innerHTML = `
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div class="p-4 rounded-2xl border bg-white">
+                <div class="text-sm text-slate-500">2026-02-10 • قاعة الغرفة التجارية بحائل</div>
+                <div class="font-semibold mt-1">ملتقى تمكين القطاع غير الربحي في المنطقة</div>
+                <p class="text-xs text-slate-600 mt-1">فعالية لتعريف الجمعيات بخدمات منصة حصيف وفرص المنح المتاحة.</p>
+              </div>
+              <div class="p-4 rounded-2xl border bg-white">
+                <div class="text-sm text-slate-500">2026-03-05 • جامعة حائل</div>
+                <div class="font-semibold mt-1">ورشة العمل المشتركة بين الجامعات والجمعيات</div>
+                <p class="text-xs text-slate-600 mt-1">ورشة لبحث سبل تعزيز الشراكات العلمية والاستشارية في مشاريع الجمعيات.</p>
+              </div>
+            </div>
+          `;
+        }
+
+        // تخصيص تبويب الوظائف/التطوع
+        const jobsTab = sec.querySelector('#tab-'+id+'-jobs');
+        if(jobsTab){
+          jobsTab.innerHTML = `
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div class="p-4 rounded-2xl border bg-white">
+                <div class="font-semibold">مدير مشروع غير ربحي</div>
+                <div class="text-sm text-slate-500">جمعية تنموية • الرياض</div>
+                <p class="text-xs text-slate-600 mt-1">إدارة مشروع مجتمعي مرتبط بأهداف رؤية 2030 وقياس الأثر.</p>
+              </div>
+              <div class="p-4 rounded-2xl border bg-white">
+                <div class="font-semibold">متطوع توثيق أثر</div>
+                <div class="text-sm text-slate-500">جمعية خيرية • حائل</div>
+                <p class="text-xs text-slate-600 mt-1">توثيق قصص المستفيدين ونتائج المشاريع الداعمة للأسر.</p>
+              </div>
+            </div>
+          `;
+        }
+
+        // تخصيص تبويب المرافق/المنح لهذا الحساب
+        const facilitiesTab = sec.querySelector('#tab-'+id+'-facilities');
+        if(facilitiesTab){
+          facilitiesTab.innerHTML = `
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div class="p-4 rounded-2xl border bg-white">
+                <div class="font-semibold">برنامج منح سنوي للجمعيات الصغيرة</div>
+                <div class="text-sm text-slate-500">الجهة المانحة: صندوق تنمية مجتمعية</div>
+                <p class="text-xs text-slate-600 mt-1">منح تشغيلية وتنموية للجمعيات الناشئة المرتبطة بأولويات المنطقة.</p>
+              </div>
+              <div class="p-4 rounded-2xl border bg-white">
+                <div class="font-semibold">مركز تدريب مشترك</div>
+                <div class="text-sm text-slate-500">الشريك: جامعة حائل</div>
+                <p class="text-xs text-slate-600 mt-1">مرفق تدريبي يمكن للجمعيات حجزه لتنفيذ برامجها التأهيلية.</p>
+              </div>
+            </div>
+          `;
+        }
+
+        // إضافة قسم في أسفل صفحة الحساب يوضح مسارات العمل كما في النموذج التشغيلي
+        const card = sec.querySelector('.bg-white.rounded-2xl.p-5.shadow-soft');
+        if(card){
+          const block = document.createElement('div');
+          block.className = 'mt-6 border-t pt-4 border-slate-100';
+          block.innerHTML = `
+            <div class="grid gap-4 md:grid-cols-3">
+              <div class="space-y-3">
+                <h3 class="text-sm font-semibold text-slate-700">الخدمات الرئيسة في حساب القطاع غير الربحي</h3>
+                <ul class="list-disc pr-4 text-sm text-slate-700 space-y-1">
+                  <li>تصميم ورفع مشاريع غير ربحية (تنموية/مجتمعية).</li>
+                  <li>طلب منح وتمويل من الجهات المانحة والقطاع الخاص.</li>
+                  <li>تنظيم الفعاليات والحملات التوعوية.</li>
+                  <li>إدارة فرص التطوع والتدريب للمستفيدين والمتطوعين.</li>
+                  <li>إرسال تقارير الأثر والتقارير المالية للجهات الداعمة.</li>
+                </ul>
+              </div>
+              <div class="space-y-3">
+                <h3 class="text-sm font-semibold text-slate-700">مثال لمسار عمل مشروع جمعيّة</h3>
+                <ol class="list-decimal pr-4 text-sm text-slate-700 space-y-1">
+                  <li>تصميم فكرة المشروع داخل حساب الجمعية وربطها بأهداف الرؤية.</li>
+                  <li>رفع طلب تمويل للمشروع إلى المانحين أو القطاع الخاص عبر حصيف.</li>
+                  <li>استكمال المتطلبات (الحوكمة، التراخيص، الخطط التنفيذية).</li>
+                  <li>تنفيذ المشروع مع توثيق الأنشطة والمستفيدين.</li>
+                  <li>رفع تقرير الأثر والتقرير المالي وإغلاق المشروع.</li>
+                </ol>
+              </div>
+              <div class="space-y-3">
+                <h3 class="text-sm font-semibold text-slate-700">تكامل الحساب مع بقية مكوّنات حصيف</h3>
+                <p class="text-sm text-slate-700 leading-relaxed">
+                  يستفيد حساب القطاع غير الربحي من حسابات المانحين والقطاع الخاص والجامعات من خلال:
+                  <br>- الحصول على تمويل ومنح ورعايات.
+                  <br>- الاستفادة من خدمات الاستشارات والتدريب الجامعي.
+                  <br>- إشراك الأفراد في فرص التطوع المرتبطة بالمشاريع.
+                </p>
+              </div>
+            </div>
+          `;
+          card.appendChild(block);
+        }
+
+      }catch(e){
+        console.error('configureNonprofitAccount error', e);
+      }
+    }
+function openDrawer(id){ $('#'+id).classList.remove('hidden'); }
     function closeDrawer(id){ $('#'+id).classList.add('hidden'); }
 
     document.getElementById('btnNewProject').onclick=()=>openDrawer('drawerProject');
@@ -1162,7 +1200,6 @@ function configurePeopleAccount(sec, id){
       $(`#navMain .navlink[data-route="${id}"]`)?.classList.add('bg-slate-100');
       location.hash=id;
       if(id==='map'){ setTimeout(()=>{ initMap(); mapInstance && mapInstance.invalidateSize(); }, 60); }
-      if(id==='ops'){ renderOpsOverview(); }
       if(id.startsWith('account-')){ buildAccountPage(id.replace('account-','')); }
     }
 
