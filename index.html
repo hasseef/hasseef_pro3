@@ -119,6 +119,10 @@
             <button data-route="stories" class="navlink w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-50">
               <span class="flex items-center gap-2"><i data-lucide="sparkles" class="w-4 h-4"></i> <span data-i18n="impactStories">قصص الأثر</span></span>
             </button>
+            <button data-route="ops" class="navlink w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-50">
+              <span class="flex items-center gap-2"><i data-lucide="activity" class="w-4 h-4"></i> <span>غرفة العمليات</span></span>
+              <span class="text-xs text-slate-400">Alt+5</span>
+            </button>
           </nav>
         </div>
 
@@ -215,6 +219,64 @@
           <div id="storiesWrap" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
         </div>
       </section>
+      <section id="ops" class="view hidden">
+        <div class="bg-white rounded-2xl p-6 shadow-soft">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h2 class="text-lg font-semibold">غرفة العمليات الوطنية</h2>
+              <p class="text-sm text-slate-600 mt-1">
+                لوحة تشغيلية مختصرة تجمع نظرة على المشاريع والفعاليات والفرص عبر جميع الحسابات
+                (تجريبية، ويمكن لاحقًا ربطها مباشرة ببيانات قاعدة البيانات).
+              </p>
+            </div>
+            <div class="hidden md:flex gap-2">
+              <button class="px-3 py-2 rounded-lg bg-slate-100 text-sm">تصدير تقرير</button>
+              <button class="px-3 py-2 rounded-lg bg-primary text-white text-sm">إعداد تقرير فوري</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+            <div class="bg-slate-50 rounded-xl p-4">
+              <div class="text-xs text-slate-500">إجمالي المشاريع النشطة</div>
+              <div class="text-2xl font-bold" id="ops-total-projects">0</div>
+              <div class="text-[11px] text-slate-500 mt-1">حكومي، غير ربحي، جامعات، قطاع خاص</div>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4">
+              <div class="text-xs text-slate-500">إجمالي التمويل (ر.س)</div>
+              <div class="text-2xl font-bold" id="ops-total-funding">0</div>
+              <div class="text-[11px] text-slate-500 mt-1">تشمل منح، مسؤولية اجتماعية، استثمار تنموي</div>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4">
+              <div class="text-xs text-slate-500">الفعاليات القادمة</div>
+              <div class="text-2xl font-bold" id="ops-total-events">0</div>
+              <div class="text-[11px] text-slate-500 mt-1">بانتظار اعتماد الإمارة أو التنفيذ</div>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4">
+              <div class="text-xs text-slate-500">فرص عمل/تطوع/تدريب</div>
+              <div class="text-2xl font-bold" id="ops-total-opps">0</div>
+              <div class="text-[11px] text-slate-500 mt-1">مرتبطة بمشاريع مسجلة داخل حصيف</div>
+            </div>
+          </div>
+
+          <div class="overflow-auto scroll-slim rounded-2xl border border-slate-100">
+            <table class="min-w-full text-sm text-right">
+              <thead class="bg-slate-50 text-slate-500">
+                <tr>
+                  <th class="px-3 py-2">المشروع / البرنامج</th>
+                  <th class="px-3 py-2">الحساب</th>
+                  <th class="px-3 py-2">القطاع</th>
+                  <th class="px-3 py-2">المنطقة</th>
+                  <th class="px-3 py-2">الحالة</th>
+                  <th class="px-3 py-2">التمويل (ر.س)</th>
+                </tr>
+              </thead>
+              <tbody id="ops-projects-body">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
 
       <!-- Per-account sections -->
       <section id="account-emirate" class="view hidden"></section>
@@ -547,6 +609,13 @@
       { id:2, title:'لقاء الجامعات والجهات', date:'2025-12-02', venue:'جامعة حائل', desc:'ربط البحث بالتنفيذ' },
     ];
 
+    let opportunities = [
+      { id:1, title:'متطوع فعاليات حصيف', type:'تطوع', sector:'غير ربحي', region:'حائل', account:'حساب القطاع غير الربحي' },
+      { id:2, title:'باحث مشاريع تنموية', type:'وظيفة', sector:'حكومي', region:'الرياض', account:'حساب الجهة الحكومية' },
+      { id:3, title:'متدرب في مختبر الابتكار', type:'تدريب تعاوني', sector:'جامعات', region:'حائل', account:'حساب الجامعات' },
+      { id:4, title:'منسق مسؤولية اجتماعية', type:'وظيفة', sector:'خاص', region:'الشرقية', account:'حساب القطاع الخاص' },
+    ];
+
     function renderAccounts(){
       const w=$('#accountsGrid'); w.innerHTML='';
       accounts.forEach(a=>{
@@ -573,7 +642,51 @@
       });
     }
 
-    function renderKPIs(){
+    
+    function renderOpsOverview(){
+      const opsTotalProjects = document.getElementById('ops-total-projects');
+      const opsTotalFunding  = document.getElementById('ops-total-funding');
+      const opsTotalEvents   = document.getElementById('ops-total-events');
+      const opsTotalOpps     = document.getElementById('ops-total-opps');
+      const body             = document.getElementById('ops-projects-body');
+      if(!opsTotalProjects || !body) return;
+
+      const totalProjects = projects.length;
+      const totalFunding  = projects.reduce((sum,p)=> sum + (p.fund||0), 0);
+      const totalEvents   = (typeof events!=='undefined' && events)? events.length : 0;
+      const totalOpps     = (typeof opportunities!=='undefined' && opportunities)? opportunities.length : 0;
+
+      opsTotalProjects.textContent = totalProjects.toString();
+      opsTotalFunding.textContent  = totalFunding.toLocaleString('ar-EG');
+      opsTotalEvents.textContent   = totalEvents.toString();
+      opsTotalOpps.textContent     = totalOpps.toString();
+
+      body.innerHTML = '';
+      const sectorAccountMap = {
+        'غير ربحي':'حساب القطاع غير الربحي',
+        'جامعات':'حساب الجامعات',
+        'حكومي':'حساب الجهة الحكومية',
+        'خاص':'حساب القطاع الخاص'
+      };
+
+      projects.forEach(p=>{
+        const tr = document.createElement('tr');
+        tr.className = 'border-t border-slate-100';
+        const accountName = sectorAccountMap[p.sector] || '—';
+        tr.innerHTML = `
+          <td class="px-3 py-2">${p.name}</td>
+          <td class="px-3 py-2">${accountName}</td>
+          <td class="px-3 py-2">${p.sector||''}</td>
+          <td class="px-3 py-2">${p.region||''}</td>
+          <td class="px-3 py-2">
+            <span class="px-2 py-1 rounded-full bg-slate-50 text-slate-700 text-xs">${p.status||''}</span>
+          </td>
+          <td class="px-3 py-2">${(p.fund||0).toLocaleString('ar-EG')}</td>
+        `;
+        body.appendChild(tr);
+      });
+    }
+function renderKPIs(){
       $('#kpiProjects').textContent=projects.length;
       const funding=projects.reduce((s,p)=>s+(+p.fund||0),0);
       $('#kpiFunding').textContent=funding.toLocaleString(currentLang==='ar'?'ar-EG':'en-US');
@@ -1049,6 +1162,7 @@ function configurePeopleAccount(sec, id){
       $(`#navMain .navlink[data-route="${id}"]`)?.classList.add('bg-slate-100');
       location.hash=id;
       if(id==='map'){ setTimeout(()=>{ initMap(); mapInstance && mapInstance.invalidateSize(); }, 60); }
+      if(id==='ops'){ renderOpsOverview(); }
       if(id.startsWith('account-')){ buildAccountPage(id.replace('account-','')); }
     }
 
