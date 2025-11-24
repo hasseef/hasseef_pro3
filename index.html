@@ -218,14 +218,15 @@
 
       <!-- Per-account sections -->
       <section id="account-emirate" class="view hidden"></section>
-      <section id="account-dev" class="view hidden"></section>
       <section id="account-gov" class="view hidden"></section>
       <section id="account-private" class="view hidden"></section>
       <section id="account-nonprofit" class="view hidden"></section>
       <section id="account-uni" class="view hidden"></section>
       <section id="account-funder" class="view hidden"></section>
       <section id="account-people" class="view hidden"></section>
+      <section id="account-speakers" class="view hidden"></section>
       <section id="account-admin" class="view hidden"></section>
+      <section id="account-detail" class="view hidden"></section>
     </main>
   </div>
 
@@ -283,33 +284,30 @@
     function toast(m){const el=$('#toast');el.textContent=m;el.classList.remove('hidden');setTimeout(()=>el.classList.add('hidden'),1800);}
 
     const accounts = [
-      { key:'emirate',  name_ar:'إمارة المنطقة',   name_en:'Regional Emirate',      icon:'shield',        color:'from-primary to-accent' },
-      { key:'dev',      name_ar:'هيئة التطوير',    name_en:'Development Authority', icon:'map',           color:'from-primary to-accent' },
-      { key:'gov',      name_ar:'جهة حكومية',      name_en:'Government Entity',     icon:'building-2',    color:'from-primary to-accent' },
-      { key:'private',  name_ar:'قطاع خاص',        name_en:'Private Sector',        icon:'briefcase',     color:'from-primary to-accent' },
-      { key:'nonprofit',name_ar:'قطاع غير ربحي',   name_en:'Nonprofit Sector',      icon:'heart',         color:'from-primary to-accent' },
-      { key:'uni',      name_ar:'الجامعات',        name_en:'Universities',          icon:'graduation-cap',color:'from-primary to-accent' },
-      { key:'funder',   name_ar:'جهات مانحة',      name_en:'Funders',               icon:'wallet',        color:'from-primary to-accent' },
-      { key:'people',   name_ar:'الأفراد',         name_en:'Individuals',           icon:'users',         color:'from-primary to-accent' },
-      { key:'admin',    name_ar:'حوكمة المنصة',    name_en:'Platform Governance',   icon:'settings',      color:'from-primary to-accent' },
+      { key:'emirate',  name_ar:'إمارة المنطقة', name_en:'Regional Emirate', icon:'shield', color:'from-primary to-accent' },
+      { key:'gov',      name_ar:'جهة حكومية',    name_en:'Government Entity', icon:'building-2', color:'from-primary to-accent' },
+      { key:'private',  name_ar:'قطاع خاص',      name_en:'Private Sector', icon:'briefcase', color:'from-primary to-accent' },
+      { key:'nonprofit',name_ar:'قطاع غير ربحي', name_en:'Nonprofit', icon:'heart', color:'from-primary to-accent' },
+      { key:'uni',      name_ar:'الجامعات',      name_en:'Universities', icon:'graduation-cap', color:'from-primary to-accent' },
+      { key:'funder',   name_ar:'جهات مانحة',    name_en:'Funders', icon:'wallet', color:'from-primary to-accent' },
+      { key:'people',   name_ar:'الأفراد',       name_en:'Individuals', icon:'users', color:'from-primary to-accent' },
+      { key:'speakers', name_ar:'مدربون/متحدثون',name_en:'Trainers/Speakers', icon:'mic', color:'from-primary to-accent' },
+      { key:'admin',    name_ar:'حوكمة المنصة',  name_en:'Platform Governance', icon:'settings', color:'from-primary to-accent' },
     ];
-    // تعريف مواصفات كل حساب: الأهداف والمكوّنات الأساسية ومسارات العمل
-    const accountSpecs = {
+    // تفاصيل كل حساب لصفحة "تفاصيل الحساب الكاملة"
+    const accountDetailSpecs = {
       emirate: {
-        intro: 'حساب إمارة المنطقة هو الحساب الإشرافي الأعلى على مستوى المنطقة، يركّز على التكامل الأمني والتنظيمي ومتابعة الأثر التنموي الشامل.',
+        intro: 'حساب إمارة المنطقة هو الحساب الإشرافي الأعلى على مستوى المنطقة، يركّز على التكامل الأمني والتنظيمي ومتابعة الأثر التنموي الشامل بالتعاون مع بقية الحسابات.',
         goals: [
           'متابعة المشاريع والفعاليات التنموية على مستوى المنطقة وضمان توافقها مع مستهدفات رؤية 2030.',
           'تعزيز التنسيق بين الجهات الحكومية والقطاع الخاص والقطاع غير الربحي داخل المنطقة.',
           'متابعة الأثر المجتمعي والاقتصادي للمبادرات والمشاريع الممولة عبر المنصة.'
         ],
         modules: [
-          { name: 'الحلول التنموية', level: 'استعراض شامل للحلول وربطها بأولويات المنطقة.' },
-          { name: 'المشاريع', level: 'استعراض ومتابعة حالات المشاريع والتمويل على مستوى المنطقة.' },
-          { name: 'الفعاليات', level: 'اعتماد الفعاليات الكبرى ومتابعة الجاهزية والتنفيذ.' },
-          { name: 'المرافق', level: 'استعراض المرافق المتاحة وربطها بالفعاليات والمبادرات.' },
-          { name: 'الوظائف والتطوع', level: 'قراءة المؤشرات المرتبطة بفرص التوظيف والتطوع في المنطقة.' },
-          { name: 'التقارير ولوحة المؤشرات', level: 'صلاحية متقدمة في قراءة تقارير الأداء التنموي ومؤشرات الرؤية.' },
-          { name: 'الشراكات الاستراتيجية', level: 'اعتماد الشراكات التنموية على مستوى المنطقة.' }
+          { name: 'لوحة متابعة المشاريع', level: 'إشراف على جميع المشاريع في المنطقة مع إمكانية الفرز حسب الجهة أو القطاع.' },
+          { name: 'لوحة الفعاليات واعتمادها', level: 'اعتماد الفعاليات الكبرى ومسار المتحدثين وضبط الجاهزية الأمنية والتنظيمية.' },
+          { name: 'التقارير ولوحة المؤشرات', level: 'قراءة تقارير الأداء التنموي ومؤشرات الرؤية على مستوى المنطقة.' },
+          { name: 'الشراكات الاستراتيجية', level: 'اعتماد الشراكات التنموية على مستوى المنطقة مع الوزارات والهيئات.' }
         ],
         flows: [
           'مسار اعتماد فعالية استراتيجية برعاية الإمارة.',
@@ -317,40 +315,18 @@
           'مسار متابعة جاهزية المنطقة للمبادرات الوطنية الكبرى.'
         ]
       },
-      dev: {
-        intro: 'حساب هيئة التطوير يركّز على التخطيط الحضري والاستثماري وتنسيق المشاريع الكبرى في المنطقة.',
-        goals: [
-          'مواءمة المشاريع والمبادرات مع الخطط المكانية والحضرية والاستراتيجية للمنطقة.',
-          'رفع كفاءة استغلال المرافق والأصول الاستثمارية.',
-          'تعزيز الشراكات مع القطاع الخاص في المشاريع الاستثمارية والبنية التحتية.'
-        ],
-        modules: [
-          { name: 'المشاريع', level: 'إدارة ومتابعة المشاريع التطويرية والبنى التحتية.' },
-          { name: 'الفعاليات', level: 'تنسيق فعاليات التنمية الحضرية والاستثمارية.' },
-          { name: 'المرافق', level: 'إدارة ربط المرافق بالمشاريع والفعاليات.' },
-          { name: 'الاستثمار والفرص الاستثمارية', level: 'تصميم وطرح الفرص الاستثمارية وربطها بالمستثمرين.' },
-          { name: 'الشراكات الاستراتيجية', level: 'تأسيس شراكات مع المطورين والمستثمرين والجهات الممولة.' },
-          { name: 'التقارير', level: 'قراءة تقارير الأداء العمراني والاستثماري.' }
-        ],
-        flows: [
-          'مسار طرح فرصة استثمارية واعتمادها.',
-          'مسار مواءمة مشروع تنموي جديد مع الخطة الاستراتيجية للمنطقة.'
-        ]
-      },
       gov: {
-        intro: 'حساب الجهة الحكومية يمكّن الوزارات والهيئات من طرح احتياجاتها ومشاريعها وحلولها التنموية وقياس الأثر.',
+        intro: 'حساب الجهة الحكومية يمكّن الوزارات والهيئات من طرح احتياجاتها ومشاريعها وحلولها التنموية وقياس الأثر بشكل منظم ومترابط مع برامج الرؤية.',
         goals: [
           'تنظيم احتياجات الجهة وربطها بحلول من القطاعين الخاص وغير الربحي والجامعات.',
           'رفع كفاءة صرف الميزانيات المخصصة للمبادرات التنموية.',
           'تعزيز الشفافية في متابعة المشاريع والبرامج والمخرجات.'
         ],
         modules: [
-          { name: 'الحلول', level: 'استقبال وطلب حلول تنموية من مختلف القطاعات.' },
-          { name: 'المشاريع', level: 'إنشاء وإدارة ومتابعة مشاريع الجهة.' },
-          { name: 'الفعاليات', level: 'طلب واعتماد وتنفيذ الفعاليات التوعوية والتنموية.' },
-          { name: 'المرافق', level: 'استخدام مرافق الجهة وربطها بالفعاليات والبرامج.' },
-          { name: 'الوظائف والتطوع والتدريب', level: 'طرح فرص عمل وتطوع وتدريب تعاوني بالتكامل مع منصة حصيف.' },
-          { name: 'الشراكات', level: 'إدارة الشراكات مع القطاع الخاص وغير الربحي والجامعات.' },
+          { name: 'إدارة الحلول', level: 'استقبال وطلب حلول تنموية من مختلف القطاعات.' },
+          { name: 'إدارة المشاريع والبرامج', level: 'إنشاء وإدارة ومتابعة مشاريع الجهة وربطها بالموازنات.' },
+          { name: 'إدارة الفعاليات', level: 'طلب واعتماد وتنفيذ الفعاليات التوعوية والتنموية.' },
+          { name: 'إدارة الفرص (وظائف/تطوع/تدريب)', level: 'طرح فرص عمل وتطوع وتدريب تعاوني مرتبطة بمشاريع الجهة.' },
           { name: 'التقارير ومؤشرات الرؤية', level: 'متابعة إسهام الجهة في مستهدفات رؤية 2030.' }
         ],
         flows: [
@@ -359,19 +335,17 @@
         ]
       },
       private: {
-        intro: 'حساب القطاع الخاص يركّز على تمكين المسؤولية الاجتماعية والاستثمار التنموي وربط الشركات بالفرص المناسبة.',
+        intro: 'حساب القطاع الخاص يركّز على تمكين المسؤولية الاجتماعية والاستثمار التنموي وربط الشركات بالفرص المناسبة الرابحة للمجتمع والاقتصاد.',
         goals: [
           'ربط خطط المسؤولية الاجتماعية للشركة مع أولويات الرؤية والجهات الحكومية.',
           'تسهيل الاستثمار في مشاريع ذات عائد تنموي واقتصادي.',
           'إبراز أثر مساهمات الشركة عبر تقارير ولوحات مؤشرات واضحة.'
         ],
         modules: [
-          { name: 'فرص المنح والرعايات', level: 'إنشاء فرص منح ورعاية وربطها بالمشاريع والفعاليات.' },
-          { name: 'المشاريع', level: 'تمويل وتبنّي مشاريع مجتمعية وتنموية.' },
-          { name: 'الفعاليات', level: 'رعاية الفعاليات والمشاركة فيها.' },
-          { name: 'الاستثمار', level: 'الاستثمار في مشاريع ومنتجات ذات بعد تجاري وتنموي.' },
-          { name: 'المحفظة المالية', level: 'متابعة حركة التمويل والاشتراكات والاستثمارات.' },
-          { name: 'التقارير', level: 'قراءة تقارير الأثر التنموي والتسويقي لمساهمات الشركة.' }
+          { name: 'فرص المنح والرعايات', level: 'إنشاء فرص منح ورعاية وربطها بالمشاريع والفعاليات ذات الأولوية.' },
+          { name: 'المشاريع المدعومة', level: 'تمويل وتبنّي مشاريع مجتمعية وتنموية وقراءة أثرها.' },
+          { name: 'الاستثمار التنموي', level: 'الاستثمار في منتجات ومنصات رقمية أو مشاريع ذات بعد تجاري وتنموي.' },
+          { name: 'المحفظة والتقارير', level: 'متابعة حركة التمويل والاشتراكات والاستثمارات وتقارير الأثر.' }
         ],
         flows: [
           'مسار اختيار مشروع ودعمه كمسؤولية اجتماعية.',
@@ -379,27 +353,25 @@
         ]
       },
       nonprofit: {
-        intro: 'حساب القطاع غير الربحي يمكّن الجمعيات والمؤسسات الأهلية من طرح مشاريعها وفرصها التطوعية والتدريبية والتمويلية.',
+        intro: 'حساب القطاع غير الربحي يمكّن الجمعيات والمؤسسات الأهلية من طرح مشاريعها وفرصها التطوعية والتدريبية والتمويلية، ورفع جودة العمل التنموي.',
         goals: [
           'تنويع مصادر الدخل عبر المنح والاشتراكات والاستثمار المسموح نظامًا.',
           'رفع جودة المشاريع من خلال الربط العلمي مع الجامعات والجهات الاستشارية.',
           'توسيع قاعدة المتطوعين والمستفيدين.'
         ],
         modules: [
-          { name: 'المشاريع', level: 'تصميم وإدارة مشاريع وبرامج غير ربحية.' },
-          { name: 'الفعاليات', level: 'تنظيم فعاليات مجتمعية وتوعوية.' },
-          { name: 'فرص التطوع', level: 'طرح فرص تطوعية وإدارة المتطوعين.' },
-          { name: 'فرص التدريب', level: 'تنفيذ برامج تدريبية للمستفيدين أو العاملين في القطاع.' },
-          { name: 'فرص التمويل والمنح', level: 'طلب منح وتمويل من المانحين والشركات.' },
-          { name: 'التقارير', level: 'رفع تقارير الأثر التنموي والمالي للجهات الممولة.' }
+          { name: 'إدارة المشاريع غير الربحية', level: 'تصميم وإدارة مشاريع وبرامج تنموية للفئات المستهدفة.' },
+          { name: 'الفعاليات المجتمعية', level: 'تنظيم فعاليات مجتمع...ية وتوعوية بالشراكة مع الجهات.' },
+          { name: 'التطوع والتدريب', level: 'طرح فرص تطوعية وتدريبية وإدارة المشاركين.' },
+          { name: 'طلبات التمويل والمنح', level: 'رفع طلبات منح وتمويل للمانحين والشركات.' }
         ],
         flows: [
           'مسار تصميم مشروع جديد ورفعه للتمويل عبر حصيف.',
-          'مسار إدارة حملة تطوعية أو توعوية.'
+          'مسار إدارة حملة تطوعية أو توعوية مرتبطة بمؤشرات قياس.'
         ]
       },
       uni: {
-        intro: 'حساب الجامعات يربط البحث العلمي والابتكار بالاحتياجات التنموية ويتيح دورًا استشاريًا وعلميًا في المشاريع.',
+        intro: 'حساب الجامعات يربط البحث العلمي والابتكار بالاحتياجات التنموية ويتيح دورًا استشاريًا وعلميًا في المشاريع على مستوى المناطق والقطاعات.',
         goals: [
           'تعزيز الدور الاستشاري والعلمي للجامعات في المشاريع التنموية.',
           'توفير فرص تدريب تعاوني للطلاب مرتبطة بمشاريع حقيقية.',
@@ -407,11 +379,9 @@
         ],
         modules: [
           { name: 'الحلول البحثية والاستشارية', level: 'تقديم حلول ودراسات واستشارات للجهات والقطاعات.' },
-          { name: 'المشاريع', level: 'المشاركة العلمية في مشاريع القطاعات المختلفة.' },
+          { name: 'المشاريع المشتركة', level: 'المشاركة العلمية في مشاريع القطاعات المختلفة.' },
           { name: 'الفعاليات والمؤتمرات', level: 'تنظيم واستضافة فعاليات علمية وتنموية.' },
-          { name: 'التدريب التعاوني', level: 'ربط الطلاب بفرص التدريب في المشاريع والجهات الشريكة.' },
-          { name: 'المرافق الجامعية', level: 'عرض مرافق الجامعة كقاعات أو معامل أو مراكز بحثية للاستفادة.' },
-          { name: 'التقارير', level: 'إبراز أثر الجامعة في الرؤية والشراكات.' }
+          { name: 'التدريب التعاوني', level: 'ربط الطلاب بفرص التدريب في المشاريع والجهات الشريكة.' }
         ],
         flows: [
           'مسار ترشيح فريق بحثي لدراسة مشروع مقترح.',
@@ -419,21 +389,21 @@
         ]
       },
       funder: {
-        intro: 'حساب الجهات المانحة يركّز على تنظيم المنح والوقف والتمويل الخيري والاستثماري وربطه بالمشاريع المؤثرة.',
+        intro: 'حساب الجهات المانحة يركّز على تنظيم المنح والوقف والتمويل الخيري والاستثماري وربطه بالمشاريع ذات الأثر العالي.',
         goals: [
           'توجيه المنح للمشاريع ذات الأثر الأعلى على مستهدفات الرؤية.',
           'رفع شفافية متابعة استخدام أموال المنح والوقف.',
-          'تمكين تنوع أدوات التمويل (منح، قروض حسنة، استثمار وقفي...).'
+          'تمكين تنوع أدوات التمويل والتنمية المستدامة.'
         ],
         modules: [
-          { name: 'فرص المنح', level: 'تصميم حقائب منح مرتبطة بمحاور وأولويات محددة.' },
-          { name: 'المشاريع', level: 'اختيار وتمويل المشاريع وفق معايير الحوكمة المعتمدة.' },
-          { name: 'المحفظة المالية', level: 'متابعة التزامات التمويل والصرف.' },
-          { name: 'التقارير', level: 'استقبال تقارير الأثر والتقارير المالية من الجهات المنفذة.' }
+          { name: 'إدارة برامج المنح', level: 'تصميم حقائب منح مرتبطة بمحاور وأولويات محددة.' },
+          { name: 'إدارة طلبات التمويل', level: 'اختيار وتمويل المشاريع وفق معايير الحوكمة المعتمدة.' },
+          { name: 'المحفظة المالية', level: 'متابعة التزامات التمويل والصرف بشكل دوري.' },
+          { name: 'تقارير الأثر', level: 'استقبال تقارير الأثر والتقارير المالية من الجهات المنفذة.' }
         ],
         flows: [
           'مسار تصميم برنامج منح سنوي وإطلاقه عبر المنصة.',
-          'مسار تقييم طلب تمويل لمشروع جديد.'
+          'مسار تقييم طلب تمويل لمشروع جديد وإصدار قرار الدعم.'
         ]
       },
       people: {
@@ -446,130 +416,152 @@
         modules: [
           { name: 'ملف الفرد', level: 'إدارة الملف الشخصي والسيرة التنموية والمهارية.' },
           { name: 'الفرص الوظيفية', level: 'استعراض والتقديم على الوظائف المطروحة من الجهات.' },
-          { name: 'التطوع', level: 'استعراض فرص التطوع والتقديم عليها.' },
-          { name: 'التدريب', level: 'استعراض البرامج والدورات وفرص التدريب التعاوني.' },
-          { name: 'المبادرات والحلول', level: 'رفع مبادرات وحلول ومشاريع مقترحة.' }
+          { name: 'التطوع', level: 'استعراض فرص التطوع والتقديم عليها وإدارة الساعات التطوعية.' },
+          { name: 'البرامج التدريبية', level: 'الاطلاع على البرامج والدورات وفرص التدريب التعاوني.' },
+          { name: 'المبادرات والحلول', level: 'رفع مبادرات وحلول ومشاريع مقترحة من الأفراد.' }
         ],
         flows: [
           'مسار بناء الملف التنموي للفرد.',
           'مسار التقديم على فرصة (وظيفية/تطوعية/تدريبية) عبر المنصة.'
         ]
       },
+      speakers: {
+        intro: 'حساب المدربين والمتحدثين يمكّن المختصين من تقديم أنفسهم كخبراء مشاركين في الفعاليات والبرامج والمشاريع التنموية.',
+        goals: [
+          'ربط المتحدثين والمدربين بالفعاليات والبرامج المناسبة لتخصصهم.',
+          'تنظيم عملية الاعتماد والتقييم بما يتوافق مع معايير الجهات المختصة.'
+        ],
+        modules: [
+          { name: 'الملف المهني', level: 'إدارة السيرة الذاتية والخبرات العلمية والعملية.' },
+          { name: 'الفعاليات المقترحة', level: 'الترشيح للمشاركة في فعاليات وبرامج داخل المنصة.' },
+          { name: 'التقييم والتقارير', level: 'استقبال تقييمات الجهات والمنظمين.' }
+        ],
+        flows: [
+          'مسار اعتماد متحدث/مدرب جديد.',
+          'مسار ترشيح متحدث لفعالية معينة ضمن مسار اعتماد الإمارة.'
+        ]
+      },
       admin: {
-        intro: 'حساب حوكمة المنصة خاص بفريق التشغيل والإدارة لدى مبادرة تلبية والشركاء الحكوميين المعنيين.',
+        intro: 'حساب حوكمة المنصة خاص بفريق التشغيل والإدارة لدى مبادرة تلبية والشركاء الحكوميين المعنيين بضبط بوابة حصيف على مستوى المملكة.',
         goals: [
           'ضبط إعدادات المنصة والحسابات والصلاحيات.',
           'متابعة جودة البيانات والمشاريع وضمان التوافق مع الأنظمة.',
           'إدارة التقارير العامة وعلاقات الشراكات الوطنية.'
         ],
         modules: [
-          { name: 'إدارة المستخدمين والحسابات', level: 'إدارة صلاحيات الحسابات الرئيسية والفرعية.' },
-          { name: 'إعدادات المنصة', level: 'تهيئة البرامج والحقول العامة والهوية البصرية.' },
-          { name: 'التقارير العامة', level: 'لوحات مؤشرات إجمالية على مستوى المملكة والمناطق.' },
-          { name: 'إدارة الشراكات', level: 'إدارة اتفاقيات التعاون والاعتمادات الرسمية.' }
+          { name: 'إدارة المستخدمين والحسابات', level: 'إدارة صلاحيات الحسابات الرئيسية والفرعية على مستوى المملكة.' },
+          { name: 'إعدادات المنصة الوطنية', level: 'تهيئة البرامج والحقول العامة والهوية البصرية الوطنية.' },
+          { name: 'التقارير العامة', level: 'لوحات مؤشرات إجمالية على مستوى المملكة والمناطق والقطاعات.' },
+          { name: 'إدارة الشراكات', level: 'إدارة اتفاقيات التعاون والاعتمادات الرسمية مع الشركاء.' }
         ],
         flows: [
-          'مسار إنشاء حساب جديد أو تفعيله.',
-          'مسار إعداد تقارير دورية لصانع القرار.'
+          'مسار إنشاء حساب جديد أو تفعيله أو إيقافه.',
+          'مسار إعداد تقارير دورية لصانع القرار على المستوى الوطني.'
         ]
       }
     };
 
-    function enrichAccountWithSpec(key, sec, id){
-      const spec = accountSpecs[key];
-      if(!spec) return;
-      const card = sec.querySelector('.bg-white.rounded-2xl.p-5.shadow-soft');
-      if(!card) return;
+    function openAccountDetail(key){
+      const meta = accounts.find(a => a.key === key);
+      const spec = accountDetailSpecs[key];
+      const sec = document.getElementById('account-detail');
+      if(!meta || !spec || !sec) return;
+      const title = currentLang==='ar' ? meta.name_ar : meta.name_en;
 
-      const wrapper = document.createElement('div');
-      wrapper.className = 'mt-6 grid gap-4 md:grid-cols-3';
+      sec.innerHTML = `
+        <div class="bg-white rounded-2xl p-5 shadow-soft">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <button class="px-3 py-1.5 rounded-full border text-xs text-slate-600 hover:bg-slate-50 flex items-center gap-1" onclick="switchView('accounts')">
+                <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                <span>${currentLang==='ar'?'رجوع للحسابات':'Back to accounts'}</span>
+              </button>
+              <div class="flex items-center gap-2">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-r ${meta.color} flex items-center justify-center text-white">
+                  <i data-lucide="${meta.icon}" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-500">${currentLang==='ar'?'تفاصيل حساب':'Account details'}</div>
+                  <h2 class="text-lg font-semibold">${title}</h2>
+                </div>
+              </div>
+            </div>
+            <div class="text-xs text-slate-500 hidden md:block">
+              ${currentLang==='ar'
+                ? 'هذه الصفحة توضح دور الحساب، المكوّنات الأساسية، ومسارات العمل كما في النموذج التشغيلي لمنصة حصيف.'
+                : 'This view describes the account role, core modules and workflows as defined in the Hasif operating model.'}
+            </div>
+          </div>
 
-      // العمود الأول: مقدمة وأهداف
-      const col1 = document.createElement('div');
-      col1.className = 'space-y-3';
+          <div class="grid gap-4 md:grid-cols-3">
+            <div class="space-y-3">
+              <h3 class="text-sm font-semibold text-slate-700">${currentLang==='ar'?'أهداف الحساب':'Account goals'}</h3>
+              <ul id="detail-goals" class="list-disc pr-4 text-sm text-slate-700 space-y-1"></ul>
+            </div>
+            <div class="md:col-span-2 space-y-3">
+              <h3 class="text-sm font-semibold text-slate-700">${currentLang==='ar'?'المكوّنات الأساسية في الحساب':'Core modules in this account'}</h3>
+              <div class="overflow-auto scroll-slim rounded-xl border border-slate-100 bg-slate-50/60">
+                <table class="min-w-full text-xs text-right">
+                  <thead class="bg-slate-100 text-slate-500">
+                    <tr>
+                      <th class="px-3 py-2">${currentLang==='ar'?'المكوّن':'Module'}</th>
+                      <th class="px-3 py-2">${currentLang==='ar'?'الدور والصلاحية':'Role / Permission'}</th>
+                    </tr>
+                  </thead>
+                  <tbody id="detail-modules"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
-      if(spec.intro){
-        const introEl = document.createElement('p');
-        introEl.className = 'text-sm text-slate-700 leading-relaxed';
-        introEl.textContent = spec.intro;
-        col1.appendChild(introEl);
-      }
+          <div class="mt-6 grid gap-4 md:grid-cols-3">
+            <div class="md:col-span-2 space-y-3">
+              <h3 class="text-sm font-semibold text-slate-700">${currentLang==='ar'?'أهم مسارات العمل':'Key workflows'}</h3>
+              <ul id="detail-flows" class="list-disc pr-4 text-sm text-slate-700 space-y-1"></ul>
+            </div>
+            <div class="space-y-3">
+              <h3 class="text-sm font-semibold text-slate-700">${currentLang==='ar'?'نبذة تشغيليّة مختصرة':'Operational note'}</h3>
+              <p class="text-sm text-slate-700 leading-relaxed">${spec.intro}</p>
+            </div>
+          </div>
+        </div>
+      `;
 
-      if(spec.goals && spec.goals.length){
-        const goalsTitle = document.createElement('div');
-        goalsTitle.className = 'text-xs font-semibold text-slate-500';
-        goalsTitle.textContent = currentLang==='ar' ? 'أهداف الحساب' : 'Account Goals';
-        col1.appendChild(goalsTitle);
-
-        const goalsList = document.createElement('ul');
-        goalsList.className = 'list-disc pr-4 text-sm text-slate-700 space-y-1';
-        spec.goals.forEach(g=>{
+      const goalsList = sec.querySelector('#detail-goals');
+      if(goalsList && spec.goals){
+        spec.goals.forEach(g => {
           const li = document.createElement('li');
           li.textContent = g;
           goalsList.appendChild(li);
         });
-        col1.appendChild(goalsList);
       }
 
-      // العمود الثاني والثالث: جدول المكوّنات ومسارات العمل
-      const col2 = document.createElement('div');
-      col2.className = 'md:col-span-2 space-y-3';
-
-      if(spec.modules && spec.modules.length){
-        const modulesTitle = document.createElement('div');
-        modulesTitle.className = 'text-xs font-semibold text-slate-500 flex items-center justify-between';
-        modulesTitle.textContent = currentLang==='ar' ? 'المكوّنات الأساسية في هذا الحساب' : 'Core modules in this account';
-        col2.appendChild(modulesTitle);
-
-        const tableWrap = document.createElement('div');
-        tableWrap.className = 'overflow-auto scroll-slim rounded-xl border border-slate-100 bg-slate-50/60';
-
-        const table = document.createElement('table');
-        table.className = 'min-w-full text-xs text-right';
-
-        const thead = document.createElement('thead');
-        thead.className = 'bg-slate-100 text-slate-500';
-        thead.innerHTML = `<tr>
-          <th class="px-3 py-2">${currentLang==='ar'?'المكوّن':'Module'}</th>
-          <th class="px-3 py-2">${currentLang==='ar'?'مستوى الصلاحية/الدور':'Role / Level'}</th>
-        </tr>`;
-        table.appendChild(thead);
-
-        const tbody = document.createElement('tbody');
-        spec.modules.forEach(m=>{
+      const modulesBody = sec.querySelector('#detail-modules');
+      if(modulesBody && spec.modules){
+        spec.modules.forEach(m => {
           const tr = document.createElement('tr');
           tr.className = 'border-t border-slate-100';
-          tr.innerHTML = \`<td class="px-3 py-2 font-medium text-slate-800">\${m.name}</td>
-                           <td class="px-3 py-2 text-slate-700">\${m.level}</td>\`;
-          tbody.appendChild(tr);
+          tr.innerHTML = `<td class="px-3 py-2 font-medium text-slate-800">${m.name}</td>
+                          <td class="px-3 py-2 text-slate-700">${m.level}</td>`;
+          modulesBody.appendChild(tr);
         });
-        table.appendChild(tbody);
-        tableWrap.appendChild(table);
-        col2.appendChild(tableWrap);
       }
 
-      if(spec.flows && spec.flows.length){
-        const flowsTitle = document.createElement('div');
-        flowsTitle.className = 'text-xs font-semibold text-slate-500 mt-2';
-        flowsTitle.textContent = currentLang==='ar' ? 'أهم مسارات العمل في الحساب' : 'Key workflows';
-        col2.appendChild(flowsTitle);
-
-        const flowsList = document.createElement('ul');
-        flowsList.className = 'list-disc pr-4 text-sm text-slate-700 space-y-1';
-        spec.flows.forEach(f=>{
+      const flowsList = sec.querySelector('#detail-flows');
+      if(flowsList && spec.flows){
+        spec.flows.forEach(f => {
           const li = document.createElement('li');
           li.textContent = f;
           flowsList.appendChild(li);
         });
-        col2.appendChild(flowsList);
       }
 
-      wrapper.appendChild(col1);
-      wrapper.appendChild(col2);
-      card.appendChild(wrapper);
+      switchView('account-detail');
+      lucide.createIcons();
     }
 
-// تعريف خدمات حساب الأفراد (Individuals account services)
+
+    // تعريف خدمات حساب الأفراد (Individuals account services)
     const peopleAccountServices = [
       {
         key: 'my_profile',
@@ -1168,12 +1160,13 @@ function configurePeopleAccount(sec, id){
       }
     }
 
+    
     function buildAccountPage(key){
-      const meta=accounts.find(a=>a.key===key);
-      const id='account-'+key;
-      const sec=document.getElementById(id);
-      if(!sec) return;
-      const title=currentLang==='ar'?meta.name_ar:meta.name_en;
+      const meta = accounts.find(a => a.key === key);
+      const id = 'account-' + key;
+      const sec = document.getElementById(id);
+      if(!sec || !meta) return;
+      const title = currentLang==='ar' ? meta.name_ar : meta.name_en;
 
       sec.innerHTML = `
         <div class="bg-white rounded-2xl p-5 shadow-soft">
@@ -1183,44 +1176,79 @@ function configurePeopleAccount(sec, id){
                 <i data-lucide="${meta.icon}" class="w-5 h-5"></i>
               </div>
               <div>
-                <div class="text-xs text-slate-500">${currentLang==='ar'?'الملف':'Profile'}</div>
+                <div class="text-xs text-slate-500">${currentLang==='ar'?'الملف التشغيلي':'Operational profile'}</div>
                 <h2 class="text-lg font-semibold">${title}</h2>
               </div>
             </div>
             <div class="flex items-center gap-2">
               <button class="px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-sm">${currentLang==='ar'?'تصدير':'Export'}</button>
               <button class="px-3 py-2 rounded-lg bg-primary text-white text-sm">${currentLang==='ar'?'إنشاء جديد':'New'}</button>
+              <button class="px-3 py-2 rounded-lg border border-slate-200 text-sm hidden md:inline-flex" data-account-detail="${key}">
+                ${currentLang==='ar'?'تفاصيل الحساب الكاملة':'Full account details'}
+              </button>
             </div>
           </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
-            <div class="bg-slate-50 rounded-xl p-4"><div class="text-xs text-slate-500">${currentLang==='ar'?'مشاريع':'Projects'}</div><div class="text-2xl font-bold">12</div></div>
-            <div class="bg-slate-50 rounded-xl p-4"><div class="text-xs text-slate-500">${currentLang==='ar'?'تمويل (ر.س)':'Funding (SAR)'} </div><div class="text-2xl font-bold">1,280,000</div></div>
-            <div class="bg-slate-50 rounded-xl p-4"><div class="text-xs text-slate-500">${currentLang==='ar'?'فعاليات':'Events'} </div><div class="text-2xl font-bold">3</div></div>
-            <div class="bg-slate-50 rounded-xl p-4"><div class="text-xs text-slate-500">${currentLang==='ar'?'فرص':'Opportunities'} </div><div class="text-2xl font-bold">7</div></div>
+            <div class="bg-slate-50 rounded-xl p-4">
+              <div class="text-xs text-slate-500">${currentLang==='ar'?'المشاريع النشطة':'Active projects'}</div>
+              <div class="text-2xl font-bold">12</div>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4">
+              <div class="text-xs text-slate-500">${currentLang==='ar'?'تمويل (ر.س)':'Funding (SAR)'}</div>
+              <div class="text-2xl font-bold">1,280,000</div>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4">
+              <div class="text-xs text-slate-500">${currentLang==='ar'?'الفعاليات':'Events'}</div>
+              <div class="text-2xl font-bold">3</div>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4">
+              <div class="text-xs text-slate-500">${currentLang==='ar'?'فرص (وظائف/تطوع)':'Opportunities'}</div>
+              <div class="text-2xl font-bold">7</div>
+            </div>
           </div>
 
           <div class="mt-5">
             <div class="flex items-center gap-2 text-sm">
-              <button class="tab-btn px-3 py-2 rounded-lg bg-slate-900 text-white" data-tab="tab-${id}-projects">${currentLang==='ar'?'المشاريع':'Projects'}</button>
-              <button class="tab-btn px-3 py-2 rounded-lg bg-slate-100" data-tab="tab-${id}-events">${currentLang==='ar'?'الفعاليات':'Events'}</button>
-              <button class="tab-btn px-3 py-2 rounded-lg bg-slate-100" data-tab="tab-${id}-jobs">${currentLang==='ar'?'الوظائف/التطوع':'Jobs/Volunteer'}</button>
-              <button class="tab-btn px-3 py-2 rounded-lg bg-slate-100" data-tab="tab-${id}-resources">${currentLang==='ar'?'المرافق/المنح':'Facilities/Grants'}</button>
+              <button class="tab-btn px-3 py-2 rounded-lg bg-slate-900 text-white" data-tab="tab-${id}-projects">
+                ${currentLang==='ar'?'المشاريع':'Projects'}
+              </button>
+              <button class="tab-btn px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200" data-tab="tab-${id}-events">
+                ${currentLang==='ar'?'الفعاليات':'Events'}
+              </button>
+              <button class="tab-btn px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200" data-tab="tab-${id}-jobs">
+                ${currentLang==='ar'?'الوظائف/التطوع':'Jobs/Volunteer'}
+              </button>
+              <button class="tab-btn px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200" data-tab="tab-${id}-facilities">
+                ${currentLang==='ar'?'المرافق/المنح':'Facilities/Grants'}
+              </button>
             </div>
 
             <div id="tab-${id}-projects" class="tab mt-3">
               <div class="overflow-auto scroll-slim">
                 <table class="w-full text-sm">
-                  <thead><tr class="text-right text-slate-500">
-                    <th class="px-3 py-2">${currentLang==='ar'?'المشروع':'Project'}</th>
-                    <th class="px-3 py-2">${currentLang==='ar'?'القطاع':'Sector'}</th>
-                    <th class="px-3 py-2">${currentLang==='ar'?'الحالة':'Status'}</th>
-                    <th class="px-3 py-2">${currentLang==='ar'?'التمويل':'Funding'}</th>
-                    <th class="px-3 py-2"></th>
-                  </tr></thead>
+                  <thead>
+                    <tr class="text-right text-slate-500">
+                      <th class="px-3 py-2">${currentLang==='ar'?'المشروع':'Project'}</th>
+                      <th class="px-3 py-2">${currentLang==='ar'?'القطاع':'Sector'}</th>
+                      <th class="px-3 py-2">${currentLang==='ar'?'الحالة':'Status'}</th>
+                      <th class="px-3 py-2">${currentLang==='ar'?'التمويل':'Funding'}</th>
+                      <th class="px-3 py-2"></th>
+                    </tr>
+                  </thead>
                   <tbody>
-                    <tr><td class="px-3 py-3 font-medium">برنامج تمكين رقمي</td><td class="px-3 py-3 text-slate-600">جامعات</td><td class="px-3 py-3"><span class="px-2 py-1 rounded-full text-xs bg-emerald-100 text-emerald-700">${currentLang==='ar'?'نشط':'Active'}</span></td><td class="px-3 py-3 text-slate-600">320,000</td><td class="px-3 py-3"><button class="p-2 rounded-lg hover:bg-slate-100"><i data-lucide="arrow-right" class="w-4 h-4"></i></button></td></tr>
-                    <tr><td class="px-3 py-3 font-medium">مختبر ابتكار اجتماعي</td><td class="px-3 py-3 text-slate-600">غير ربحي</td><td class="px-3 py-3"><span class="px-2 py-1 rounded-full text-xs bg-amber-100 text-amber-700">${currentLang==='ar'?'قيد المراجعة':'Review'}</span></td><td class="px-3 py-3 text-slate-600">180,000</td><td class="px-3 py-3"><button class="p-2 rounded-lg hover:bg-slate-100"><i data-lucide="arrow-right" class="w-4 h-4"></i></button></td></tr>
+                    <tr>
+                      <td class="px-3 py-3 font-medium">برنامج تجريبي تنموي</td>
+                      <td class="px-3 py-3 text-slate-500">حكومي</td>
+                      <td class="px-3 py-3"><span class="px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs">${currentLang==='ar'?'قيد التنفيذ':'In progress'}</span></td>
+                      <td class="px-3 py-3 text-slate-700">450,000</td>
+                      <td class="px-3 py-3 text-right">
+                        <button class="text-xs text-primary flex items-center gap-1">
+                          <span>${currentLang==='ar'?'تفاصيل':'Details'}</span>
+                          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        </button>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -1252,11 +1280,11 @@ function configurePeopleAccount(sec, id){
               </div>
             </div>
 
-            <div id="tab-${id}-resources" class="tab mt-3 hidden">
+            <div id="tab-${id}-facilities" class="tab mt-3 hidden">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="p-4 rounded-2xl border bg-white">
-                  <div class="font-semibold">${currentLang==='ar'?'منحة صغيرة — جودة الحياة':'Micro Grant — Quality of Life'}</div>
-                  <div class="text-sm text-slate-500">${currentLang==='ar'?'حتى 100 ألف ر.س':'Up to 100k SAR'}</div>
+                  <div class="font-semibold">${currentLang==='ar'?'قاعة فعاليات':'Event Hall'}</div>
+                  <div class="text-sm text-slate-500">${currentLang==='ar'?'الغرفة التجارية • حائل':'Chamber of Commerce • Hail'}</div>
                 </div>
                 <div class="p-4 rounded-2xl border bg-white">
                   <div class="font-semibold">${currentLang==='ar'?'مرفق تدريب مشترك':'Shared Training Facility'}</div>
@@ -1269,11 +1297,9 @@ function configurePeopleAccount(sec, id){
         </div>
       `;
 
-      
-      enrichAccountWithSpec(key, sec, id);
       if(key==='people'){ configurePeopleAccount(sec, id); }
 
-// Tabs behavior
+      // Tabs behavior
       sec.querySelectorAll('.tab-btn').forEach(btn => {
         btn.onclick = () => {
           const target = btn.getAttribute('data-tab');
@@ -1283,10 +1309,16 @@ function configurePeopleAccount(sec, id){
           sec.querySelector('#'+target)?.classList.remove('hidden');
         };
       });
+
+      const detailBtn = sec.querySelector('[data-account-detail]');
+      if(detailBtn){
+        detailBtn.onclick = () => openAccountDetail(key);
+      }
+
       lucide.createIcons();
     }
 
-    function openDrawer(id){ $('#'+id).classList.remove('hidden'); }
+function openDrawer(id){ $('#'+id).classList.remove('hidden'); }
     function closeDrawer(id){ $('#'+id).classList.add('hidden'); }
 
     document.getElementById('btnNewProject').onclick=()=>openDrawer('drawerProject');
