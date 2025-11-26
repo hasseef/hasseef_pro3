@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>منصة حصيف – حساب الجهة الحكومية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Readex Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #f5f7f6;
+    }
+    .bg-primary { background-color: #006c35; }
+    .bg-primary-soft { background-color: #e6f3ec; }
+    .text-primary { color: #006c35; }
+    .shadow-soft { box-shadow: 0 18px 45px rgba(15,23,42,0.18); }
+    .shadow-card { box-shadow: 0 10px 30px rgba(15,23,42,0.08); }
+    .scroll-slim::-webkit-scrollbar { width: 6px; height: 6px; }
+    .scroll-slim::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.7); border-radius: 999px; }
+    .tab-active { background-color: #006c35; color: #ffffff; }
+  </style>
+</head>
+<body class="min-h-screen text-slate-900">
+  <!-- هيدر الحساب -->
+  <header class="bg-slate-900 text-slate-100">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-2xl bg-primary flex items-center justify-center">
+          <span class="text-white text-base font-bold">ح</span>
+        </div>
+        <div class="leading-tight">
+          <div class="text-sm font-semibold">منصة حصيف</div>
+          <div class="text-[11px] text-slate-300">حساب الجهة الحكومية – لوحة التشغيل</div>
+        </div>
+      </div>
+      <div class="hidden sm:flex items-center gap-3 text-[11px]">
+        <a href="index.html" class="text-slate-200 hover:text-white">الرجوع للصفحة الرئيسية</a>
+        <span class="text-slate-500">|</span>
+        <span>نسخة تشغيلية تجريبية (بدون تسجيل فعلي)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- مسار تنقل -->
+  <div class="bg-slate-100 border-b border-slate-200 text-[11px]">
+    <div class="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-1 text-slate-500">
+        <a href="index.html" class="hover:text-primary">منصة حصيف</a>
+        <span>/</span>
+        <span>حسابات المنصة</span>
+        <span>/</span>
+        <span class="text-slate-800 font-medium">حساب الجهة الحكومية</span>
+      </div>
+      <div class="hidden sm:flex items-center gap-2 text-slate-500">
+        <span>جهة تجريبية:</span>
+        <span class="px-2 py-0.5 rounded-full bg-white border border-slate-200 text-[10px]">
+          وزارة افتراضية – قطاع تنمية مجتمعية
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- محتوى الحساب -->
+  <main class="max-w-6xl mx-auto px-4 py-5">
+    <div class="grid grid-cols-1 lg:grid-cols-[260px,1fr] gap-4 items-start">
+      <!-- القائمة الجانبية للوحات -->
+      <aside class="bg-white rounded-3xl shadow-card border border-slate-100 p-3 text-xs">
+        <div class="mb-3">
+          <div class="text-[11px] text-slate-500 mb-1">لوحات الحساب</div>
+          <div class="text-sm font-semibold text-slate-900">الجهة الحكومية – Dashboard</div>
+        </div>
+        <nav id="govTabs" class="space-y-1">
+          <button data-tab="gov-panel-initiatives" class="tab-active w-full text-right px-3 py-2 rounded-xl text-[12px] flex items-center justify-between">
+            <span>لوحة البرامج والمبادرات الحكومية</span>
+            <span class="text-[10px] bg-emerald-600/70 text-emerald-50 px-1.5 py-0.5 rounded-full">1</span>
+          </button>
+          <button data-tab="gov-panel-needs" class="w-full text-right px-3 py-2 rounded-xl text-[12px] hover:bg-slate-50 flex items-center justify-between">
+            <span>لوحة الاحتياجات والحلول</span>
+            <span class="text-[10px] text-slate-500">2</span>
+          </button>
+          <button data-tab="gov-panel-events" class="w-full text-right px-3 py-2 rounded-xl text-[12px] hover:bg-slate-50 flex items-center justify-between">
+            <span>لوحة الفعاليات واعتماد الإمارة</span>
+            <span class="text-[10px] text-slate-500">3</span>
+          </button>
+          <button data-tab="gov-panel-partners" class="w-full text-right px-3 py-2 rounded-xl text-[12px] hover:bg-slate-50 flex items-center justify-between">
+            <span>لوحة الشركاء والتكامل</span>
+            <span class="text-[10px] text-slate-500">4</span>
+          </button>
+          <button data-tab="gov-panel-reports" class="w-full text-right px-3 py-2 rounded-xl text-[12px] hover:bg-slate-50 flex items-center justify-between">
+            <span>لوحة التقارير ومؤشرات الأثر</span>
+            <span class="text-[10px] text-slate-500">5</span>
+          </button>
+          <button data-tab="gov-panel-settings" class="w-full text-right px-3 py-2 rounded-xl text-[12px] hover:bg-slate-50 flex items-center justify-between">
+            <span>إعدادات الحساب والصلاحيات</span>
+            <span class="text-[10px] text-slate-500">6</span>
+          </button>
+        </nav>
+        <div class="mt-4 text-[11px] text-slate-500 border-t border-slate-100 pt-3">
+          هذا الحساب يمثّل ما ورد في الملف التشغيلي: برامج، مبادرات، احتياجات، حلول، فعاليات، شركاء، تقارير، وصلاحيات.
+        </div>
+      </aside>
+
+      <!-- منطقة المحتوى الديناميكي -->
+      <section class="space-y-4">
+        <!-- مؤشرات أعلى -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+          <div class="bg-white rounded-2xl shadow-card border border-slate-100 px-3 py-3">
+            <div class="text-[11px] text-slate-500 mb-1">برامج/مبادرات مسجّلة</div>
+            <div class="text-lg font-semibold text-slate-900">24</div>
+            <div class="text-[10px] text-slate-600 mt-1">8 تحت التنفيذ • 5 قيد الإطلاق</div>
+          </div>
+          <div class="bg-white rounded-2xl shadow-card border border-slate-100 px-3 py-3">
+            <div class="text-[11px] text-slate-500 mb-1">الاحتياجات المنشورة عبر حصيف</div>
+            <div class="text-lg font-semibold text-slate-900">17</div>
+            <div class="text-[10px] text-slate-600 mt-1">9 منها لها حلول مقترحة</div>
+          </div>
+          <div class="bg-white rounded-2xl shadow-card border border-slate-100 px-3 py-3">
+            <div class="text-[11px] text-slate-500 mb-1">الشركاء النشطون</div>
+            <div class="text-lg font-semibold text-slate-900">12</div>
+            <div class="text-[10px] text-slate-600 mt-1">جامعات + جمعيات + قطاع خاص</div>
+          </div>
+          <div class="bg-primary rounded-2xl shadow-soft px-3 py-3 text-white">
+            <div class="text-[11px] text-emerald-100 mb-1">الربط بالرؤية 2030</div>
+            <div class="text-sm font-semibold mb-1">18 مبادرة مرتبطة بالأهداف الاستراتيجية</div>
+            <div class="text-[10px] text-emerald-100">يمكن استعراض التفاصيل من لوحة التقارير.</div>
+          </div>
+        </div>
+
+        <!-- 1) لوحة البرامج والمبادرات الحكومية -->
+        <div id="gov-panel-initiatives" class="bg-white rounded-3xl shadow-soft border border-slate-100 p-4 text-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+            <div>
+              <h2 class="text-sm font-semibold text-slate-900 mb-1">لوحة البرامج والمبادرات الحكومية</h2>
+              <p class="text-[11px] text-slate-600">
+                إدارة البرامج والمبادرات التابعة للجهة، وربط كل مبادرة بأهداف الرؤية 2030، والجهات الشريكة، وحساب المسؤول عن التنفيذ.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button class="px-3 py-1.5 rounded-xl bg-primary text-white text-[11px]">+ مبادرة جديدة</button>
+              <button class="px-3 py-1.5 rounded-xl border border-slate-200 text-[11px] text-slate-700">
+                استيراد من ملف مبادرات الجهة
+              </button>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mb-3 text-[11px]">
+            <button class="px-3 py-1.5 rounded-xl bg-slate-900 text-white">كل المبادرات</button>
+            <button class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-800">قيد الاعتماد</button>
+            <button class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-800">قيد التنفيذ</button>
+            <button class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-800">مكتملة</button>
+            <button class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-800">مرتبطة بالرؤية 2030</button>
+          </div>
+
+          <div class="overflow-auto scroll-slim border border-slate-100 rounded-2xl">
+            <table class="min-w-full text-[11px] text-right">
+              <thead class="bg-slate-50 text-slate-500">
+                <tr>
+                  <th class="px-3 py-2 font-medium">اسم البرنامج/المبادرة</th>
+                  <th class="px-3 py-2 font-medium">الحالة</th>
+                  <th class="px-3 py-2 font-medium">القطاع الحكومي المعني</th>
+                  <th class="px-3 py-2 font-medium">الحسابات الشريكة</th>
+                  <th class="px-3 py-2 font-medium">الربط بالرؤية</th>
+                  <th class="px-3 py-2 font-medium">إجراءات</th>
+                </tr>
+              </thead>
+              <tbody class="text-slate-800">
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2">
+                    برنامج تمكين الجمعيات في دعم الأسر المنتجة
+                    <div class="text-[10px] text-slate-500">محور: تنمية وتنويع الاقتصاد</div>
+                  </td>
+                  <td class="px-3 py-2">
+                    <span class="px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-100">
+                      قيد التنفيذ
+                    </span>
+                  </td>
+                  <td class="px-3 py-2">قطاع التنمية الاجتماعية</td>
+                  <td class="px-3 py-2">جمعيات غير ربحية • قطاع خاص • جامعة</td>
+                  <td class="px-3 py-2">تنمية وتنويع الاقتصاد • تمكين المسؤولية الاجتماعية</td>
+                  <td class="px-3 py-2">
+                    <button class="px-2 py-1 rounded-lg bg-slate-100 text-slate-800">عرض التفاصيل</button>
+                  </td>
+                </tr>
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2">
+                    مبادرة التوجيه المهني لطلاب الثانوية
+                    <div class="text-[10px] text-slate-500">محور: تمكين حياة عامرة وصحية</div>
+                  </td>
+                  <td class="px-3 py-2">
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">
+                      مكتملة
+                    </span>
+                  </td>
+                  <td class="px-3 py-2">قطاع التعليم العام</td>
+                  <td class="px-3 py-2">جامعات • جمعيات • أفراد متطوعون</td>
+                  <td class="px-3 py-2">تمكين حياة عامرة وصحية • تعزيز الهوية الوطنية</td>
+                  <td class="px-3 py-2">
+                    <button class="px-2 py-1 rounded-lg bg-slate-100 text-slate-800">عرض التقرير</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2) لوحة الاحتياجات والحلول -->
+        <div id="gov-panel-needs" class="hidden bg-white rounded-3xl shadow-soft border border-slate-100 p-4 text-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+            <div>
+              <h2 class="text-sm font-semibold text-slate-900 mb-1">لوحة الاحتياجات والحلول المقترحة</h2>
+              <p class="text-[11px] text-slate-600">
+                نشر احتياجات الجهة (تشغيلية، تقنية، برامجية، بحثية)، واستقبال الحلول من القطاع الخاص، غير الربحي، الجامعات، والأفراد.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button class="px-3 py-1.5 rounded-xl bg-primary text-white text-[11px]">+ احتياج جديد</button>
+              <button class="px-3 py-1.5 rounded-xl border border-slate-200 text-[11px] text-slate-700">
+                استعراض الحلول من منصة حصيف
+              </button>
+            </div>
+          </div>
+
+          <div class="overflow-auto scroll-slim border border-slate-100 rounded-2xl">
+            <table class="min-w-full text-[11px] text-right">
+              <thead class="bg-slate-50 text-slate-500">
+                <tr>
+                  <th class="px-3 py-2 font-medium">عنوان الاحتياج</th>
+                  <th class="px-3 py-2 font-medium">نوع الاحتياج</th>
+                  <th class="px-3 py-2 font-medium">القطاع المستهدف لتقديم الحل</th>
+                  <th class="px-3 py-2 font-medium">عدد الحلول المستلمة</th>
+                  <th class="px-3 py-2 font-medium">الحالة</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2">منصة لإدارة بيانات المستفيدين من برامج الجهة</td>
+                  <td class="px-3 py-2">احتياج تقني</td>
+                  <td class="px-3 py-2">قطاع خاص تقني • جامعات</td>
+                  <td class="px-3 py-2">4 حلول</td>
+                  <td class="px-3 py-2">
+                    <span class="px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-100">قيد التقييم</span>
+                  </td>
+                </tr>
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2">برنامج توعوي وطني حول المسؤولية الاجتماعية</td>
+                  <td class="px-3 py-2">احتياج برامجي</td>
+                  <td class="px-3 py-2">جمعيات • جامعات • إعلام تنموي</td>
+                  <td class="px-3 py-2">3 حلول</td>
+                  <td class="px-3 py-2">
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">تم الترسية</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 3) لوحة الفعاليات واعتماد الإمارة -->
+        <div id="gov-panel-events" class="hidden bg-white rounded-3xl shadow-soft border border-slate-100 p-4 text-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+            <div>
+              <h2 class="text-sm font-semibold text-slate-900 mb-1">لوحة الفعاليات واعتماد إمارة المنطقة</h2>
+              <p class="text-[11px] text-slate-600">
+                استعراض فعاليات الجهة التي تتطلب اعتماد الإمارة أو التنسيق مع الجهات الأمنية والمرورية، وربط كل فعالية بالمرافق الشريكة.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button class="px-3 py-1.5 rounded-xl bg-primary text-white text-[11px]">+ فعالية جديدة</button>
+            </div>
+          </div>
+
+          <div class="overflow-auto scroll-slim border border-slate-100 rounded-2xl">
+            <table class="min-w-full text-[11px] text-right">
+              <thead class="bg-slate-50 text-slate-500">
+                <tr>
+                  <th class="px-3 py-2 font-medium">اسم الفعالية</th>
+                  <th class="px-3 py-2 font-medium">نوع الفعالية</th>
+                  <th class="px-3 py-2 font-medium">الموقع / المرفق</th>
+                  <th class="px-3 py-2 font-medium">حالة اعتماد الإمارة</th>
+                  <th class="px-3 py-2 font-medium">إجراءات</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2">منتدى المسؤولية الاجتماعية بالشراكة مع غرف المنطقة</td>
+                  <td class="px-3 py-2">منتدى / مؤتمر</td>
+                  <td class="px-3 py-2">مركز معارض في المنطقة</td>
+                  <td class="px-3 py-2">
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">
+                      معتمد من الإمارة
+                    </span>
+                  </td>
+                  <td class="px-3 py-2">
+                    <button class="px-2 py-1 rounded-lg bg-slate-100 text-slate-800">عرض التفاصيل</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 4) لوحة الشركاء -->
+        <div id="gov-panel-partners" class="hidden bg-white rounded-3xl shadow-soft border border-slate-100 p-4 text-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+            <div>
+              <h2 class="text-sm font-semibold text-slate-900 mb-1">لوحة الشركاء والتكامل القطاعي</h2>
+              <p class="text-[11px] text-slate-600">
+                إدارة الشراكات مع إمارات المناطق، الوزارات الأخرى، الجامعات، الجمعيات، القطاع الخاص، والجهات المانحة.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button class="px-3 py-1.5 rounded-xl bg-primary text-white text-[11px]">+ شراكة جديدة</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="bg-slate-50 rounded-2xl border border-slate-100 p-3">
+              <div class="text-[11px] text-slate-500 mb-1">شراكات حكومية</div>
+              <div class="text-sm font-semibold text-slate-900 mb-1">5 شراكات مفعّلة</div>
+              <ul class="list-disc pr-4 text-[11px] text-slate-700 space-y-1">
+                <li>إمارة المنطقة – متابعة أثر البرامج على مستوى المنطقة.</li>
+                <li>وزارة الاقتصاد والتخطيط – ربط البرامج بالأهداف الاستراتيجية والمؤشرات.</li>
+                <li>وزارة التعليم – مواءمة البرامج مع الأنشطة المدرسية والجامعية.</li>
+              </ul>
+            </div>
+            <div class="bg-slate-50 rounded-2xl border border-slate-100 p-3">
+              <div class="text-[11px] text-slate-500 mb-1">شراكات مع القطاعات الأخرى</div>
+              <div class="text-sm font-semibold text-slate-900 mb-1">7 شركاء من غير الربحي والقطاع الخاص</div>
+              <ul class="list-disc pr-4 text-[11px] text-slate-700 space-y-1">
+                <li>جمعيات متخصصة لتنفيذ برامج مجتمعية.</li>
+                <li>شركات لرعاية فعاليات وبرامج توعوية.</li>
+                <li>جامعات لتقديم الدراسات وقياس الأثر.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5) لوحة التقارير ومؤشرات الأثر -->
+        <div id="gov-panel-reports" class="hidden bg-white rounded-3xl shadow-soft border border-slate-100 p-4 text-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+            <div>
+              <h2 class="text-sm font-semibold text-slate-900 mb-1">لوحة التقارير ومؤشرات الأثر</h2>
+              <p class="text-[11px] text-slate-600">
+                مؤشرات عدد البرامج، المستفيدين، الشركاء، التمويل، وربطها ببرامج الرؤية 2030 كما في الملف التشغيلي.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button class="px-3 py-1.5 rounded-xl border border-slate-200 text-[11px] text-slate-700">تصدير تقرير PDF</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+            <div class="bg-slate-50 rounded-2xl border border-slate-100 p-3">
+              <div class="text-[11px] text-slate-500 mb-1">عدد المستفيدين من برامج الجهة</div>
+              <div class="text-lg font-semibold text-slate-900">32,500</div>
+              <div class="text-[10px] text-slate-600 mt-1">منذ بداية السنة المالية</div>
+            </div>
+            <div class="bg-slate-50 rounded-2xl border border-slate-100 p-3">
+              <div class="text-[11px] text-slate-500 mb-1">عدد البرامج المرتبطة بالرؤية 2030</div>
+              <div class="text-lg font-semibold text-slate-900">18</div>
+              <div class="text-[10px] text-slate-600 mt-1">موثقة عبر منصة حصيف</div>
+            </div>
+            <div class="bg-slate-50 rounded-2xl border border-slate-100 p-3">
+              <div class="text-[11px] text-slate-500 mb-1">عدد الشراكات الفاعلة عبر المنصة</div>
+              <div class="text-lg font-semibold text-slate-900">12</div>
+              <div class="text-[10px] text-slate-600 mt-1">بالتكامل مع القطاعات الأخرى</div>
+            </div>
+          </div>
+
+          <p class="text-[11px] text-slate-600">
+            يمكن لاحقًا ربط هذه اللوحة بأنظمة الجهة الداخلية وأنظمة الرؤية الوطنية لقراءة المؤشرات آليًا،
+            وجعل منصة حصيف واجهة موحدة للتقارير على مستوى الجهة والمنطقة.
+          </p>
+        </div>
+
+        <!-- 6) لوحة الإعدادات والصلاحيات -->
+        <div id="gov-panel-settings" class="hidden bg-white rounded-3xl shadow-soft border border-slate-100 p-4 text-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+            <div>
+              <h2 class="text-sm font-semibold text-slate-900 mb-1">إعدادات الحساب والصلاحيات</h2>
+              <p class="text-[11px] text-slate-600">
+                إدارة مستخدمي الجهة، وربط الحساب مع الأنظمة الحكومية الأخرى، وتحديد صلاحيات كل إدارة/وكالة داخل الجهة.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button class="px-3 py-1.5 rounded-xl bg-primary text-white text-[11px]">+ مستخدم جديد</button>
+            </div>
+          </div>
+
+          <div class="overflow-auto scroll-slim border border-slate-100 rounded-2xl mb-3">
+            <table class="min-w-full text-[11px] text-right">
+              <thead class="bg-slate-50 text-slate-500">
+                <tr>
+                  <th class="px-3 py-2 font-medium">اسم المستخدم</th>
+                  <th class="px-3 py-2 font-medium">الإدارة</th>
+                  <th class="px-3 py-2 font-medium">الدور</th>
+                  <th class="px-3 py-2 font-medium">الحالة</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2">مدير التخطيط والبرامج</td>
+                  <td class="px-3 py-2">إدارة التخطيط</td>
+                  <td class="px-3 py-2">إدارة كاملة للبرامج والتقارير</td>
+                  <td class="px-3 py-2">
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">مفعّل</span>
+                  </td>
+                </tr>
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2">منسق الشراكات</td>
+                  <td class="px-3 py-2">إدارة الشراكات</td>
+                  <td class="px-3 py-2">إدارة الشركاء والاتفاقيات</td>
+                  <td class="px-3 py-2">
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">مفعّل</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="text-[11px] text-slate-600">
+            يمكن لاحقًا ربط هذه الصلاحيات بنظام الدخول الموحد الحكومي (SSO) ليصبح الدخول عبر نفاذ أو أنظمة الجهة،
+            مع الإبقاء على منصة حصيف كمنصة تشغيلية متكاملة.
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-slate-900 text-slate-100 text-[11px] mt-4">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col md:flex-row gap-2 items-start md:items-center justify-between">
+      <span>منصة حصيف – حساب الجهة الحكومية (عرض تشغيلي تجريبي)</span>
+      <a href="index.html" class="text-slate-300 hover:text-white">الرجوع للصفحة الرئيسية لمنصة حصيف</a>
+    </div>
+  </footer>
+
+  <script>
+    // تبديل اللوحات
+    const govTabs = document.querySelectorAll('#govTabs button');
+    const govPanels = {
+      'gov-panel-initiatives': document.getElementById('gov-panel-initiatives'),
+      'gov-panel-needs': document.getElementById('gov-panel-needs'),
+      'gov-panel-events': document.getElementById('gov-panel-events'),
+      'gov-panel-partners': document.getElementById('gov-panel-partners'),
+      'gov-panel-reports': document.getElementById('gov-panel-reports'),
+      'gov-panel-settings': document.getElementById('gov-panel-settings'),
+    };
+
+    govTabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        govTabs.forEach(b => b.classList.remove('tab-active'));
+        btn.classList.add('tab-active');
+        Object.keys(govPanels).forEach(key => {
+          if (key === target) {
+            govPanels[key].classList.remove('hidden');
+          } else {
+            govPanels[key].classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
