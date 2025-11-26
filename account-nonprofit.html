@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>منصة حصيف – حساب القطاع غير الربحي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Readex Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #f5f7f6;
+    }
+    .bg-primary { background-color: #006c35; }
+    .bg-primary-soft { background-color: #e6f3ec; }
+    .text-primary { color: #006c35; }
+    .shadow-soft { box-shadow: 0 18px 45px rgba(15,23,42,0.18); }
+    .shadow-card { box-shadow: 0 10px 30px rgba(15,23,42,0.08); }
+    .scroll-slim::-webkit-scrollbar { width: 6px; height: 6px; }
+    .scroll-slim::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.7); border-radius: 999px; }
+    .tab-active { background-color: #006c35; color: #ffffff; }
+  </style>
+</head>
+<body class="min-h-screen text-slate-900">
+  <!-- هيدر بسيط للحساب -->
+  <header class="bg-slate-900 text-slate-100">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-2xl bg-primary flex items-center justify-center">
+          <span class="text-white text-base font-bold">ح</span>
+        </div>
+        <div class="leading-tight">
+          <div class="text-sm font-semibold">منصة حصيف</div>
+          <div class="text-[11px] text-slate-300">حساب القطاع غير الربحي – لوحة الجمعيات</div>
+        </div>
+      </div>
+      <div class="hidden sm:flex items-center gap-3 text-[11px]">
+        <a href="index.html" class="text-slate-200 hover:text-white">الرجوع للصفحة الرئيسية</a>
+        <span class="text-slate-500">|</span>
+        <span>نسخة تشغيلية تجريبية (بدون تسجيل فعلي)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- مسار تنقل -->
+  <div class="bg-slate-100 border-b border-slate-200 text-[11px]">
+    <div class="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-1 text-slate-500">
+        <a href="index.html" class="hover:text-primary">منصة حصيف</a>
+        <span>/</span>
+        <span>حسابات المنصة</span>
+        <span>/</span>
+        <span class="text-slate-800 font-medium">حساب القطاع غير الربحي</span>
+      </div>
+      <div class="hidden sm:flex items-center gap-2 text-slate-500">
+        <span>جمعية تجريبية:</span>
+        <span class="px-2 py-0.5 rounded-full bg-white border border-slate-200 text-[10px]">جمعية التنمية المجتمعية بحائل</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- محتوى الحساب -->
+  <main class="max-w-6xl mx-auto px-4 py-5">
+    <div class="grid grid-cols-1 lg:grid-cols-[260px,1fr] gap-4 items-start">
+      <!-- القائمة الجانبية للوحات -->
+      <aside class="bg-white rounded-3xl shadow-card border border-slate-100 p-3 text-xs">
+        <div class="mb-3">
+          <div class="text-[11px] text-slate-500 mb-1">لوحات الحساب</div>
+          <div class="text-sm font-semibold text-slate-900">القطاع غير الربحي – Dashboard</div>
+        </div>
+        <nav id="nonprofitTabs" class="space-y-1">
+          <button data-tab="panel-projects" class="tab-active w-full text-right px-3 py-2 rounded-xl text-[12px] flex items-center justify-between">
+            <span>لوحة المشاريع المجتمعية</span>
+            <span class="text-[10px] text-emerald-100 bg-emerald-600/60 px-1.5 py-0.5 rounded-full">1</span>
+          </button>
+          <button data-tab="panel-funding" class="w-full text-right px-3 py-2 rounded-xl text-[12px] hover:bg-slate-50 flex items-center justify-between">
+            <span>لوحة التمويل والمنح</span>
+            <span class="text-[10px] text-slate-500">2</span>
+          </button>
+          <button data-tab="panel-events" class="w-full text-right px-3 py-2 rounded-xl text-[12px] hover:bg-slate-50 flex items-center justify-between">
+            <span>لوحة الفعاليات المجتمعية</span>
+            <span class="text-[10px] text-slate-500">3</span>
+          </button>
+          <button data-tab="panel-opportunities" class="w-full text-right px-3 py-2 rounded-xl text-[12px] hover:bg-slate-50 flex items-center justify-between">
+            <span>لوحة التطوع والتدريب والوظائف</span>
+            <span class="text-[10px] text-slate-500">4</span>
+          </button>
+          <button data-tab="panel-partners" class="w-full text-right px-3 py-2 rounded-xl text-[12px] hover:bg-slate-50 flex items-center justify-between">
+            <span>لوحة الشركاء</span>
+            <span class="text-[10px] text-slate-500">5</span>
+          </button>
+          <button data-tab="panel-reports" class="w-full text-right px-3 py-2 rounded-xl text-[12px] hover:bg-slate-50 flex items-center justify-between">
+            <span>لوحة التقارير والأثر</span>
+            <span class="text-[10px] text-slate-500">6</span>
+          </button>
+          <button data-tab="panel-settings" class="w-full text-right px-3 py-2 rounded-xl text-[12px] hover:bg-slate-50 flex items-center justify-between">
+            <span>إعدادات الحساب والصلاحيات</span>
+            <span class="text-[10px] text-slate-500">7</span>
+          </button>
+        </nav>
+        <div class="mt-4 text-[11px] text-slate-500 border-t border-slate-100 pt-3">
+          يمكن تخصيص هذه اللوحات وربطها مباشرة بملف الجمعية في المركز الوطني لتنمية القطاع غير الربحي.
+        </div>
+      </aside>
+
+      <!-- منطقة المحتوى الديناميكي لكل لوحة -->
+      <section class="space-y-4">
+        <!-- بطاقة ملخص أعلى -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+          <div class="bg-white rounded-2xl shadow-card border border-slate-100 px-3 py-3">
+            <div class="text-[11px] text-slate-500 mb-1">إجمالي المشاريع</div>
+            <div class="text-lg font-semibold text-slate-900">18</div>
+            <div class="text-[10px] text-emerald-700 mt-1">6 مشاريع تحت التنفيذ • 4 تطلب تمويل</div>
+          </div>
+          <div class="bg-white rounded-2xl shadow-card border border-slate-100 px-3 py-3">
+            <div class="text-[11px] text-slate-500 mb-1">قيمة التمويل المرتبط</div>
+            <div class="text-lg font-semibold text-slate-900">4.2 م</div>
+            <div class="text-[10px] text-slate-600 mt-1">منح + رعايات + مساهمات أفراد</div>
+          </div>
+          <div class="bg-white rounded-2xl shadow-card border border-slate-100 px-3 py-3">
+            <div class="text-[11px] text-slate-500 mb-1">فرص تطوع/تدريب نشطة</div>
+            <div class="text-lg font-semibold text-slate-900">32</div>
+            <div class="text-[10px] text-slate-600 mt-1">مرتبطة بـ 9 مشاريع</div>
+          </div>
+          <div class="bg-primary rounded-2xl shadow-soft px-3 py-3 text-white">
+            <div class="text-[11px] text-emerald-100 mb-1">الربط بالرؤية 2030</div>
+            <div class="text-sm font-semibold mb-1">13 مشروعًا مرتبطة بأهداف الرؤية</div>
+            <div class="text-[10px] text-emerald-100">يمكن استعراض تفاصيل الربط من لوحة التقارير والأثر.</div>
+          </div>
+        </div>
+
+        <!-- لوحة المشاريع المجتمعية -->
+        <div id="panel-projects" class="bg-white rounded-3xl shadow-soft border border-slate-100 p-4 text-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+            <div>
+              <h2 class="text-sm font-semibold text-slate-900 mb-1">لوحة المشاريع المجتمعية</h2>
+              <p class="text-[11px] text-slate-600">
+                هذه اللوحة تمثّل العناصر الواردة في الملف التشغيلي: مشاريع تحت الإنشاء، قيد التنفيذ، مكتملة، تطلب تمويل، ذات أثر كبير، مرتبطة بالرؤية.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button class="px-3 py-1.5 rounded-xl bg-primary text-white text-[11px]">+ مشروع جديد</button>
+              <button class="px-3 py-1.5 rounded-xl border border-slate-200 text-[11px] text-slate-700">استيراد من نموذج اللبنات التسع</button>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mb-3 text-[11px]">
+            <button class="px-3 py-1.5 rounded-xl bg-slate-900 text-white">كل المشاريع</button>
+            <button class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-800">تحت الإنشاء</button>
+            <button class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-800">قيد التنفيذ</button>
+            <button class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-800">تطلب تمويل</button>
+            <button class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-800">مكتملة</button>
+            <button class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-800">مرتبطة بالرؤية 2030</button>
+          </div>
+
+          <div class="overflow-auto scroll-slim border border-slate-100 rounded-2xl">
+            <table class="min-w-full text-[11px] text-right">
+              <thead class="bg-slate-50 text-slate-500">
+                <tr>
+                  <th class="px-3 py-2 font-medium">اسم المشروع</th>
+                  <th class="px-3 py-2 font-medium">الحالة</th>
+                  <th class="px-3 py-2 font-medium">النوع</th>
+                  <th class="px-3 py-2 font-medium">الجهة الشريكة</th>
+                  <th class="px-3 py-2 font-medium">التمويل المطلوب</th>
+                  <th class="px-3 py-2 font-medium">الربط بالرؤية</th>
+                  <th class="px-3 py-2 font-medium">إجراءات</th>
+                </tr>
+              </thead>
+              <tbody class="text-slate-800">
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2 text-[11px]">
+                    برنامج التمكين المهني للأسر المنتجة
+                    <div class="text-[10px] text-slate-500">مشروع مجتمعي – حائل</div>
+                  </td>
+                  <td class="px-3 py-2 text-[11px]">
+                    <span class="px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-100">قيد التنفيذ</span>
+                  </td>
+                  <td class="px-3 py-2 text-[11px]">مشروع مستمر</td>
+                  <td class="px-3 py-2 text-[11px]">غرفة حائل + بنك تنموي</td>
+                  <td class="px-3 py-2 text-[11px]">800,000 ر.س</td>
+                  <td class="px-3 py-2 text-[11px]">تنمية وتنويع الاقتصاد • تمكين المسؤولية الاجتماعية</td>
+                  <td class="px-3 py-2 text-[11px]">
+                    <button class="px-2 py-1 rounded-lg bg-slate-100 text-slate-800">عرض التفاصيل</button>
+                  </td>
+                </tr>
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2 text-[11px]">
+                    مبادرة التوجيه المهني لطلاب الثانوية
+                    <div class="text-[10px] text-slate-500">فعالية + برنامج مستمر</div>
+                  </td>
+                  <td class="px-3 py-2 text-[11px]">
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">مكتمل</span>
+                  </td>
+                  <td class="px-3 py-2 text-[11px]">برنامج سنوي</td>
+                  <td class="px-3 py-2 text-[11px]">إدارة التعليم + جامعة</td>
+                  <td class="px-3 py-2 text-[11px]">250,000 ر.س</td>
+                  <td class="px-3 py-2 text-[11px]">تمكين حياة عامرة وصحية • تعزيز الهوية الوطنية</td>
+                  <td class="px-3 py-2 text-[11px]">
+                    <button class="px-2 py-1 rounded-lg bg-slate-100 text-slate-800">عرض التفاصيل</button>
+                  </td>
+                </tr>
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2 text-[11px]">
+                    مشروع منصة توعوية لذوي الإعاقة
+                    <div class="text-[10px] text-slate-500">مشروع تقني توعوي</div>
+                  </td>
+                  <td class="px-3 py-2 text-[11px]">
+                    <span class="px-2 py-0.5 rounded-full bg-red-50 text-red-700 border border-red-100">يطلب تمويل</span>
+                  </td>
+                  <td class="px-3 py-2 text-[11px]">مشروع جديد</td>
+                  <td class="px-3 py-2 text-[11px]">وزارة الصحة + جمعيات متخصصة</td>
+                  <td class="px-3 py-2 text-[11px]">1,200,000 ر.س</td>
+                  <td class="px-3 py-2 text-[11px]">تمكين حياة عامرة وصحية • تعزيز فاعلية الحكومة</td>
+                  <td class="px-3 py-2 text-[11px]">
+                    <button class="px-2 py-1 rounded-lg bg-primary text-white">طلب تمويل / رعاية</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- لوحة التمويل والمنح -->
+        <div id="panel-funding" class="hidden bg-white rounded-3xl shadow-soft border border-slate-100 p-4 text-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+            <div>
+              <h2 class="text-sm font-semibold text-slate-900 mb-1">لوحة التمويل والمنح</h2>
+              <p class="text-[11px] text-slate-600">
+                إدارة طلبات المنح والتمويل والرعايات وربطها بالمشاريع المعتمدة، مع إمكانية ربط كل مساهمة بمؤشر أثر واضح.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button class="px-3 py-1.5 rounded-xl bg-primary text-white text-[11px]">+ طلب تمويل جديد</button>
+              <button class="px-3 py-1.5 rounded-xl border border-slate-200 text-[11px] text-slate-700">استعراض فرص المانحين</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3 text-[11px]">
+            <div class="bg-slate-50 rounded-2xl px-3 py-3 border border-slate-100">
+              <div class="text-slate-500 mb-1">إجمالي قيمة المنح المستلمة</div>
+              <div class="text-lg font-semibold text-slate-900">3.1 م ر.س</div>
+              <div class="text-[10px] text-slate-600 mt-1">من 6 مانحين معتمدين</div>
+            </div>
+            <div class="bg-slate-50 rounded-2xl px-3 py-3 border border-slate-100">
+              <div class="text-slate-500 mb-1">طلبات تمويل قيد الدراسة</div>
+              <div class="text-lg font-semibold text-slate-900">5 طلبات</div>
+              <div class="text-[10px] text-slate-600 mt-1">يمكن تحديث حالاتها بعد التواصل مع المانحين</div>
+            </div>
+          </div>
+
+          <div class="overflow-auto scroll-slim border border-slate-100 rounded-2xl">
+            <table class="min-w-full text-[11px] text-right">
+              <thead class="bg-slate-50 text-slate-500">
+                <tr>
+                  <th class="px-3 py-2 font-medium">المشروع</th>
+                  <th class="px-3 py-2 font-medium">المانح / الجهة الداعمة</th>
+                  <th class="px-3 py-2 font-medium">نوع المساهمة</th>
+                  <th class="px-3 py-2 font-medium">المبلغ</th>
+                  <th class="px-3 py-2 font-medium">حالة الطلب</th>
+                  <th class="px-3 py-2 font-medium">إجراءات</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2">برنامج التمكين المهني للأسر المنتجة</td>
+                  <td class="px-3 py-2">بنك تنموي وطني</td>
+                  <td class="px-3 py-2">منحة تنموية</td>
+                  <td class="px-3 py-2">500,000 ر.س</td>
+                  <td class="px-3 py-2">
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">معتمد</span>
+                  </td>
+                  <td class="px-3 py-2">
+                    <button class="px-2 py-1 rounded-lg bg-slate-100 text-slate-800">عرض العقد</button>
+                  </td>
+                </tr>
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2">مشروع منصة توعوية لذوي الإعاقة</td>
+                  <td class="px-3 py-2">مؤسسة مانحة</td>
+                  <td class="px-3 py-2">طلب منحة</td>
+                  <td class="px-3 py-2">1,200,000 ر.س</td>
+                  <td class="px-3 py-2">
+                    <span class="px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-100">قيد الدراسة</span>
+                  </td>
+                  <td class="px-3 py-2">
+                    <button class="px-2 py-1 rounded-lg bg-slate-100 text-slate-800">تحديث الحالة</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- لوحة الفعاليات -->
+        <div id="panel-events" class="hidden bg-white rounded-3xl shadow-soft border border-slate-100 p-4 text-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+            <div>
+              <h2 class="text-sm font-semibold text-slate-900 mb-1">لوحة الفعاليات المجتمعية</h2>
+              <p class="text-[11px] text-slate-600">
+                تنظيم المؤتمرات، الورش، الأيام المفتوحة، المعارض، والملتقيات، مع ربطها بمرافق وطلب موافقة إمارة المنطقة عند الحاجة.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button class="px-3 py-1.5 rounded-xl bg-primary text-white text-[11px]">+ فعالية جديدة</button>
+              <button class="px-3 py-1.5 rounded-xl border border-slate-200 text-[11px] text-slate-700">طلب اعتماد من الإمارة</button>
+            </div>
+          </div>
+          <div class="overflow-auto scroll-slim border border-slate-100 rounded-2xl">
+            <table class="min-w-full text-[11px] text-right">
+              <thead class="bg-slate-50 text-slate-500">
+                <tr>
+                  <th class="px-3 py-2 font-medium">اسم الفعالية</th>
+                  <th class="px-3 py-2 font-medium">التصنيف</th>
+                  <th class="px-3 py-2 font-medium">الموقع / المرفق</th>
+                  <th class="px-3 py-2 font-medium">التاريخ</th>
+                  <th class="px-3 py-2 font-medium">حالة الاعتماد</th>
+                  <th class="px-3 py-2 font-medium">إجراءات</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2">ملتقى الابتكار الاجتماعي</td>
+                  <td class="px-3 py-2">ملتقى / معرض</td>
+                  <td class="px-3 py-2">مركز تلبية للابتكار – حائل</td>
+                  <td class="px-3 py-2">15 ربيع الثاني 1447هـ</td>
+                  <td class="px-3 py-2">
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">معتمد من الإمارة</span>
+                  </td>
+                  <td class="px-3 py-2">
+                    <button class="px-2 py-1 rounded-lg bg-slate-100 text-slate-800">استعراض التفاصيل</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- لوحة الفرص (تطوع/تدريب/وظائف) -->
+        <div id="panel-opportunities" class="hidden bg-white rounded-3xl shadow-soft border border-slate-100 p-4 text-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+            <div>
+              <h2 class="text-sm font-semibold text-slate-900 mb-1">لوحة التطوع والتدريب والوظائف</h2>
+              <p class="text-[11px] text-slate-600">
+                نشر وإدارة فرص التطوع، التدريب (بما فيها التدريب التعاوني)، والوظائف المرتبطة بمشاريع الجمعية.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button class="px-3 py-1.5 rounded-xl bg-primary text-white text-[11px]">+ فرصة جديدة</button>
+              <button class="px-3 py-1.5 rounded-xl border border-slate-200 text-[11px] text-slate-700">استيراد من منصة التطوع الوطنية</button>
+            </div>
+          </div>
+          <div class="overflow-auto scroll-slim border border-slate-100 rounded-2xl">
+            <table class="min-w-full text-[11px] text-right">
+              <thead class="bg-slate-50 text-slate-500">
+                <tr>
+                  <th class="px-3 py-2 font-medium">عنوان الفرصة</th>
+                  <th class="px-3 py-2 font-medium">النوع</th>
+                  <th class="px-3 py-2 font-medium">مرتبطة بالمشروع</th>
+                  <th class="px-3 py-2 font-medium">الموقع</th>
+                  <th class="px-3 py-2 font-medium">عدد المقاعد</th>
+                  <th class="px-3 py-2 font-medium">الحالة</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2">متطوعون في تنظيم ملتقى الابتكار الاجتماعي</td>
+                  <td class="px-3 py-2">تطوع</td>
+                  <td class="px-3 py-2">ملتقى الابتكار الاجتماعي</td>
+                  <td class="px-3 py-2">حائل</td>
+                  <td class="px-3 py-2">25</td>
+                  <td class="px-3 py-2">
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">مفتوحة</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- لوحة الشركاء -->
+        <div id="panel-partners" class="hidden bg-white rounded-3xl shadow-soft border border-slate-100 p-4 text-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+            <div>
+              <h2 class="text-sm font-semibold text-slate-900 mb-1">لوحة الشركاء</h2>
+              <p class="text-[11px] text-slate-600">
+                إدارة الشراكات مع الجهات الحكومية، القطاع الخاص، الجامعات، وبقية الجمعيات، كما ورد في الملف التشغيلي.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button class="px-3 py-1.5 rounded-xl bg-primary text-white text-[11px]">+ شراكة جديدة</button>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="bg-slate-50 rounded-2xl border border-slate-100 p-3">
+              <div class="text-[11px] text-slate-500 mb-1">شراكات مع جهات حكومية</div>
+              <div class="text-sm font-semibold text-slate-900 mb-1">3 شراكات مفعّلة</div>
+              <ul class="list-disc pr-4 text-[11px] text-slate-700 space-y-1">
+                <li>إدارة التعليم – برامج توجيه مهني.</li>
+                <li>فرع وزارة الموارد البشرية – تمكين الأسر المنتجة.</li>
+                <li>إمارة المنطقة – فعاليات وتمكين مجتمعي.</li>
+              </ul>
+            </div>
+            <div class="bg-slate-50 rounded-2xl border border-slate-100 p-3">
+              <div class="text-[11px] text-slate-500 mb-1">شراكات مع القطاع الخاص</div>
+              <div class="text-sm font-semibold text-slate-900 mb-1">4 شركات داعمة</div>
+              <ul class="list-disc pr-4 text-[11px] text-slate-700 space-y-1">
+                <li>رعاية ملتقى الابتكار الاجتماعي.</li>
+                <li>دعم مالي لمشاريع الأسر المنتجة.</li>
+                <li>دعم تقني لمشاريع المنصات الرقمية.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- لوحة التقارير والأثر -->
+        <div id="panel-reports" class="hidden bg-white rounded-3xl shadow-soft border border-slate-100 p-4 text-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+            <div>
+              <h2 class="text-sm font-semibold text-slate-900 mb-1">لوحة التقارير والأثر</h2>
+              <p class="text-[11px] text-slate-600">
+                تقارير المشاريع، التمويل، الفعاليات، الرعايات، التطوع، الربط بالرؤية، وأثر البرامج كما هو موصوف في الملف التشغيلي.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button class="px-3 py-1.5 rounded-xl border border-slate-200 text-[11px] text-slate-700">تصدير تقرير PDF</button>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+            <div class="bg-slate-50 rounded-2xl border border-slate-100 p-3">
+              <div class="text-[11px] text-slate-500 mb-1">عدد المستفيدين المباشرين</div>
+              <div class="text-lg font-semibold text-slate-900">4,850</div>
+              <div class="text-[10px] text-slate-600 mt-1">منذ بداية العام</div>
+            </div>
+            <div class="bg-slate-50 rounded-2xl border border-slate-100 p-3">
+              <div class="text-[11px] text-slate-500 mb-1">ساعات التطوع المسجلة</div>
+              <div class="text-lg font-semibold text-slate-900">12,400</div>
+              <div class="text-[10px] text-slate-600 mt-1">عبر 32 فرصة تطوعية</div>
+            </div>
+            <div class="bg-slate-50 rounded-2xl border border-slate-100 p-3">
+              <div class="text-[11px] text-slate-500 mb-1">المشاريع المرتبطة بالرؤية 2030</div>
+              <div class="text-lg font-semibold text-slate-900">13</div>
+              <div class="text-[10px] text-slate-600 mt-1">موثقة بالأهداف والبرامج</div>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-600">
+            يمكن تخصيص هذه اللوحة لاحقًا لعرض رسوم بيانية تفصيلية لكل هدف من أهداف الرؤية، مع توزيع المشاريع والتمويل وفق البرامج والجهات الشريكة.
+          </p>
+        </div>
+
+        <!-- لوحة الإعدادات والصلاحيات -->
+        <div id="panel-settings" class="hidden bg-white rounded-3xl shadow-soft border border-slate-100 p-4 text-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+            <div>
+              <h2 class="text-sm font-semibold text-slate-900 mb-1">إعدادات الحساب والصلاحيات</h2>
+              <p class="text-[11px] text-slate-600">
+                إدارة مستخدمي الجمعية، صلاحياتهم، وربط الحساب بجهات الإشراف (المركز الوطني، وزارة الموارد البشرية، الإمارة، وغيرها).
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button class="px-3 py-1.5 rounded-xl bg-primary text-white text-[11px]">+ مستخدم جديد</button>
+            </div>
+          </div>
+          <div class="overflow-auto scroll-slim border border-slate-100 rounded-2xl">
+            <table class="min-w-full text-[11px] text-right">
+              <thead class="bg-slate-50 text-slate-500">
+                <tr>
+                  <th class="px-3 py-2 font-medium">اسم المستخدم</th>
+                  <th class="px-3 py-2 font-medium">الدور</th>
+                  <th class="px-3 py-2 font-medium">البريد</th>
+                  <th class="px-3 py-2 font-medium">الحالة</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2">مدير الجمعية</td>
+                  <td class="px-3 py-2">إدارة كاملة</td>
+                  <td class="px-3 py-2">director@example.org</td>
+                  <td class="px-3 py-2">
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">مفعّل</span>
+                  </td>
+                </tr>
+                <tr class="border-t border-slate-100">
+                  <td class="px-3 py-2">مسؤول المشاريع</td>
+                  <td class="px-3 py-2">إدارة المشاريع والفعاليات</td>
+                  <td class="px-3 py-2">projects@example.org</td>
+                  <td class="px-3 py-2">
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">مفعّل</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-slate-900 text-slate-100 text-[11px] mt-4">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col md:flex-row gap-2 items-start md:items-center justify-between">
+      <span>منصة حصيف – حساب القطاع غير الربحي (عرض تشغيلي تجريبي)</span>
+      <a href="index.html" class="text-slate-300 hover:text-white">الرجوع للصفحة الرئيسية لمنصة حصيف</a>
+    </div>
+  </footer>
+
+  <script>
+    // تبديل اللوحات
+    const tabs = document.querySelectorAll('#nonprofitTabs button');
+    const panels = {
+      'panel-projects': document.getElementById('panel-projects'),
+      'panel-funding': document.getElementById('panel-funding'),
+      'panel-events': document.getElementById('panel-events'),
+      'panel-opportunities': document.getElementById('panel-opportunities'),
+      'panel-partners': document.getElementById('panel-partners'),
+      'panel-reports': document.getElementById('panel-reports'),
+      'panel-settings': document.getElementById('panel-settings'),
+    };
+
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        // فعّل الزر
+        tabs.forEach(b => b.classList.remove('tab-active'));
+        btn.classList.add('tab-active');
+        // عرض/إخفاء اللوحات
+        Object.keys(panels).forEach(key => {
+          if (key === target) {
+            panels[key].classList.remove('hidden');
+          } else {
+            panels[key].classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
