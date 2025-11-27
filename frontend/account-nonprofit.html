@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>منصة حصيف – نموذج تشغيلي على GitHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    textarea { resize: vertical; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-50 min-h-screen">
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-20">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2">
+          <span class="inline-flex h-9 w-9 rounded-2xl bg-gradient-to-br from-emerald-400 to-lime-400 items-center justify-center text-slate-950 font-black text-xl">
+            ح
+          </span>
+          <div class="flex flex-col leading-tight">
+            <span class="font-semibold text-sm md:text-base">منصة حصيف</span>
+            <span class="text-[11px] text-slate-400">نموذج تشغيلي مبسّط يعمل بالكامل على GitHub Pages</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 text-[11px] md:text-xs text-slate-300">
+        <div class="flex items-center gap-2">
+          <span class="text-slate-400">نوع الحساب الحالي:</span>
+          <select id="role-select" class="rounded-xl bg-slate-950/60 border border-slate-700 px-3 py-1.5 text-[11px] md:text-xs focus:outline-none focus:border-emerald-400">
+            <option value="emirate">إمارة المنطقة</option>
+            <option value="nonprofit">قطاع غير ربحي</option>
+            <option value="private">قطاع خاص</option>
+            <option value="university">جامعة</option>
+            <option value="donor">مانح</option>
+            <option value="individual">فرد</option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2 text-slate-400">
+          <span class="hidden md:inline">⚠</span>
+          <span>هذه نسخة استعراضية، البيانات تحفظ في المتصفح (بدون خادم أو تسجيل دخول فعلي).</span>
+        </div>
+        <a href="./index.html" class="inline-flex items-center justify-center px-3 py-1.5 rounded-full border border-slate-700/70 text-[11px] md:text-xs hover:border-emerald-400 hover:text-emerald-300 transition">
+          الصفحة التعريفية
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4 py-6 flex gap-6">
+    <!-- Sidebar -->
+    <aside class="w-60 hidden md:block">
+      <div class="border border-slate-800 bg-slate-900/60 rounded-3xl p-4 space-y-4">
+        <div>
+          <p class="text-xs font-semibold text-slate-400 mb-1">لوحات التشغيل</p>
+          <button class="nav-btn w-full text-right text-sm px-3 py-2 rounded-2xl hover:bg-slate-800 transition" data-target="solutions">
+            الحلول التنموية
+          </button>
+          <button class="nav-btn w-full text-right text-sm px-3 py-2 rounded-2xl hover:bg-slate-800 transition" data-target="projects">
+            المشاريع
+          </button>
+          <button class="nav-btn w-full text-right text-sm px-3 py-2 rounded-2xl hover:bg-slate-800 transition" data-target="events">
+            الفعاليات
+          </button>
+          <button class="nav-btn w-full text-right text-sm px-3 py-2 rounded-2xl hover:bg-slate-800 transition" data-target="funding">
+            طلبات التمويل
+          </button>
+        </div>
+        <div class="border-t border-slate-800 pt-3">
+          <p class="text-xs font-semibold text-slate-400 mb-1">ملاحظة</p>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            التفريعات (الحلول ← مشاريع ← فعاليات ← تمويل) تعمل هنا بشكل مبسّط
+            عبر المتصفح فقط، ويمكن تحويل هذا النموذج لاحقًا لمنصة كاملة بقاعدة بيانات حقيقية.
+          </p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 space-y-6">
+      <!-- Role label + KPIs -->
+      <section class="space-y-3">
+        <div class="flex items-center justify-between gap-3 flex-wrap">
+          <div>
+            <h1 class="text-lg md:text-xl font-semibold mb-1">لوحة تشغيل حساب: <span id="role-label" class="text-emerald-300">إمارة المنطقة</span></h1>
+            <p class="text-sm text-slate-400 max-w-xl">
+              هذه اللوحة تعرض البيانات الخاصة بالحساب المختار فقط. عند تغيير نوع الحساب من الأعلى، تتغير جميع الجداول والمؤشرات لتعرض ما يخص ذلك الحساب.
+            </p>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-4 gap-3">
+          <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-4">
+            <p class="text-[11px] text-slate-400 mb-1">عدد الحلول لهذا الحساب</p>
+            <p id="kpi-solutions" class="text-2xl font-semibold">0</p>
+          </div>
+          <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-4">
+            <p class="text-[11px] text-slate-400 mb-1">عدد المشاريع لهذا الحساب</p>
+            <p id="kpi-projects" class="text-2xl font-semibold">0</p>
+          </div>
+          <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-4">
+            <p class="text-[11px] text-slate-400 mb-1">عدد الفعاليات لهذا الحساب</p>
+            <p id="kpi-events" class="text-2xl font-semibold">0</p>
+          </div>
+          <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-4">
+            <p class="text-[11px] text-slate-400 mb-1">طلبات التمويل المسجلة</p>
+            <p id="kpi-funding" class="text-2xl font-semibold">0</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Solutions Panel -->
+      <section id="panel-solutions" class="panel space-y-4">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl font-semibold mb-1">إدارة الحلول التنموية</h2>
+            <p class="text-sm text-slate-400">
+              أضف الحلول التي يقترحها هذا الحساب، وسيتم ربطها لاحقًا بالمشاريع والتمويل.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <form id="form-solution" class="md:col-span-1 border border-slate-800 rounded-2xl bg-slate-900/70 p-4 space-y-3">
+            <div>
+              <label class="text-xs text-slate-300">عنوان الحل</label>
+              <input required name="title" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-emerald-400" />
+            </div>
+            <div>
+              <label class="text-xs text-slate-300">الوصف</label>
+              <textarea required name="description" rows="3" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-emerald-400"></textarea>
+            </div>
+            <div>
+              <label class="text-xs text-slate-300">المنطقة (اختياري)</label>
+              <input name="region" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-emerald-400" placeholder="مثال: منطقة حائل" />
+            </div>
+            <button class="w-full mt-1 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-sm font-semibold py-2 transition">
+              حفظ الحل
+            </button>
+          </form>
+
+          <div class="md:col-span-2 border border-slate-800 rounded-2xl bg-slate-900/70 p-4">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <h3 class="text-sm font-semibold text-slate-200">قائمة الحلول لهذا الحساب</h3>
+              <span class="text-[11px] text-slate-400">كل حل مرتبط داخليًا بنوع الحساب الحالي.</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="min-w-full text-right text-xs">
+                <thead class="text-slate-400 border-b border-slate-800">
+                  <tr>
+                    <th class="py-2">#</th>
+                    <th class="py-2">العنوان</th>
+                    <th class="py-2">المنطقة</th>
+                    <th class="py-2">الحالة</th>
+                  </tr>
+                </thead>
+                <tbody id="table-solutions" class="divide-y divide-slate-800 text-slate-200"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Panel -->
+      <section id="panel-projects" class="panel space-y-4 hidden">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl font-semibold mb-1">إدارة المشاريع</h2>
+            <p class="text-sm text-slate-400">
+              قم بإنشاء المشاريع وربطها بحلول هذا الحساب، تمهيدًا لطلبات التمويل والفعاليات.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <form id="form-project" class="md:col-span-1 border border-slate-800 rounded-2xl bg-slate-900/70 p-4 space-y-3">
+            <div>
+              <label class="text-xs text-slate-300">عنوان المشروع</label>
+              <input required name="title" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-emerald-400" />
+            </div>
+            <div>
+              <label class="text-xs text-slate-300">الوصف</label>
+              <textarea required name="description" rows="3" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-emerald-400"></textarea>
+            </div>
+            <div>
+              <label class="text-xs text-slate-300">ربط بحل من نفس الحساب (اختياري)</label>
+              <select name="solution_id" id="select-solution" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-emerald-400">
+                <option value="">بدون</option>
+              </select>
+            </div>
+            <button class="w-full mt-1 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-sm font-semibold py-2 transition">
+              حفظ المشروع
+            </button>
+          </form>
+
+          <div class="md:col-span-2 border border-slate-800 rounded-2xl bg-slate-900/70 p-4">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <h3 class="text-sm font-semibold text-slate-200">قائمة المشاريع لهذا الحساب</h3>
+              <span class="text-[11px] text-slate-400">لا تظهر هنا إلا المشاريع المربوطة بهذا الحساب.</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="min-w-full text-right text-xs">
+                <thead class="text-slate-400 border-b border-slate-800">
+                  <tr>
+                    <th class="py-2">#</th>
+                    <th class="py-2">العنوان</th>
+                    <th class="py-2">مرتبط بحل</th>
+                    <th class="py-2">الحالة</th>
+                  </tr>
+                </thead>
+                <tbody id="table-projects" class="divide-y divide-slate-800 text-slate-200"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Events Panel -->
+      <section id="panel-events" class="panel space-y-4 hidden">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl font-semibold mb-1">إدارة الفعاليات</h2>
+            <p class="text-sm text-slate-400">
+              سجل الفعاليات المتعلقة بمشاريع هذا الحساب، لتظهر في التقارير ولوحات الأثر.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <form id="form-event" class="md:col-span-1 border border-slate-800 rounded-2xl bg-slate-900/70 p-4 space-y-3">
+            <div>
+              <label class="text-xs text-slate-300">عنوان الفعالية</label>
+              <input required name="title" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-emerald-400" />
+            </div>
+            <div>
+              <label class="text-xs text-slate-300">الوصف</label>
+              <textarea required name="description" rows="3" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-emerald-400"></textarea>
+            </div>
+            <div>
+              <label class="text-xs text-slate-300">ربط بمشروع من نفس الحساب (اختياري)</label>
+              <select name="project_id" id="select-project-event" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-emerald-400">
+                <option value="">بدون</option>
+              </select>
+            </div>
+            <button class="w-full mt-1 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-sm font-semibold py-2 transition">
+              حفظ الفعالية
+            </button>
+          </form>
+
+          <div class="md:col-span-2 border border-slate-800 rounded-2xl bg-slate-900/70 p-4">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <h3 class="text-sm font-semibold text-slate-200">قائمة الفعاليات لهذا الحساب</h3>
+              <span class="text-[11px] text-slate-400">تقتصر على الفعاليات المرتبطة بهذا الحساب فقط.</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="min-w-full text-right text-xs">
+                <thead class="text-slate-400 border-b border-slate-800">
+                  <tr>
+                    <th class="py-2">#</th>
+                    <th class="py-2">العنوان</th>
+                    <th class="py-2">المشروع</th>
+                    <th class="py-2">الحالة</th>
+                  </tr>
+                </thead>
+                <tbody id="table-events" class="divide-y divide-slate-800 text-slate-200"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Funding Panel -->
+      <section id="panel-funding" class="panel space-y-4 hidden">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl font-semibold mb-1">طلبات التمويل</h2>
+            <p class="text-sm text-slate-400">
+              سجّل طلبات التمويل للمشاريع المرتبطة بهذا الحساب، واعرضها لأغراض العرض الأولي.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <form id="form-funding" class="md:col-span-1 border border-slate-800 rounded-2xl bg-slate-900/70 p-4 space-y-3">
+            <div>
+              <label class="text-xs text-slate-300">المشروع</label>
+              <select name="project_id" id="select-project-funding" required class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-emerald-400">
+                <option value="">اختر مشروعًا</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-xs text-slate-300">مبلغ التمويل المطلوب</label>
+              <input name="amount" type="number" min="0" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-emerald-400" />
+            </div>
+            <button class="w-full mt-1 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-sm font-semibold py-2 transition">
+              تسجيل طلب التمويل
+            </button>
+          </form>
+
+          <div class="md:col-span-2 border border-slate-800 rounded-2xl bg-slate-900/70 p-4">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <h3 class="text-sm font-semibold text-slate-200">قائمة طلبات التمويل لهذا الحساب</h3>
+              <span class="text-[11px] text-slate-400">كل طلب مرتبط بمشروع من هذا الحساب فقط.</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="min-w-full text-right text-xs">
+                <thead class="text-slate-400 border-b border-slate-800">
+                  <tr>
+                    <th class="py-2">#</th>
+                    <th class="py-2">المشروع</th>
+                    <th class="py-2">المبلغ</th>
+                    <th class="py-2">الحالة</th>
+                  </tr>
+                </thead>
+                <tbody id="table-funding" class="divide-y divide-slate-800 text-slate-200"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="border-t border-slate-800 mt-10 py-5 text-center text-[11px] text-slate-500">
+    نسخة تشغيلية مبسّطة من منصة حصيف تعمل على GitHub Pages فقط (بدون خادم)،
+    الهدف منها توضيح فكرة الحسابات والتفريعات الرئيسية للحلول والمشاريع والفعاليات والتمويل.
+  </footer>
+
+  <script>
+    // LocalStorage keys
+    const LS_SOLUTIONS = 'hasseef_solutions_v2';
+    const LS_PROJECTS = 'hasseef_projects_v2';
+    const LS_EVENTS = 'hasseef_events_v2';
+    const LS_FUNDING = 'hasseef_funding_v2';
+    const LS_ROLE = 'hasseef_role_v2';
+
+    function loadList(key) {
+      try { return JSON.parse(localStorage.getItem(key)) || []; } catch { return []; }
+    }
+    function saveList(key, list) {
+      localStorage.setItem(key, JSON.stringify(list));
+    }
+
+    function currentRole() {
+      return localStorage.getItem(LS_ROLE) || 'emirate';
+    }
+
+    function roleLabel(role) {
+      switch (role) {
+        case 'emirate': return 'إمارة المنطقة';
+        case 'nonprofit': return 'قطاع غير ربحي';
+        case 'private': return 'قطاع خاص';
+        case 'university': return 'جامعة';
+        case 'donor': return 'مانح';
+        case 'individual': return 'فرد';
+        default: return role;
+      }
+    }
+
+    function refreshKPIs() {
+      const role = currentRole();
+      const solutions = loadList(LS_SOLUTIONS).filter(x => x.role === role);
+      const projects = loadList(LS_PROJECTS).filter(x => x.role === role);
+      const events = loadList(LS_EVENTS).filter(x => x.role === role);
+      const funding = loadList(LS_FUNDING).filter(x => x.role === role);
+      document.getElementById('kpi-solutions').textContent = solutions.length;
+      document.getElementById('kpi-projects').textContent = projects.length;
+      document.getElementById('kpi-events').textContent = events.length;
+      document.getElementById('kpi-funding').textContent = funding.length;
+    }
+
+    function renderSolutions() {
+      const role = currentRole();
+      const list = loadList(LS_SOLUTIONS).filter(x => x.role === role);
+      const tbody = document.getElementById('table-solutions');
+      const selectSolution = document.getElementById('select-solution');
+      tbody.innerHTML = '';
+      if (selectSolution) {
+        selectSolution.innerHTML = '<option value="">بدون</option>';
+      }
+      list.forEach((s, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="py-2 px-2 text-slate-400">${idx + 1}</td>
+          <td class="py-2 px-2">${s.title}</td>
+          <td class="py-2 px-2 text-slate-400">${s.region || '-'}</td>
+          <td class="py-2 px-2 text-emerald-300 text-[11px]">${s.status}</td>
+        `;
+        tbody.appendChild(tr);
+        if (selectSolution) {
+          const opt = document.createElement('option');
+          opt.value = s.id;
+          opt.textContent = s.title;
+          selectSolution.appendChild(opt);
+        }
+      });
+    }
+
+    function renderProjects() {
+      const role = currentRole();
+      const list = loadList(LS_PROJECTS).filter(x => x.role === role);
+      const solutions = loadList(LS_SOLUTIONS).filter(x => x.role === role);
+      const tbody = document.getElementById('table-projects');
+      const selectProjEvent = document.getElementById('select-project-event');
+      const selectProjFunding = document.getElementById('select-project-funding');
+      tbody.innerHTML = '';
+      if (selectProjEvent) selectProjEvent.innerHTML = '<option value="">بدون</option>';
+      if (selectProjFunding) selectProjFunding.innerHTML = '<option value="">اختر مشروعًا</option>';
+
+      list.forEach((p, idx) => {
+        const sol = solutions.find(s => s.id === p.solution_id);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="py-2 px-2 text-slate-400">${idx + 1}</td>
+          <td class="py-2 px-2">${p.title}</td>
+          <td class="py-2 px-2 text-slate-400">${sol ? sol.title : '-'}</td>
+          <td class="py-2 px-2 text-emerald-300 text-[11px]">${p.status}</td>
+        `;
+        tbody.appendChild(tr);
+
+        if (selectProjEvent) {
+          const opt1 = document.createElement('option');
+          opt1.value = p.id;
+          opt1.textContent = p.title;
+          selectProjEvent.appendChild(opt1);
+        }
+        if (selectProjFunding) {
+          const opt2 = document.createElement('option');
+          opt2.value = p.id;
+          opt2.textContent = p.title;
+          selectProjFunding.appendChild(opt2);
+        }
+      });
+    }
+
+    function renderEvents() {
+      const role = currentRole();
+      const list = loadList(LS_EVENTS).filter(x => x.role === role);
+      const projects = loadList(LS_PROJECTS).filter(x => x.role === role);
+      const tbody = document.getElementById('table-events');
+      tbody.innerHTML = '';
+      list.forEach((e, idx) => {
+        const pr = projects.find(p => p.id === e.project_id);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="py-2 px-2 text-slate-400">${idx + 1}</td>
+          <td class="py-2 px-2">${e.title}</td>
+          <td class="py-2 px-2 text-slate-400">${pr ? pr.title : '-'}</td>
+          <td class="py-2 px-2 text-emerald-300 text-[11px]">${e.status}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderFunding() {
+      const role = currentRole();
+      const list = loadList(LS_FUNDING).filter(x => x.role === role);
+      const projects = loadList(LS_PROJECTS).filter(x => x.role === role);
+      const tbody = document.getElementById('table-funding');
+      tbody.innerHTML = '';
+      list.forEach((f, idx) => {
+        const pr = projects.find(p => p.id === f.project_id);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="py-2 px-2 text-slate-400">${idx + 1}</td>
+          <td class="py-2 px-2">${pr ? pr.title : '-'}</td>
+          <td class="py-2 px-2 text-slate-400">${f.amount || 0}</td>
+          <td class="py-2 px-2 text-emerald-300 text-[11px]">${f.status}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Forms
+    document.getElementById('form-solution').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const list = loadList(LS_SOLUTIONS);
+      const id = 'SOL-' + (list.length + 1);
+      const role = currentRole();
+      list.push({
+        id,
+        title: form.title.value.trim(),
+        description: form.description.value.trim(),
+        region: form.region.value.trim(),
+        status: 'draft',
+        role
+      });
+      saveList(LS_SOLUTIONS, list);
+      form.reset();
+      renderSolutions();
+      refreshKPIs();
+    });
+
+    document.getElementById('form-project').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const list = loadList(LS_PROJECTS);
+      const id = 'PRJ-' + (list.length + 1);
+      const role = currentRole();
+      list.push({
+        id,
+        title: form.title.value.trim(),
+        description: form.description.value.trim(),
+        solution_id: form.solution_id.value || null,
+        status: 'draft',
+        role
+      });
+      saveList(LS_PROJECTS, list);
+      form.reset();
+      renderProjects();
+      refreshKPIs();
+    });
+
+    document.getElementById('form-event').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const list = loadList(LS_EVENTS);
+      const id = 'EVT-' + (list.length + 1);
+      const role = currentRole();
+      list.push({
+        id,
+        title: form.title.value.trim(),
+        description: form.description.value.trim(),
+        project_id: form.project_id.value || null,
+        status: 'scheduled',
+        role
+      });
+      saveList(LS_EVENTS, list);
+      form.reset();
+      renderEvents();
+      refreshKPIs();
+    });
+
+    document.getElementById('form-funding').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const list = loadList(LS_FUNDING);
+      const id = 'FND-' + (list.length + 1);
+      const role = currentRole();
+      list.push({
+        id,
+        project_id: form.project_id.value,
+        amount: Number(form.amount.value || 0),
+        status: 'pending',
+        role
+      });
+      saveList(LS_FUNDING, list);
+      form.reset();
+      renderFunding();
+      refreshKPIs();
+    });
+
+    // Navigation between panels
+    const panels = {
+      solutions: document.getElementById('panel-solutions'),
+      projects: document.getElementById('panel-projects'),
+      events: document.getElementById('panel-events'),
+      funding: document.getElementById('panel-funding')
+    };
+
+    function showPanel(name) {
+      Object.keys(panels).forEach((key) => {
+        panels[key].classList.toggle('hidden', key !== name);
+      });
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        if (btn.dataset.target === name) {
+          btn.classList.add('bg-slate-800', 'text-emerald-300');
+        } else {
+          btn.classList.remove('bg-slate-800', 'text-emerald-300');
+        }
+      });
+    }
+
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        showPanel(btn.dataset.target);
+      });
+    });
+
+    // Role switching
+    const roleSelect = document.getElementById('role-select');
+    const roleLabelEl = document.getElementById('role-label');
+
+    roleSelect.addEventListener('change', () => {
+      const role = roleSelect.value;
+      localStorage.setItem(LS_ROLE, role);
+      roleLabelEl.textContent = roleLabel(role);
+      // إعادة تحميل البيانات لهذا الحساب
+      renderSolutions();
+      renderProjects();
+      renderEvents();
+      renderFunding();
+      refreshKPIs();
+    });
+
+    // Initial setup
+    (function init() {
+      const savedRole = currentRole();
+      roleSelect.value = savedRole;
+      roleLabelEl.textContent = roleLabel(savedRole);
+      renderSolutions();
+      renderProjects();
+      renderEvents();
+      renderFunding();
+      refreshKPIs();
+      showPanel('solutions');
+    })();
+  </script>
+</body>
+</html>
