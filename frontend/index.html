@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>منصة حصيف – بوابة الحسابات الوطنية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Readex Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #f5f7f6;
+    }
+    .bg-primary { background-color: #006c35; }
+    .bg-primary-soft { background-color: #e6f3ec; }
+    .text-primary { color: #006c35; }
+    .border-primary { border-color: #006c35; }
+    .shadow-soft { box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12); }
+    .shadow-card { box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08); }
+    .scroll-slim::-webkit-scrollbar { width: 6px; height: 6px; }
+    .scroll-slim::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.7); border-radius: 999px; }
+  </style>
+</head>
+<body class="min-h-screen text-slate-900">
+  <!-- شريط علوي صغير -->
+  <div class="w-full bg-slate-900 text-xs text-slate-100">
+    <div class="max-w-6xl mx-auto px-4 py-1 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex w-5 h-5 rounded-full bg-emerald-500 items-center justify-center text-[10px] font-bold">ح</span>
+        <span>برنامج شباب المملكة حصيف الوطني</span>
+      </div>
+      <div class="hidden sm:flex items-center gap-4 text-[11px]">
+        <span>منصة وطنية لتمكين الحلول التنموية وربطها بالجهات ذات العلاقة</span>
+        <span class="text-slate-400">نسخة عرض تشغيلية (Demo)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- الهيدر الرئيسي -->
+  <header class="bg-white/90 backdrop-blur border-b border-slate-100 sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      <!-- شعارات -->
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-2">
+          <!-- شعار حصيف -->
+          <div class="w-10 h-10 rounded-2xl bg-primary flex items-center justify-center shadow-soft">
+            <span class="text-white text-lg font-bold">ح</span>
+          </div>
+          <div class="leading-tight">
+            <div class="text-sm font-semibold text-slate-900">منصة حصيف</div>
+            <div class="text-[11px] text-slate-500">منصة تكاملية للحلول التنموية الوطنية</div>
+          </div>
+        </div>
+        <!-- شعارات رؤية وتلبية معاً -->
+        <div class="hidden sm:flex items-center gap-3 border-r border-slate-200 pr-3">
+          <div class="flex flex-col items-start leading-tight">
+            <span class="text-[11px] text-slate-500 mb-0.5">برعاية</span>
+            <span class="text-[11px] font-semibold text-slate-800">رؤية المملكة 2030</span>
+          </div>
+          <div class="flex flex-col items-start leading-tight">
+            <span class="text-[11px] text-slate-500 mb-0.5">حاضنة المبادرة</span>
+            <span class="text-[11px] font-semibold text-slate-800">مبادرة تلبية</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- القائمة -->
+      <nav class="hidden md:flex items-center gap-5 text-[13px]">
+        <a href="#hero" class="hover:text-primary transition">الرئيسية</a>
+        <a href="#services" class="hover:text-primary transition">الخدمات</a>
+        <a href="#accounts" class="hover:text-primary transition">الحسابات</a>
+        <a href="#documents" class="hover:text-primary transition">الوثائق</a>
+        <a href="#subscriptions" class="hover:text-primary transition">الاشتراكات</a>
+        <a href="#partners" class="hover:text-primary transition">الشركاء</a>
+        <a href="#about" class="hover:text-primary transition">عن المنصة</a>
+      </nav>
+
+      <!-- أزرار الدخول -->
+      <div class="hidden sm:flex items-center gap-2">
+        <button class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs text-slate-800 hover:bg-slate-50">
+          تسجيل دخول
+        </button>
+        <button class="px-3 py-1.5 rounded-xl bg-primary text-xs text-white hover:bg-emerald-700">
+          إنشاء حساب جديد
+        </button>
+      </div>
+
+      <!-- زر القائمة للجوال -->
+      <button id="btnMobileNav" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-xl border border-slate-200">
+        <span class="sr-only">القائمة</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- قائمة الجوال -->
+    <div id="mobileNav" class="md:hidden hidden border-t border-slate-100 bg-white">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2 text-sm">
+        <a href="#hero" class="py-1">الرئيسية</a>
+        <a href="#services" class="py-1">الخدمات</a>
+        <a href="#accounts" class="py-1">الحسابات</a>
+        <a href="#documents" class="py-1">الوثائق</a>
+        <a href="#subscriptions" class="py-1">الاشتراكات</a>
+        <a href="#partners" class="py-1">الشركاء</a>
+        <a href="#about" class="py-1">عن المنصة</a>
+        <div class="pt-2 flex gap-2">
+          <button class="flex-1 px-3 py-1.5 rounded-xl border border-slate-200 text-xs text-slate-800">تسجيل دخول</button>
+          <button class="flex-1 px-3 py-1.5 rounded-xl bg-primary text-xs text-white">إنشاء حساب</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- البطل (Hero) -->
+  <section id="hero" class="max-w-6xl mx-auto px-4 pt-8 pb-10">
+    <div class="grid grid-cols-1 md:grid-cols-[1.4fr,1fr] gap-6 items-stretch">
+      <!-- النص -->
+      <div class="bg-white rounded-3xl shadow-soft p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-semibold text-slate-900 leading-relaxed mb-3">
+            منصة حصيف
+            <span class="text-primary">لإدارة الحلول والمشاريع التنموية</span>
+          </h1>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4">
+            منصة وطنية تشغيلية تربط بين الأفراد، والقطاع غير الربحي، والقطاع الخاص، والجامعات،
+            والجهات الحكومية، وإمارات المناطق، والمانحين، ضمن نموذج عمل موحّد يسهّل
+            تصميم المشاريع، واعتمادها، وتمويلها، وتنفيذها، وقياس أثرها وفق مستهدفات رؤية المملكة 2030.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+            <div class="bg-primary-soft rounded-2xl px-3 py-3">
+              <div class="text-[11px] text-slate-500 mb-1">الربط بالرؤية 2030</div>
+              <div class="text-sm font-semibold text-slate-900">ربط كل مشروع بهدف وبرنامج وقطاع حكومي</div>
+            </div>
+            <div class="bg-slate-50 rounded-2xl px-3 py-3">
+              <div class="text-[11px] text-slate-500 mb-1">تكامل القطاعات</div>
+              <div class="text-sm font-semibold text-slate-900">8 حسابات تعمل ضمن نموذج تكاملي واحد</div>
+            </div>
+            <div class="bg-slate-50 rounded-2xl px-3 py-3">
+              <div class="text-[11px] text-slate-500 mb-1">تتبع الأثر</div>
+              <div class="text-sm font-semibold text-slate-900">لوحة تقارير موحّدة للأثر والاستثمار التنموي</div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-3 items-center">
+          <a href="#accounts" class="px-4 py-2.5 rounded-2xl bg-primary text-white text-sm font-medium hover:bg-emerald-700">
+            استعراض الحسابات
+          </a>
+          <a href="#partners" class="px-3 py-2.5 rounded-2xl border border-slate-200 text-xs text-slate-800 hover:bg-slate-50">
+            طلب شراكة استراتيجية
+          </a>
+          <span class="text-[11px] text-slate-500">
+            نسخة تشغيلية أولية – لاستخدام العرض والتجريب
+          </span>
+        </div>
+      </div>
+
+      <!-- لوحة مختصرة -->
+      <div class="space-y-3">
+        <div class="bg-primary rounded-3xl text-white p-5 shadow-soft h-[210px] flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2">
+            <div>
+              <div class="text-xs text-emerald-100 mb-1">لوحة نظرة عامة</div>
+              <div class="text-sm font-semibold">ملخّص حركة المنصة</div>
+            </div>
+            <div class="text-[10px] bg-white/10 rounded-full px-2 py-1">تجريبي</div>
+          </div>
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="bg-black/10 rounded-2xl px-3 py-2">
+              <div class="text-emerald-100">مشاريع مسجّلة</div>
+              <div class="text-lg font-semibold">128</div>
+              <div class="text-[10px] text-emerald-200 mt-1">من جميع الحسابات</div>
+            </div>
+            <div class="bg-black/10 rounded-2xl px-3 py-2">
+              <div class="text-emerald-100">قيمة التمويل</div>
+              <div class="text-lg font-semibold">32 م</div>
+              <div class="text-[10px] text-emerald-200 mt-1">منح + رعايات + استثمار</div>
+            </div>
+            <div class="bg-black/10 rounded-2xl px-3 py-2">
+              <div class="text-emerald-100">فرص تطوع/تدريب</div>
+              <div class="text-lg font-semibold">540</div>
+              <div class="text-[10px] text-emerald-200 mt-1">مرتبطة بالمشاريع المسجّلة</div>
+            </div>
+            <div class="bg-black/10 rounded-2xl px-3 py-2">
+              <div class="text-emerald-100">عدد الشركاء</div>
+              <div class="text-lg font-semibold">36</div>
+              <div class="text-[10px] text-emerald-200 mt-1">جهات حكومية + جامعات + مانحين</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-card p-4 text-xs h-[170px] flex flex-col justify-between">
+          <div>
+            <div class="text-[11px] text-slate-500 mb-1">كيف تستخدم المنصة؟</div>
+            <ol class="list-decimal pr-4 space-y-1 text-slate-700">
+              <li>اختيار نوع الحساب (جمعية، شركة، جامعة، إمارة…)</li>
+              <li>تصميم المشروع أو الفعالية وربطها بالرؤية والجهة الحكومية.</li>
+              <li>طلب تمويل/رعاية أو شريك تنفيذي من الحسابات الأخرى.</li>
+              <li>تنفيذ الأنشطة ورفع تقارير الأثر عبر المنصة.</li>
+            </ol>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-100">
+            <span>نموذج العمل يعتمد اللبنات التسع + الربط بالرؤية.</span>
+            <span class="text-primary font-medium">تفاصيل أكثر في صفحة الوثائق</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- الخدمات الرئيسية -->
+  <section id="services" class="max-w-6xl mx-auto px-4 pb-8">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-lg font-semibold text-slate-900">الخدمات والمكوّنات التشغيلية في منصة حصيف</h2>
+      <span class="text-[11px] text-slate-500">مستوى العرض: نسخة تشغيلية أولية (Frontend)</span>
+    </div>
+    <p class="text-xs text-slate-600 mb-4">
+      تم تجميع الخدمات في حزمة مكوّنات تشغيلية يمكن تفعيلها من كل حساب حسب دوره (إمارة، جهة حكومية، جمعية، جامعة، قطاع خاص، مانح، أفراد).
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
+      <div class="bg-white rounded-2xl shadow-card p-4 border border-slate-100">
+        <div class="text-xs text-slate-500 mb-1">مكوّن 01</div>
+        <div class="font-semibold mb-1">إدارة الحلول والمبادرات</div>
+        <p class="text-xs text-slate-600">
+          استقبال الحلول التنموية والمبادرات من الأفراد والجهات، وتصنيفها وربطها بالجهات ذات العلاقة وبرامج الرؤية.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-card p-4 border border-slate-100">
+        <div class="text-xs text-slate-500 mb-1">مكوّن 02</div>
+        <div class="font-semibold mb-1">إدارة المشاريع التنموية</div>
+        <p class="text-xs text-slate-600">
+          تصميم نماذج مشاريع وفق اللبنات التسع، مع ربطها بالأهداف الاستراتيجية والجهات الحكومية والتمويل.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-card p-4 border border-slate-100">
+        <div class="text-xs text-slate-500 mb-1">مكوّن 03</div>
+        <div class="font-semibold mb-1">إدارة الفعاليات والمرافق</div>
+        <p class="text-xs text-slate-600">
+          طلب واعتماد الفعاليات من إمارة المنطقة، مع إمكانية ربط الفعالية بمرافق (قاعات، مسارح، جامعات، مقرات شركات).
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-card p-4 border border-slate-100">
+        <div class="text-xs text-slate-500 mb-1">مكوّن 04</div>
+        <div class="font-semibold mb-1">إدارة الفرص (وظائف، تطوع، تدريب)</div>
+        <p class="text-xs text-slate-600">
+          نشر فرص عمل وتطوع وتدريب مرتبطة بالمشاريع والجهات الشريكة، مع تمكين الجامعات من ربط طلابها بالفرص.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-card p-4 border border-slate-100">
+        <div class="text-xs text-slate-500 mb-1">مكوّن 05</div>
+        <div class="font-semibold mb-1">إدارة التمويل، المنح، الرعايات، والاستثمار</div>
+        <p class="text-xs text-slate-600">
+          تمكين المانحين والقطاع الخاص من تقديم منح ورعايات واستثمارات تنموية، مع محفظة لكل جهة وتقارير أداء.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-card p-4 border border-slate-100">
+        <div class="text-xs text-slate-500 mb-1">مكوّن 06</div>
+        <div class="font-semibold mb-1">التقارير ومؤشرات الأثر</div>
+        <p class="text-xs text-slate-600">
+          لوحات تحليلية لإمارات المناطق والجهات الحكومية والمانحين، لعرض عدد المشاريع والتمويل والفرص والأثر وفق الرؤية 2030.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- بوابة الحسابات -->
+  <section id="accounts" class="max-w-6xl mx-auto px-4 pb-8">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-lg font-semibold text-slate-900">بوابة الحسابات الوطنية في منصة حصيف</h2>
+      <span class="text-[11px] text-slate-500">يتم لاحقًا ربط كل بطاقة بحساب تشغيلي كامل</span>
+    </div>
+    <p class="text-xs text-slate-600 mb-4">
+      تم تصميم نموذج حصيف ليحتوي على حسابات متكاملة تخدم جميع الأطراف ذات العلاقة بالتنمية، مع صلاحيات خاصة وخدمات مهيأة وفق دور كل جهة.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+      <!-- إمارة -->
+      <div class="bg-white rounded-2xl shadow-card p-4 border border-slate-100 flex flex-col">
+        <div class="text-[11px] text-slate-500 mb-1">حساب 01</div>
+        <div class="font-semibold mb-1">حساب إمارة المنطقة</div>
+        <p class="text-xs text-slate-600 mb-3 flex-1">
+          متابعة المشاريع والفعاليات والفرص في المنطقة، واعتماد الفعاليات، وقراءة تقارير الأثر، وتفعيل الشراكات بين القطاعات.
+        </p>
+        <button class="mt-auto px-3 py-2 rounded-xl bg-slate-900 text-white text-[11px]">
+          فتح لوحة إمارة (عرض تجريبي قريبًا)
+        </button>
+      </div>
+      <!-- جهة تطوير / هيئة -->
+      <div class="bg-white rounded-2xl shadow-card p-4 border border-slate-100 flex flex-col">
+        <div class="text-[11px] text-slate-500 mb-1">حساب 02</div>
+        <div class="font-semibold mb-1">حساب هيئة/جهة تطوير</div>
+        <p class="text-xs text-slate-600 mb-3 flex-1">
+          إدارة المشاريع الكبرى وبرامج التطوير في المدن والمناطق، وربطها بالمبادرات المجتمعية والقطاع الخاص والجامعات.
+        </p>
+        <button class="mt-auto px-3 py-2 rounded-xl bg-slate-100 text-slate-800 text-[11px]">
+          فتح لوحة الهيئة (قريبًا)
+        </button>
+      </div>
+      <!-- جهة حكومية -->
+      <div class="bg-white rounded-2xl shadow-card p-4 border border-slate-100 flex flex-col">
+        <div class="text-[11px] text-slate-500 mb-1">حساب 03</div>
+        <div class="font-semibold mb-1">حساب الجهة الحكومية</div>
+        <p class="text-xs text-slate-600 mb-3 flex-1">
+          رفع الاحتياجات والبرامج والمبادرات، واستقبال الحلول من القطاع الخاص وغير الربحي والجامعات والأفراد، وقياس الأثر.
+        </p>
+        <button class="mt-auto px-3 py-2 rounded-xl bg-slate-100 text-slate-800 text-[11px]">
+          فتح لوحة الجهة الحكومية (قريبًا)
+        </button>
+      </div>
+      <!-- قطاع خاص -->
+      <div class="bg-white rounded-2xl shadow-card p-4 border border-slate-100 flex flex-col">
+        <div class="text-[11px] text-slate-500 mb-1">حساب 04</div>
+        <div class="font-semibold mb-1">حساب القطاع الخاص</div>
+        <p class="text-xs text-slate-600 mb-3 flex-1">
+          إدارة برامج المسؤولية الاجتماعية والاستثمار الاجتماعي والرعايات، وربطها بمشاريع وجهات معتمدة، مع تقارير على مستوى المنطقة.
+        </p>
+        <button class="mt-auto px-3 py-2 rounded-xl bg-slate-100 text-slate-800 text-[11px]">
+          فتح لوحة القطاع الخاص (قريبًا)
+        </button>
+      </div>
+      <!-- قطاع غير ربحي -->
+      <div class="bg-white rounded-2xl shadow-card p-4 border border-slate-100 flex flex-col">
+        <div class="text-[11px] text-slate-500 mb-1">حساب 05</div>
+        <div class="font-semibold mb-1">حساب القطاع غير الربحي</div>
+        <p class="text-xs text-slate-600 mb-3 flex-1">
+          تصميم المشاريع والفعاليات المجتمعية، وطلب التمويل والرعايات، وإدارة التطوع والتدريب، ورفع تقارير الأثر للجهات الداعمة.
+        </p>
+        <a href="account-nonprofit.html" class="mt-auto px-3 py-2 rounded-xl bg-primary text-white text-[11px] text-center">
+          فتح لوحة الجمعيات (حساب تشغيلي)
+        </a>
+      </div>
+      <!-- الجامعات -->
+      <div class="bg-white rounded-2xl shadow-card p-4 border border-slate-100 flex flex-col">
+        <div class="text-[11px] text-slate-500 mb-1">حساب 06</div>
+        <div class="font-semibold mb-1">حساب الجامعات</div>
+        <p class="text-xs text-slate-600 mb-3 flex-1">
+          تعزيز الدور العلمي والاستشاري، وتقديم دراسات، وربط الطلاب بفرص التدريب التعاوني، والمساهمة في تقييم المشاريع والأثر.
+        </p>
+        <button class="mt-auto px-3 py-2 rounded-xl bg-slate-100 text-slate-800 text-[11px]">
+          فتح لوحة الجامعات (قريبًا)
+        </button>
+      </div>
+      <!-- المانحون -->
+      <div class="bg-white rounded-2xl shadow-card p-4 border border-slate-100 flex flex-col">
+        <div class="text-[11px] text-slate-500 mb-1">حساب 07</div>
+        <div class="font-semibold mb-1">حساب المانحين</div>
+        <p class="text-xs text-slate-600 mb-3 flex-1">
+          إدارة محفظة المنح والمساهمات، واختيار مشاريع وفق معايير محددة، وتتبع الأثر والتقارير، بما ينسجم مع أولويات المانح.
+        </p>
+        <button class="mt-auto px-3 py-2 rounded-xl bg-slate-100 text-slate-800 text-[11px]">
+          فتح لوحة المانح (قريبًا)
+        </button>
+      </div>
+      <!-- الأفراد -->
+      <div class="bg-white rounded-2xl shadow-card p-4 border border-slate-100 flex flex-col">
+        <div class="text-[11px] text-slate-500 mb-1">حساب 08</div>
+        <div class="font-semibold mb-1">حساب الأفراد</div>
+        <p class="text-xs text-slate-600 mb-3 flex-1">
+          تمكين الأفراد من طرح حلول ومبادرات، والاستفادة من الفرص التدريبية والتطوعية، وتطوير مسارهم التنموي والمهني.
+        </p>
+        <button class="mt-auto px-3 py-2 rounded-xl bg-slate-100 text-slate-800 text-[11px]">
+          فتح لوحة الأفراد (قريبًا)
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- الوثائق -->
+  <section id="documents" class="max-w-6xl mx-auto px-4 pb-8">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-lg font-semibold text-slate-900">الوثائق والخطط والدراسات</h2>
+      <span class="text-[11px] text-slate-500">يتم ربط الملفات الفعلية لاحقًا (PDF / Word)</span>
+    </div>
+    <p class="text-xs text-slate-600 mb-4">
+      هذا القسم مخصص لعرض الملفات التشغيلية والتقنية والاستراتيجية المرتبطة بمنصة حصيف، مثل نموذج العمل، والخطة التشغيلية،
+      والملف التقني الشامل، ودليل استخدام كل حساب.
+    </p>
+    <div class="bg-white rounded-2xl shadow-card border border-slate-100 overflow-hidden">
+      <table class="min-w-full text-xs text-right">
+        <thead class="bg-slate-50 text-slate-500">
+          <tr>
+            <th class="px-3 py-2 font-medium">اسم الوثيقة</th>
+            <th class="px-3 py-2 font-medium">النوع</th>
+            <th class="px-3 py-2 font-medium">الوصف المختصر</th>
+            <th class="px-3 py-2 font-medium">حالة الإتاحة</th>
+          </tr>
+        </thead>
+        <tbody class="text-slate-700">
+          <tr class="border-t border-slate-100">
+            <td class="px-3 py-2">الملف التشغيلي والتقني الشامل لمنصة حصيف</td>
+            <td class="px-3 py-2 text-slate-500">وثيقة مرجعية</td>
+            <td class="px-3 py-2 text-slate-600">يتضمن مكوّنات المنصة، الحسابات، الخدمات، الربط بالرؤية، وآليات العمل.</td>
+            <td class="px-3 py-2 text-emerald-600 font-medium">متوفر للمراجعة الداخلية</td>
+          </tr>
+          <tr class="border-t border-slate-100">
+            <td class="px-3 py-2">نموذج العمل (اللبنات التسع)</td>
+            <td class="px-3 py-2 text-slate-500">نموذج عمل</td>
+            <td class="px-3 py-2 text-slate-600">تفاصيل القيمة المضافة، الشرائح المستهدفة، القنوات، الشركاء، الموارد، الإيرادات.</td>
+            <td class="px-3 py-2 text-slate-500">سيتم إرفاقه لاحقًا</td>
+          </tr>
+          <tr class="border-t border-slate-100">
+            <td class="px-3 py-2">الخطة التشغيلية لمنصة حصيف</td>
+            <td class="px-3 py-2 text-slate-500">خطة تشغيلية</td>
+            <td class="px-3 py-2 text-slate-600">تعكس مراحل الإطلاق، وتجهيز الحسابات، وتفعيل الشركاء، وإدارة المخاطر.</td>
+            <td class="px-3 py-2 text-slate-500">قيد الاعتماد</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- الاشتراكات -->
+  <section id="subscriptions" class="max-w-6xl mx-auto px-4 pb-8">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-lg font-semibold text-slate-900">الاشتراكات والقيمة المضافة لكل حساب</h2>
+      <span class="text-[11px] text-slate-500">يمكن تعديل نماذج التسعير حسب مرحلة المشروع</span>
+    </div>
+    <p class="text-xs text-slate-600 mb-4">
+      هذا القسم يوضّح الفروقات بين الحسابات من حيث نوع الاشتراك، والخدمات المتاحة، والقيمة المضافة المتوقعة لكل حساب.
+      في المرحلة الحالية، تركّز المنصة على إثبات القيمة قبل تفعيل أي نموذج تسعير نهائي.
+    </p>
+    <div class="bg-white rounded-2xl shadow-card border border-slate-100 overflow-hidden">
+      <table class="min-w-full text-xs text-right">
+        <thead class="bg-slate-50 text-slate-500">
+          <tr>
+            <th class="px-3 py-2 font-medium">نوع الحساب</th>
+            <th class="px-3 py-2 font-medium">أهم الخدمات</th>
+            <th class="px-3 py-2 font-medium">القيمة المضافة</th>
+            <th class="px-3 py-2 font-medium">نموذج الاشتراك</th>
+          </tr>
+        </thead>
+        <tbody class="text-slate-700">
+          <tr class="border-t border-slate-100">
+            <td class="px-3 py-2 font-medium">إمارة المنطقة / الجهات الحكومية</td>
+            <td class="px-3 py-2 text-slate-600">لوحات أثر، اعتماد فعاليات، قراءة احتياجات، ربط بالمشاريع والبرامج.</td>
+            <td class="px-3 py-2 text-slate-600">رفع كفاءة الإنفاق التنموي، وتحسين التنسيق بين القطاعات.</td>
+            <td class="px-3 py-2 text-slate-500">شراكة استراتيجية – بدون رسوم للمستفيد النهائي</td>
+          </tr>
+          <tr class="border-t border-slate-100">
+            <td class="px-3 py-2 font-medium">القطاع غير الربحي</td>
+            <td class="px-3 py-2 text-slate-600">إدارة مشاريع، طلب منح، إدارة تطوع وتدريب، تقارير أثر.</td>
+            <td class="px-3 py-2 text-slate-600">تسهيل الوصول للتمويل والشركاء، ورفع جودة المشاريع.</td>
+            <td class="px-3 py-2 text-slate-500">اشتراك رمزي/منح ممولة وفق الشراكات</td>
+          </tr>
+          <tr class="border-t border-slate-100">
+            <td class="px-3 py-2 font-medium">القطاع الخاص والمانحون</td>
+            <td class="px-3 py-2 text-slate-600">محفظة مسؤولية اجتماعية، فرص رعايات، تقارير أثر، توافق مع الرؤية.</td>
+            <td class="px-3 py-2 text-slate-600">تعظيم أثر المسؤولية الاجتماعية والاستثمار الاجتماعي.</td>
+            <td class="px-3 py-2 text-slate-500">اشتراك وشراكات رعايات – وفق حجم المحفظة</td>
+          </tr>
+          <tr class="border-t border-slate-100">
+            <td class="px-3 py-2 font-medium">الجامعات</td>
+            <td class="px-3 py-2 text-slate-600">استشارات، أبحاث، تدريب تعاوني، مختبرات ابتكار للمشاريع.</td>
+            <td class="px-3 py-2 text-slate-600">تعزيز أثر الجامعة في التنمية وربط الطلاب بفرص واقعية.</td>
+            <td class="px-3 py-2 text-slate-500">شراكة علمية واستشارية – عوائد مقابل الخدمات</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- الشركاء -->
+  <section id="partners" class="max-w-6xl mx-auto px-4 pb-8">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-lg font-semibold text-slate-900">الشركاء الاستراتيجيون والجهات ذات العلاقة</h2>
+      <span class="text-[11px] text-slate-500">أمثلة للجهات التي يمكن أن تستفيد وتدعم المنصة</span>
+    </div>
+    <p class="text-xs text-slate-600 mb-4">
+      تستهدف منصة حصيف تكاملًا فعّالًا مع عدد من الجهات الوطنية، بما يعزّز تحقيق مستهدفات رؤية 2030
+      في مجالات: تمكين المسؤولية الاجتماعية، تعظيم أثر القطاع غير الربحي، وتحفيز الاستثمار في التنمية.
+    </p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 text-xs">
+      <div class="bg-white rounded-2xl shadow-card p-3 border border-slate-100">
+        <div class="font-semibold text-slate-900 mb-1">وزارة الداخلية</div>
+        <p class="text-[11px] text-slate-600">
+          الإشراف على إمارات المناطق ودعم تكامل البيانات على مستوى المناطق الإدارية.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-card p-3 border border-slate-100">
+        <div class="font-semibold text-slate-900 mb-1">وزارة الاقتصاد والتخطيط</div>
+        <p class="text-[11px] text-slate-600">
+          ربط المشاريع والمؤشرات بالأهداف الاستراتيجية والبرامج التنموية الوطنية.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-card p-3 border border-slate-100">
+        <div class="font-semibold text-slate-900 mb-1">وزارة التعليم / الجامعات</div>
+        <p class="text-[11px] text-slate-600">
+          تقديم الدعم العلمي والاستشاري، وتفعيل التدريب التعاوني والبحث التطبيقي للمشاريع.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-card p-3 border border-slate-100">
+        <div class="font-semibold text-slate-900 mb-1">المركز الوطني لتنمية القطاع غير الربحي</div>
+        <p class="text-[11px] text-slate-600">
+          تعزيز دور الجمعيات، وضمان توافق المشاريع مع الأنظمة، ودعم منصات قياس الأثر.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-card p-3 border border-slate-100">
+        <div class="font-semibold text-slate-900 mb-1">غرف التجارة والقطاع الخاص</div>
+        <p class="text-[11px] text-slate-600">
+          تفعيل برامج المسؤولية الاجتماعية والاستثمار الاجتماعي عبر مشاريع ذات أثر واضح.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-card p-3 border border-slate-100">
+        <div class="font-semibold text-slate-900 mb-1">الجهات المانحة والصناديق</div>
+        <p class="text-[11px] text-slate-600">
+          إدارة محفظة منح واستثمارات تنموية وربطها بمؤشرات أثر شفافة وموثوقة.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-card p-3 border border-slate-100">
+        <div class="font-semibold text-slate-900 mb-1">منصات وطنية مكملة</div>
+        <p class="text-[11px] text-slate-600">
+          مثل منصات العمل التطوعي، ومنصات التبرع، ومنصات الجهات الحكومية ذات العلاقة.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-card p-3 border border-slate-100">
+        <div class="font-semibold text-slate-900 mb-1">مبادرة تلبية</div>
+        <p class="text-[11px] text-slate-600">
+          الحاضنة المشغلة للمنصة، والمنسقة بين الشركاء، والجهة التي تطوّر نماذج العمل والتشغيل.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- عن المنصة -->
+  <section id="about" class="max-w-6xl mx-auto px-4 pb-10">
+    <div class="bg-white rounded-3xl shadow-soft p-5 md:p-6 flex flex-col md:flex-row gap-5 items-start">
+      <div class="flex-1">
+        <h2 class="text-lg font-semibold text-slate-900 mb-2">عن منصة حصيف</h2>
+        <p class="text-xs text-slate-700 leading-relaxed mb-3">
+          منصة حصيف هي أحد منتجات برنامج شباب المملكة حصيف الوطني، الذي تنفّذه مبادرة تلبية،
+          وتستهدف المنصة تمكين الحلول التنموية وربطها بالجهات ذات العلاقة، وتسهيل مشاركة المجتمع
+          والقطاع الخاص والقطاع غير الربحي والجامعات في تحقيق مستهدفات رؤية المملكة 2030.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <div>
+            <div class="font-semibold text-slate-900 mb-1">الأهداف الرئيسة</div>
+            <ul class="list-disc pr-4 space-y-1 text-slate-700">
+              <li>تحفيز المشاركة المجتمعية والتنموية.</li>
+              <li>تسهيل وصول الحلول والمشاريع للجهات ذات العلاقة.</li>
+              <li>رفع كفاءة الإنفاق التنموي والمسؤولية الاجتماعية.</li>
+              <li>تعزيز التكامل بين إمارات المناطق والجهات والجامعات.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="font-semibold text-slate-900 mb-1">ميزات المنصة التشغيلية</div>
+            <ul class="list-disc pr-4 space-y-1 text-slate-700">
+              <li>نموذج حسابات متكامل (8 حسابات + إدارة المنصة).</li>
+              <li>مكوّنات تشغيلية جاهزة (مشاريع، فعاليات، تمويل، فرص، تقارير).</li>
+              <li>قابلية الربط مع منصات حكومية ووطنية أخرى.</li>
+              <li>دعم للنماذج التجريبية (Pilot) قبل التوسّع الوطني.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:w-64 bg-primary-soft rounded-2xl border border-emerald-100 p-4 text-xs">
+        <div class="text-[11px] text-slate-500 mb-1">ملاحظة مهمة</div>
+        <p class="text-slate-700 leading-relaxed mb-3">
+          هذه النسخة تمثّل <span class="font-semibold">عرضًا تشغيليًا Frontend</span> للمنصة،
+          يمكن استخدامها مع الجهات المعنية لشرح فكرة حصيف، وتطويرها لاحقًا بربطها بواجهات برمجة تطبيقات
+          وقواعد بيانات وخدمات تكامل حكومية.
+        </p>
+        <button class="w-full px-3 py-2 rounded-xl bg-slate-900 text-white text-[11px]">
+          طلب ملف العرض الكامل لمنصة حصيف (PDF)
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- الفوتر -->
+  <footer class="bg-slate-900 text-slate-100 text-xs">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row gap-3 items-start md:items-center justify-between">
+      <div>
+        <div class="font-semibold text-[13px]">منصة حصيف – برنامج شباب المملكة حصيف الوطني</div>
+        <div class="text-[11px] text-slate-400 mt-1">
+          جميع الحقوق محفوظة &copy; <span id="year"></span> • النسخة الحالية لأغراض التصميم والعرض التشغيلي.
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-3 text-[11px] text-slate-300">
+        <span>البريد المقترح: info@hasseef.sa</span>
+        <span>الموقع المقترح للمقر: منطقة حائل – المملكة العربية السعودية</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // سنة الفوتر
+    document.getElementById('year').textContent = new Date().getFullYear().toString();
+
+    // قائمة الجوال
+    const btnMobileNav = document.getElementById('btnMobileNav');
+    const mobileNav = document.getElementById('mobileNav');
+    if (btnMobileNav && mobileNav) {
+      btnMobileNav.addEventListener('click', () => {
+        mobileNav.classList.toggle('hidden');
+      });
+    }
+
+    // سكرول ناعم للروابط الداخلية
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (!targetId || targetId === '#') return;
+        const el = document.querySelector(targetId);
+        if (el) {
+          e.preventDefault();
+          const top = el.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
