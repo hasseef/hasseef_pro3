@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>منصة حصيف – التطبيق التشغيلي (نسخة GitHub)</title>
+  <title>منصة حصيف – نموذج تشغيلي على GitHub</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
@@ -13,7 +13,7 @@
 <body class="bg-slate-950 text-slate-50 min-h-screen">
   <!-- Header -->
   <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-20">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
       <div class="flex items-center gap-3">
         <div class="flex items-center gap-2">
           <span class="inline-flex h-9 w-9 rounded-2xl bg-gradient-to-br from-emerald-400 to-lime-400 items-center justify-center text-slate-950 font-black text-xl">
@@ -21,17 +21,28 @@
           </span>
           <div class="flex flex-col leading-tight">
             <span class="font-semibold text-sm md:text-base">منصة حصيف</span>
-            <span class="text-[11px] text-slate-400">نموذج تشغيلي مبسط – نسخة GitHub</span>
+            <span class="text-[11px] text-slate-400">نموذج تشغيلي مبسّط يعمل بالكامل على GitHub Pages</span>
           </div>
         </div>
       </div>
-      <div class="flex items-center gap-3 text-[11px] md:text-xs text-slate-400">
-        <div class="hidden md:flex items-center gap-2">
-          <div class="h-7 w-px bg-slate-700/70"></div>
-          <span>تجريبي – البيانات تحفظ في المتصفح فقط (LocalStorage)</span>
+      <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 text-[11px] md:text-xs text-slate-300">
+        <div class="flex items-center gap-2">
+          <span class="text-slate-400">نوع الحساب الحالي:</span>
+          <select id="role-select" class="rounded-xl bg-slate-950/60 border border-slate-700 px-3 py-1.5 text-[11px] md:text-xs focus:outline-none focus:border-emerald-400">
+            <option value="emirate">إمارة المنطقة</option>
+            <option value="nonprofit">قطاع غير ربحي</option>
+            <option value="private">قطاع خاص</option>
+            <option value="university">جامعة</option>
+            <option value="donor">مانح</option>
+            <option value="individual">فرد</option>
+          </select>
         </div>
-        <a href="./index.html" class="px-3 py-1.5 rounded-full border border-slate-700/70 text-xs hover:border-emerald-400 hover:text-emerald-300 transition">
-          الرجوع للصفحة التعريفية
+        <div class="flex items-center gap-2 text-slate-400">
+          <span class="hidden md:inline">⚠</span>
+          <span>هذه نسخة استعراضية، البيانات تحفظ في المتصفح (بدون خادم أو تسجيل دخول فعلي).</span>
+        </div>
+        <a href="./index.html" class="inline-flex items-center justify-center px-3 py-1.5 rounded-full border border-slate-700/70 text-[11px] md:text-xs hover:border-emerald-400 hover:text-emerald-300 transition">
+          الصفحة التعريفية
         </a>
       </div>
     </div>
@@ -44,7 +55,7 @@
         <div>
           <p class="text-xs font-semibold text-slate-400 mb-1">لوحات التشغيل</p>
           <button class="nav-btn w-full text-right text-sm px-3 py-2 rounded-2xl hover:bg-slate-800 transition" data-target="solutions">
-            الحلول
+            الحلول التنموية
           </button>
           <button class="nav-btn w-full text-right text-sm px-3 py-2 rounded-2xl hover:bg-slate-800 transition" data-target="projects">
             المشاريع
@@ -53,47 +64,58 @@
             الفعاليات
           </button>
           <button class="nav-btn w-full text-right text-sm px-3 py-2 rounded-2xl hover:bg-slate-800 transition" data-target="funding">
-            التمويل
+            طلبات التمويل
           </button>
         </div>
         <div class="border-t border-slate-800 pt-3">
-          <p class="text-xs font-semibold text-slate-400 mb-1">مساعدة</p>
+          <p class="text-xs font-semibold text-slate-400 mb-1">ملاحظة</p>
           <p class="text-[11px] text-slate-400 leading-relaxed">
-            هذا النموذج يهدف لإظهار فكرة منصة حصيف بشكل تشغيلي بسيط يمكن تشغيله على GitHub Pages بدون خادم خلفي.
+            التفريعات (الحلول ← مشاريع ← فعاليات ← تمويل) تعمل هنا بشكل مبسّط
+            عبر المتصفح فقط، ويمكن تحويل هذا النموذج لاحقًا لمنصة كاملة بقاعدة بيانات حقيقية.
           </p>
         </div>
       </div>
     </aside>
 
-    <!-- Main content -->
+    <!-- Main -->
     <main class="flex-1 space-y-6">
-      <!-- KPIs -->
-      <section class="grid md:grid-cols-4 gap-3">
-        <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-4">
-          <p class="text-[11px] text-slate-400 mb-1">عدد الحلول</p>
-          <p id="kpi-solutions" class="text-2xl font-semibold">0</p>
+      <!-- Role label + KPIs -->
+      <section class="space-y-3">
+        <div class="flex items-center justify-between gap-3 flex-wrap">
+          <div>
+            <h1 class="text-lg md:text-xl font-semibold mb-1">لوحة تشغيل حساب: <span id="role-label" class="text-emerald-300">إمارة المنطقة</span></h1>
+            <p class="text-sm text-slate-400 max-w-xl">
+              هذه اللوحة تعرض البيانات الخاصة بالحساب المختار فقط. عند تغيير نوع الحساب من الأعلى، تتغير جميع الجداول والمؤشرات لتعرض ما يخص ذلك الحساب.
+            </p>
+          </div>
         </div>
-        <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-4">
-          <p class="text-[11px] text-slate-400 mb-1">عدد المشاريع</p>
-          <p id="kpi-projects" class="text-2xl font-semibold">0</p>
-        </div>
-        <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-4">
-          <p class="text-[11px] text-slate-400 mb-1">عدد الفعاليات</p>
-          <p id="kpi-events" class="text-2xl font-semibold">0</p>
-        </div>
-        <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-4">
-          <p class="text-[11px] text-slate-400 mb-1">طلبات التمويل</p>
-          <p id="kpi-funding" class="text-2xl font-semibold">0</p>
+        <div class="grid md:grid-cols-4 gap-3">
+          <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-4">
+            <p class="text-[11px] text-slate-400 mb-1">عدد الحلول لهذا الحساب</p>
+            <p id="kpi-solutions" class="text-2xl font-semibold">0</p>
+          </div>
+          <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-4">
+            <p class="text-[11px] text-slate-400 mb-1">عدد المشاريع لهذا الحساب</p>
+            <p id="kpi-projects" class="text-2xl font-semibold">0</p>
+          </div>
+          <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-4">
+            <p class="text-[11px] text-slate-400 mb-1">عدد الفعاليات لهذا الحساب</p>
+            <p id="kpi-events" class="text-2xl font-semibold">0</p>
+          </div>
+          <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-4">
+            <p class="text-[11px] text-slate-400 mb-1">طلبات التمويل المسجلة</p>
+            <p id="kpi-funding" class="text-2xl font-semibold">0</p>
+          </div>
         </div>
       </section>
 
-      <!-- Panels -->
+      <!-- Solutions Panel -->
       <section id="panel-solutions" class="panel space-y-4">
         <div class="flex items-center justify-between gap-3">
           <div>
-            <h1 class="text-xl font-semibold mb-1">إدارة الحلول</h1>
+            <h2 class="text-xl font-semibold mb-1">إدارة الحلول التنموية</h2>
             <p class="text-sm text-slate-400">
-              أضف حلولاً تنموية، ثم قم بتحويلها لاحقًا إلى مشاريع.
+              أضف الحلول التي يقترحها هذا الحساب، وسيتم ربطها لاحقًا بالمشاريع والتمويل.
             </p>
           </div>
         </div>
@@ -109,7 +131,7 @@
               <textarea required name="description" rows="3" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-emerald-400"></textarea>
             </div>
             <div>
-              <label class="text-xs text-slate-300">المنطقة</label>
+              <label class="text-xs text-slate-300">المنطقة (اختياري)</label>
               <input name="region" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-emerald-400" placeholder="مثال: منطقة حائل" />
             </div>
             <button class="w-full mt-1 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-sm font-semibold py-2 transition">
@@ -118,7 +140,10 @@
           </form>
 
           <div class="md:col-span-2 border border-slate-800 rounded-2xl bg-slate-900/70 p-4">
-            <h2 class="text-sm font-semibold mb-3 text-slate-200">قائمة الحلول</h2>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <h3 class="text-sm font-semibold text-slate-200">قائمة الحلول لهذا الحساب</h3>
+              <span class="text-[11px] text-slate-400">كل حل مرتبط داخليًا بنوع الحساب الحالي.</span>
+            </div>
             <div class="overflow-x-auto">
               <table class="min-w-full text-right text-xs">
                 <thead class="text-slate-400 border-b border-slate-800">
@@ -136,12 +161,13 @@
         </div>
       </section>
 
+      <!-- Projects Panel -->
       <section id="panel-projects" class="panel space-y-4 hidden">
         <div class="flex items-center justify-between gap-3">
           <div>
-            <h1 class="text-xl font-semibold mb-1">إدارة المشاريع</h1>
+            <h2 class="text-xl font-semibold mb-1">إدارة المشاريع</h2>
             <p class="text-sm text-slate-400">
-              قم بإنشاء مشروع جديد، أو اربطه بأحد الحلول المسجلة.
+              قم بإنشاء المشاريع وربطها بحلول هذا الحساب، تمهيدًا لطلبات التمويل والفعاليات.
             </p>
           </div>
         </div>
@@ -157,7 +183,7 @@
               <textarea required name="description" rows="3" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-emerald-400"></textarea>
             </div>
             <div>
-              <label class="text-xs text-slate-300">ربط بحل (اختياري)</label>
+              <label class="text-xs text-slate-300">ربط بحل من نفس الحساب (اختياري)</label>
               <select name="solution_id" id="select-solution" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-emerald-400">
                 <option value="">بدون</option>
               </select>
@@ -168,7 +194,10 @@
           </form>
 
           <div class="md:col-span-2 border border-slate-800 rounded-2xl bg-slate-900/70 p-4">
-            <h2 class="text-sm font-semibold mb-3 text-slate-200">قائمة المشاريع</h2>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <h3 class="text-sm font-semibold text-slate-200">قائمة المشاريع لهذا الحساب</h3>
+              <span class="text-[11px] text-slate-400">لا تظهر هنا إلا المشاريع المربوطة بهذا الحساب.</span>
+            </div>
             <div class="overflow-x-auto">
               <table class="min-w-full text-right text-xs">
                 <thead class="text-slate-400 border-b border-slate-800">
@@ -186,12 +215,13 @@
         </div>
       </section>
 
+      <!-- Events Panel -->
       <section id="panel-events" class="panel space-y-4 hidden">
         <div class="flex items-center justify-between gap-3">
           <div>
-            <h1 class="text-xl font-semibold mb-1">إدارة الفعاليات</h1>
+            <h2 class="text-xl font-semibold mb-1">إدارة الفعاليات</h2>
             <p class="text-sm text-slate-400">
-              يمكنك ربط الفعالية بمشروع وتسجيلها لأغراض التقارير والأثر.
+              سجل الفعاليات المتعلقة بمشاريع هذا الحساب، لتظهر في التقارير ولوحات الأثر.
             </p>
           </div>
         </div>
@@ -207,7 +237,7 @@
               <textarea required name="description" rows="3" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-emerald-400"></textarea>
             </div>
             <div>
-              <label class="text-xs text-slate-300">ربط بمشروع (اختياري)</label>
+              <label class="text-xs text-slate-300">ربط بمشروع من نفس الحساب (اختياري)</label>
               <select name="project_id" id="select-project-event" class="mt-1 w-full rounded-xl bg-slate-950/60 border border-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-emerald-400">
                 <option value="">بدون</option>
               </select>
@@ -218,7 +248,10 @@
           </form>
 
           <div class="md:col-span-2 border border-slate-800 rounded-2xl bg-slate-900/70 p-4">
-            <h2 class="text-sm font-semibold mb-3 text-slate-200">قائمة الفعاليات</h2>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <h3 class="text-sm font-semibold text-slate-200">قائمة الفعاليات لهذا الحساب</h3>
+              <span class="text-[11px] text-slate-400">تقتصر على الفعاليات المرتبطة بهذا الحساب فقط.</span>
+            </div>
             <div class="overflow-x-auto">
               <table class="min-w-full text-right text-xs">
                 <thead class="text-slate-400 border-b border-slate-800">
@@ -236,12 +269,13 @@
         </div>
       </section>
 
+      <!-- Funding Panel -->
       <section id="panel-funding" class="panel space-y-4 hidden">
         <div class="flex items-center justify-between gap-3">
           <div>
-            <h1 class="text-xl font-semibold mb-1">إدارة التمويل (مبسطة)</h1>
+            <h2 class="text-xl font-semibold mb-1">طلبات التمويل</h2>
             <p class="text-sm text-slate-400">
-              تسجيل طلبات التمويل وربطها بالمشاريع، لأغراض العرض الأولي.
+              سجّل طلبات التمويل للمشاريع المرتبطة بهذا الحساب، واعرضها لأغراض العرض الأولي.
             </p>
           </div>
         </div>
@@ -264,7 +298,10 @@
           </form>
 
           <div class="md:col-span-2 border border-slate-800 rounded-2xl bg-slate-900/70 p-4">
-            <h2 class="text-sm font-semibold mb-3 text-slate-200">قائمة طلبات التمويل</h2>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <h3 class="text-sm font-semibold text-slate-200">قائمة طلبات التمويل لهذا الحساب</h3>
+              <span class="text-[11px] text-slate-400">كل طلب مرتبط بمشروع من هذا الحساب فقط.</span>
+            </div>
             <div class="overflow-x-auto">
               <table class="min-w-full text-right text-xs">
                 <thead class="text-slate-400 border-b border-slate-800">
@@ -285,40 +322,62 @@
   </div>
 
   <footer class="border-t border-slate-800 mt-10 py-5 text-center text-[11px] text-slate-500">
-    هذه نسخة تشغيلية مبسطة من منصة حصيف تعمل بالكامل على GitHub Pages باستخدام LocalStorage في المتصفح فقط.
+    نسخة تشغيلية مبسّطة من منصة حصيف تعمل على GitHub Pages فقط (بدون خادم)،
+    الهدف منها توضيح فكرة الحسابات والتفريعات الرئيسية للحلول والمشاريع والفعاليات والتمويل.
   </footer>
 
   <script>
-    // Utilities for LocalStorage
+    // LocalStorage keys
+    const LS_SOLUTIONS = 'hasseef_solutions_v2';
+    const LS_PROJECTS = 'hasseef_projects_v2';
+    const LS_EVENTS = 'hasseef_events_v2';
+    const LS_FUNDING = 'hasseef_funding_v2';
+    const LS_ROLE = 'hasseef_role_v2';
+
     function loadList(key) {
-      try {
-        return JSON.parse(localStorage.getItem(key)) || [];
-      } catch {
-        return [];
-      }
+      try { return JSON.parse(localStorage.getItem(key)) || []; } catch { return []; }
     }
     function saveList(key, list) {
       localStorage.setItem(key, JSON.stringify(list));
     }
 
-    const LS_SOLUTIONS = 'hasseef_solutions';
-    const LS_PROJECTS = 'hasseef_projects';
-    const LS_EVENTS = 'hasseef_events';
-    const LS_FUNDING = 'hasseef_funding';
+    function currentRole() {
+      return localStorage.getItem(LS_ROLE) || 'emirate';
+    }
+
+    function roleLabel(role) {
+      switch (role) {
+        case 'emirate': return 'إمارة المنطقة';
+        case 'nonprofit': return 'قطاع غير ربحي';
+        case 'private': return 'قطاع خاص';
+        case 'university': return 'جامعة';
+        case 'donor': return 'مانح';
+        case 'individual': return 'فرد';
+        default: return role;
+      }
+    }
 
     function refreshKPIs() {
-      document.getElementById('kpi-solutions').textContent = loadList(LS_SOLUTIONS).length;
-      document.getElementById('kpi-projects').textContent = loadList(LS_PROJECTS).length;
-      document.getElementById('kpi-events').textContent = loadList(LS_EVENTS).length;
-      document.getElementById('kpi-funding').textContent = loadList(LS_FUNDING).length;
+      const role = currentRole();
+      const solutions = loadList(LS_SOLUTIONS).filter(x => x.role === role);
+      const projects = loadList(LS_PROJECTS).filter(x => x.role === role);
+      const events = loadList(LS_EVENTS).filter(x => x.role === role);
+      const funding = loadList(LS_FUNDING).filter(x => x.role === role);
+      document.getElementById('kpi-solutions').textContent = solutions.length;
+      document.getElementById('kpi-projects').textContent = projects.length;
+      document.getElementById('kpi-events').textContent = events.length;
+      document.getElementById('kpi-funding').textContent = funding.length;
     }
 
     function renderSolutions() {
-      const list = loadList(LS_SOLUTIONS);
+      const role = currentRole();
+      const list = loadList(LS_SOLUTIONS).filter(x => x.role === role);
       const tbody = document.getElementById('table-solutions');
       const selectSolution = document.getElementById('select-solution');
       tbody.innerHTML = '';
-      selectSolution.innerHTML = '<option value="">بدون</option>';
+      if (selectSolution) {
+        selectSolution.innerHTML = '<option value="">بدون</option>';
+      }
       list.forEach((s, idx) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
@@ -328,22 +387,25 @@
           <td class="py-2 px-2 text-emerald-300 text-[11px]">${s.status}</td>
         `;
         tbody.appendChild(tr);
-        const opt = document.createElement('option');
-        opt.value = s.id;
-        opt.textContent = s.title;
-        selectSolution.appendChild(opt);
+        if (selectSolution) {
+          const opt = document.createElement('option');
+          opt.value = s.id;
+          opt.textContent = s.title;
+          selectSolution.appendChild(opt);
+        }
       });
     }
 
     function renderProjects() {
-      const list = loadList(LS_PROJECTS);
-      const solutions = loadList(LS_SOLUTIONS);
+      const role = currentRole();
+      const list = loadList(LS_PROJECTS).filter(x => x.role === role);
+      const solutions = loadList(LS_SOLUTIONS).filter(x => x.role === role);
       const tbody = document.getElementById('table-projects');
       const selectProjEvent = document.getElementById('select-project-event');
       const selectProjFunding = document.getElementById('select-project-funding');
       tbody.innerHTML = '';
-      selectProjEvent.innerHTML = '<option value="">بدون</option>';
-      selectProjFunding.innerHTML = '<option value="">اختر مشروعًا</option>';
+      if (selectProjEvent) selectProjEvent.innerHTML = '<option value="">بدون</option>';
+      if (selectProjFunding) selectProjFunding.innerHTML = '<option value="">اختر مشروعًا</option>';
 
       list.forEach((p, idx) => {
         const sol = solutions.find(s => s.id === p.solution_id);
@@ -356,21 +418,25 @@
         `;
         tbody.appendChild(tr);
 
-        const opt1 = document.createElement('option');
-        opt1.value = p.id;
-        opt1.textContent = p.title;
-        selectProjEvent.appendChild(opt1);
-
-        const opt2 = document.createElement('option');
-        opt2.value = p.id;
-        opt2.textContent = p.title;
-        selectProjFunding.appendChild(opt2);
+        if (selectProjEvent) {
+          const opt1 = document.createElement('option');
+          opt1.value = p.id;
+          opt1.textContent = p.title;
+          selectProjEvent.appendChild(opt1);
+        }
+        if (selectProjFunding) {
+          const opt2 = document.createElement('option');
+          opt2.value = p.id;
+          opt2.textContent = p.title;
+          selectProjFunding.appendChild(opt2);
+        }
       });
     }
 
     function renderEvents() {
-      const list = loadList(LS_EVENTS);
-      const projects = loadList(LS_PROJECTS);
+      const role = currentRole();
+      const list = loadList(LS_EVENTS).filter(x => x.role === role);
+      const projects = loadList(LS_PROJECTS).filter(x => x.role === role);
       const tbody = document.getElementById('table-events');
       tbody.innerHTML = '';
       list.forEach((e, idx) => {
@@ -387,8 +453,9 @@
     }
 
     function renderFunding() {
-      const list = loadList(LS_FUNDING);
-      const projects = loadList(LS_PROJECTS);
+      const role = currentRole();
+      const list = loadList(LS_FUNDING).filter(x => x.role === role);
+      const projects = loadList(LS_PROJECTS).filter(x => x.role === role);
       const tbody = document.getElementById('table-funding');
       tbody.innerHTML = '';
       list.forEach((f, idx) => {
@@ -410,12 +477,14 @@
       const form = e.target;
       const list = loadList(LS_SOLUTIONS);
       const id = 'SOL-' + (list.length + 1);
+      const role = currentRole();
       list.push({
         id,
         title: form.title.value.trim(),
         description: form.description.value.trim(),
         region: form.region.value.trim(),
-        status: 'draft'
+        status: 'draft',
+        role
       });
       saveList(LS_SOLUTIONS, list);
       form.reset();
@@ -428,12 +497,14 @@
       const form = e.target;
       const list = loadList(LS_PROJECTS);
       const id = 'PRJ-' + (list.length + 1);
+      const role = currentRole();
       list.push({
         id,
         title: form.title.value.trim(),
         description: form.description.value.trim(),
         solution_id: form.solution_id.value || null,
-        status: 'draft'
+        status: 'draft',
+        role
       });
       saveList(LS_PROJECTS, list);
       form.reset();
@@ -446,12 +517,14 @@
       const form = e.target;
       const list = loadList(LS_EVENTS);
       const id = 'EVT-' + (list.length + 1);
+      const role = currentRole();
       list.push({
         id,
         title: form.title.value.trim(),
         description: form.description.value.trim(),
         project_id: form.project_id.value || null,
-        status: 'scheduled'
+        status: 'scheduled',
+        role
       });
       saveList(LS_EVENTS, list);
       form.reset();
@@ -464,11 +537,13 @@
       const form = e.target;
       const list = loadList(LS_FUNDING);
       const id = 'FND-' + (list.length + 1);
+      const role = currentRole();
       list.push({
         id,
         project_id: form.project_id.value,
         amount: Number(form.amount.value || 0),
-        status: 'pending'
+        status: 'pending',
+        role
       });
       saveList(LS_FUNDING, list);
       form.reset();
@@ -476,7 +551,7 @@
       refreshKPIs();
     });
 
-    // Navigation
+    // Navigation between panels
     const panels = {
       solutions: document.getElementById('panel-solutions'),
       projects: document.getElementById('panel-projects'),
@@ -503,8 +578,27 @@
       });
     });
 
-    // Initial
+    // Role switching
+    const roleSelect = document.getElementById('role-select');
+    const roleLabelEl = document.getElementById('role-label');
+
+    roleSelect.addEventListener('change', () => {
+      const role = roleSelect.value;
+      localStorage.setItem(LS_ROLE, role);
+      roleLabelEl.textContent = roleLabel(role);
+      // إعادة تحميل البيانات لهذا الحساب
+      renderSolutions();
+      renderProjects();
+      renderEvents();
+      renderFunding();
+      refreshKPIs();
+    });
+
+    // Initial setup
     (function init() {
+      const savedRole = currentRole();
+      roleSelect.value = savedRole;
+      roleLabelEl.textContent = roleLabel(savedRole);
       renderSolutions();
       renderProjects();
       renderEvents();
